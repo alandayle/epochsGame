@@ -1,0 +1,11 @@
+mainBgsLogos.png
+size:8192,2048
+repeat:none
+logo
+bounds:3240,640,1280,1280
+logo(portrait)
+bounds:1080,0,1080,1920
+mainBackground(portrait)
+bounds:2160,0,1080,1920
+wearHeadphones(portrait)
+bounds:0,0,1080,1920

@@ -26,6 +26,13 @@ public class EpochsGame extends Game {
     AssetManager assetManager;
     LoadingScreen loadingScreen;
 
+    //screens
+    EndScreen endScreen;
+    GameScreen gameScreen;
+    MainMenuScreen mainMenuScreen;
+    SettingsScreen settingsScreen;
+    SplashScreen splashScreen;
+
     @Override
     public void create() {
         //set camera and viewport
@@ -34,8 +41,8 @@ public class EpochsGame extends Game {
         viewport = new FillViewport(worldWidth, worldHeight, camera);
 
         //setup loading screen and load all the assets
-        loadingScreen = new LoadingScreen(this);
         assetManager = new AssetManager();
+        loadingScreen = new LoadingScreen(this);
         setScreen(loadingScreen);
 
         //debug
