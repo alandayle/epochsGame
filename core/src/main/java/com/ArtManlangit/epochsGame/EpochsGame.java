@@ -22,9 +22,10 @@ public class EpochsGame extends Game {
     Viewport viewport;
     Camera camera;
 
-    //Loading screen and asset manager
+    //Loading screen, asset manager and global variables
     AssetManager assetManager;
     LoadingScreen loadingScreen;
+    SpriteBatch batch;
 
     //screens
     EndScreen endScreen;
@@ -39,6 +40,9 @@ public class EpochsGame extends Game {
         camera = new OrthographicCamera();
         camera.position.set(worldWidth / 2, worldHeight / 2, 0);
         viewport = new FillViewport(worldWidth, worldHeight, camera);
+
+        //create sprite batch
+        batch = new SpriteBatch();
 
         //setup loading screen and load all the assets
         assetManager = new AssetManager();

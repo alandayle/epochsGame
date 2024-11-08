@@ -3,9 +3,11 @@ package com.ArtManlangit.epochsGame;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class SplashScreen implements Screen {
@@ -32,10 +34,14 @@ public class SplashScreen implements Screen {
         this.assetManager = epochsGame.assetManager;
         viewport = epochsGame.viewport;
         camera = epochsGame.camera;
-        batch = new SpriteBatch();
+        batch = epochsGame.batch;
 
         //load and setup assets
         loadAssets();
+    }
+    public void loadAssets() {
+        mainBgsLogos = assetManager.get("packedTextures/mainBgsLogos.atlas", TextureAtlas.class);
+        loadingLogo = mainBgsLogos.findRegion("logo(portrait)");
     }
 
     @Override
@@ -59,6 +65,7 @@ public class SplashScreen implements Screen {
     }
 
     public void draw() {
+        ScreenUtils.clear(Color.BLACK);
         camera.update();
         viewport.apply();
         batch.setProjectionMatrix(camera.combined);
@@ -67,11 +74,6 @@ public class SplashScreen implements Screen {
         batch.begin();
         batch.draw(loadingLogo, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
         batch.end();
-    }
-
-    public void loadAssets() {
-        mainBgsLogos = assetManager.get("packedTextures/mainBgsLogos.atlas", TextureAtlas.class);
-        loadingLogo = mainBgsLogos.findRegion("logo(portrait)");
     }
 
     @Override
@@ -96,6 +98,6 @@ public class SplashScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        mainBgsLogos.dispose();
     }
 }
