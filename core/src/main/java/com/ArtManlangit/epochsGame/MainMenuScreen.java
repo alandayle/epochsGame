@@ -77,6 +77,8 @@ public class MainMenuScreen implements Screen {
     public void input() {
         if (Gdx.input.isTouched()) {
             epochsGame.splashScreen.backgroundMusic.stop();
+            epochsGame.gameScreen = new GameScreen(epochsGame);
+            epochsGame.setScreen(epochsGame.gameScreen);
         }
     }
 

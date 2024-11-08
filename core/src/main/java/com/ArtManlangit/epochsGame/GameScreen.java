@@ -1,14 +1,14 @@
 package com.ArtManlangit.epochsGame;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -22,13 +22,14 @@ public class GameScreen implements Screen {
     Camera camera;
 
     //textures for assets in CountState
-    
+
 
     //textures for assets in inGameState
 
 
     //Audio and sound effects
     Music backgroundMusic;
+    Sound yearCountSoundEffect;
 
     //drawer
     SpriteBatch batch;
@@ -50,7 +51,12 @@ public class GameScreen implements Screen {
     int playingState = 2;
     int settingState = 3;
 
+    //fonts
+    BitmapFont headingMainFont, subHeadingMainFont, bodyMainFont;
 
+    //countdown year
+    int countDownYearCurrent;
+    int countDownYearFinish;
 
     //constructor
     public GameScreen(EpochsGame epochsGame) {
@@ -75,18 +81,32 @@ public class GameScreen implements Screen {
     }
 
     public void loadAssets() {
+        loadFonts();
+        loadAudio();
+    }
 
+    public void loadAudio() {
+        yearCountSoundEffect = assetManager.get("audio/yearCountSoundEffect.mp3");
+    }
+
+    public void loadFonts() {
+        headingMainFont = assetManager.get("setbackt50.ttf", BitmapFont.class);
+        subHeadingMainFont = assetManager.get("setbackt40.ttf", BitmapFont.class);
+        bodyMainFont = assetManager.get("setbackt25.ttf", BitmapFont.class);
     }
 
     public void setGameDefaults() {
+        //sets game defaults
         currentGameState = countState;
         currentInGameState = shuffleState;
+        countDownYearCurrent = 0;
+        countDownYearFinish = 2024;
     }
 
 
     @Override
     public void show() {
-
+        yearCountSoundEffect.play();
     }
 
     @Override
@@ -103,6 +123,27 @@ public class GameScreen implements Screen {
     public void logic(float delta) {
         //logic for count state
         if (currentGameState == countState) {
+            timer += delta;
+
+            if (countDownYearCurrent < countDownYearFinish) {
+                countDownYearCurrent = (int) (countDownYearFinish * (timer /3f));
+            }
+
+            if (countDownYearCurrent >= countDownYearFinish) {
+                countDownYearCurrent = countDownYearFinish;
+                int floorValue = (int) Math.floor(timer);
+                if (floorValue % 2 == 0) {
+                    colorValue -= delta;
+                } else {
+                    colorValue += delta;
+                }
+            }
+
+            if (colorValue < 0) {
+                colorValue = 0;
+            } else if (colorValue > 1) {
+                colorValue = 1;
+            }
 
         }
 
@@ -139,7 +180,14 @@ public class GameScreen implements Screen {
     }
 
     public void drawCountState () {
+        subHeadingMainFont.draw(batch, "year", viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 1.5f + subHeadingMainFont.getCapHeight() * 2f, 0, Align.center, false);
+        headingMainFont.draw(batch, String.valueOf(countDownYearCurrent), viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 1.5f, 0 ,Align.center, false);
 
+        if (countDownYearCurrent >= countDownYearFinish) {
+            bodyMainFont.setColor(colorValue, colorValue, colorValue, 1);
+            bodyMainFont.draw(batch, "Continue >", viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 3, 0 ,Align.center, false);
+            bodyMainFont.setColor(1, 1, 1, 1);
+        }
     }
 
     public void drawInGameState() {

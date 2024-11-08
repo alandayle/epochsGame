@@ -1,0 +1,75 @@
+loading.png
+size:8192,2048
+repeat:none
+loading-1 (dragged)
+bounds:2048,0,512,512
+loading-10 (dragged)
+bounds:1536,1536,512,512
+loading-11 (dragged)
+bounds:3584,1536,512,512
+loading-12 (dragged)
+bounds:3072,512,512,512
+loading-13 (dragged)
+bounds:1024,512,512,512
+loading-14 (dragged)
+bounds:1024,0,512,512
+loading-15 (dragged)
+bounds:1536,1024,512,512
+loading-16 (dragged)
+bounds:3072,0,512,512
+loading-17 (dragged)
+bounds:3584,1024,512,512
+loading-18 (dragged)
+bounds:2048,1536,512,512
+loading-19 (dragged)
+bounds:1536,512,512,512
+loading-2 (dragged)
+bounds:0,1536,512,512
+loading-20 (dragged)
+bounds:4096,1536,512,512
+loading-21 (dragged)
+bounds:1536,0,512,512
+loading-22 (dragged)
+bounds:2048,1024,512,512
+loading-23 (dragged)
+bounds:3584,512,512,512
+loading-24 (dragged)
+bounds:3584,0,512,512
+loading-25 (dragged)
+bounds:4096,1024,512,512
+loading-26 (dragged)
+bounds:2560,1536,512,512
+loading-27 (dragged)
+bounds:2048,512,512,512
+loading-28 (dragged)
+bounds:4608,1536,512,512
+loading-29 (dragged)
+bounds:4096,512,512,512
+loading-3 (dragged)
+bounds:0,1024,512,512
+loading-30 (dragged)
+bounds:2560,512,512,512
+loading-31 (dragged)
+bounds:1024,1536,512,512
+loading-32 (dragged)
+bounds:512,512,512,512
+loading-33 (dragged)
+bounds:512,0,512,512
+loading-34 (dragged)
+bounds:2560,0,512,512
+loading-35 (dragged)
+bounds:3072,1024,512,512
+loading-36 (dragged)
+bounds:1024,1024,512,512
+loading-4 (dragged)
+bounds:512,1536,512,512
+loading-5 (dragged)
+bounds:2560,1024,512,512
+loading-6 (dragged)
+bounds:3072,1536,512,512
+loading-7 (dragged)
+bounds:0,512,512,512
+loading-8 (dragged)
+bounds:0,0,512,512
+loading-9 (dragged)
+bounds:512,1024,512,512
