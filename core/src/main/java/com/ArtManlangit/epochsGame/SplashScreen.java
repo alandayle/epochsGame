@@ -22,7 +22,7 @@ public class SplashScreen implements Screen {
     Viewport viewport;
     Camera camera;
 
-    //textures for assets in the loading screen
+    //textures for assets
     TextureAtlas mainBgsLogos;
     TextureRegion loadingLogo;
     TextureRegion wearHeadphones;
