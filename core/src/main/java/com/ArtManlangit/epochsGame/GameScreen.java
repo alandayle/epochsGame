@@ -38,24 +38,36 @@ public class GameScreen implements Screen {
     TextureAtlas cards;
     TextureRegion currentBackground;
     TextureRegion backCardTextureRegion;
-    TextureRegion[] frontCards;
+    TextureRegion[] frontCardTextureRegions;
+    TextureRegion[] frontCardDialogueTextureRegions;
+
+    //testing for left dialogue and right dialogue
+    TextureAtlas dialogues;
+    TextureRegion leftDialogue;
+    TextureRegion rightDialogue;
+
 
     //cards
     float cardWidth, cardHeight;
     float cardDefaultX, cardDefaultY;
 
     //backCards
-    Card[] backCards;
+    BackCard[] backCards;
     int numberOfBackCards;
     int shuffleSpeed;
     int offset;
+    Boolean[] shuffledBackCard;
 
     //frontCards
+    FrontCard[] frontCards;
     int numberOfFrontCards;
+    FrontCard currentCard;
+
 
     //Audio and sound effects
     Music backgroundMusic;
     Sound yearCountSoundEffect;
+    Sound cardShuffleSoundEffect;
 
     //drawer
     SpriteBatch batch;
@@ -115,11 +127,25 @@ public class GameScreen implements Screen {
     }
 
     public void loadTextures() {
+        //setup atlas
         mainBgsLogos = assetManager.get("packedTextures/mainBgsLogos.atlas", TextureAtlas.class);
         playingBgs = assetManager.get("packedTextures/playingBgs.atlas", TextureAtlas.class);
         cards = assetManager.get("packedTextures/cards.atlas", TextureAtlas.class);
+        dialogues = assetManager.get("packedTextures/dialogues.atlas", TextureAtlas.class);
+
+        //setup TextureRegions
         currentBackground = playingBgs.findRegion("bg1");
         backCardTextureRegion = cards.findRegion("backCardTesting");
+        leftDialogue = dialogues.findRegion("no");
+        rightDialogue = dialogues.findRegion("yes");
+
+        String frontCardFileName;
+        //setup texture region for front cards
+        frontCardTextureRegions = new TextureRegion[numberOfFrontCards];
+        for (int i = 0; i < numberOfFrontCards; i++) {
+            frontCardFileName = "npc" + (i+1);
+            frontCardTextureRegions[i] = cards.findRegion(frontCardFileName);
+        }
 
     }
 
@@ -127,6 +153,7 @@ public class GameScreen implements Screen {
         yearCountSoundEffect = assetManager.get("audio/yearCountSoundEffect.mp3");
         backgroundMusic = assetManager.get("audio/playing.mp3");
         backgroundMusic.setLooping(true);
+        cardShuffleSoundEffect = assetManager.get("audio/cardShuffle.mp3");
     }
 
     public void loadFonts() {
@@ -151,14 +178,20 @@ public class GameScreen implements Screen {
     }
 
     public void setupFrontCards() {
-        frontCards = new Card[numberOfFrontCards];
+        frontCards = new FrontCard[numberOfFrontCards];
+        for (int i = 0; i < numberOfFrontCards; i++) {
+            frontCards[i] = new FrontCard(frontCardTextureRegions[i], cardDefaultX, cardDefaultY, cardWidth, cardHeight, leftDialogue, rightDialogue);
+        }
+        currentCard = frontCards[0];
     }
 
     public void setupBackCards() {
         offset = 400;
-        backCards = new Card[numberOfBackCards];
+        backCards = new BackCard[numberOfBackCards];
+        shuffledBackCard = new Boolean[numberOfBackCards];
         for (int i = 0; i < backCards.length; i++) {
-            backCards[i] = new Card(backCardTextureRegion, cardDefaultX - offset, cardDefaultY + offset, cardWidth, cardHeight);
+            backCards[i] = new BackCard(backCardTextureRegion, cardDefaultX - offset, cardDefaultY + offset, cardWidth, cardHeight);
+            shuffledBackCard[i] = false;
             offset += 100;
         }
     }
@@ -170,6 +203,7 @@ public class GameScreen implements Screen {
         countDownYearCurrent = 0;
         countDownYearFinish = 2024;
         numberOfBackCards = 18;
+        numberOfFrontCards = 18;
         shuffleSpeed = 1000;
     }
 
@@ -195,7 +229,7 @@ public class GameScreen implements Screen {
                     //reset parameters
                     timer = 0;
                     countDownYearCurrent = 0;
-                    colorValue = 1;
+                    colorValue = 0;
 
                     //play background music of playing
                     backgroundMusic.play();
@@ -244,16 +278,25 @@ public class GameScreen implements Screen {
         //logic for inGameState
         if (currentGameState == inGameState) {
             if (currentInGameState == shuffleState){
-                for(Sprite bCard: backCards) {
-                    float positionX = bCard.getX() + shuffleSpeed * delta;
-                    float positionY = bCard.getY() - shuffleSpeed * delta;
+                colorValue += delta/2;
+                if (colorValue >= 1) {
+                    colorValue = 1;
+                }
+                for(int i = 0; i < backCards.length; i++) {
+                    float positionX = backCards[i].getX() + shuffleSpeed * delta;
+                    float positionY = backCards[i].getY() - shuffleSpeed * delta;
                     if (positionY <= cardDefaultY) {
                         positionY = cardDefaultY;
+                        //if position equal destination, play shuffle once
+                        if (!shuffledBackCard[i]) {
+                            cardShuffleSoundEffect.play();
+                            shuffledBackCard[i] = true;
+                        }
                     }
                     if (positionX >= cardDefaultX) {
                         positionX = cardDefaultX;
                     }
-                    bCard.setPosition(positionX, positionY);
+                    backCards[i].setPosition(positionX, positionY);
                 }
 
                 if (backCards[backCards.length - 1].getX() >= cardDefaultX) {
@@ -277,6 +320,7 @@ public class GameScreen implements Screen {
         viewport.apply();
         batch.setProjectionMatrix(camera.combined);
 
+        batch.setColor(colorValue, colorValue, colorValue, 1);
         //begin draw
         batch.begin();
 
@@ -309,12 +353,15 @@ public class GameScreen implements Screen {
         batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
         if (currentInGameState == shuffleState){
             for (Card backCard : backCards) {
+                backCard.setColor(colorValue, colorValue, colorValue, 1);
                 backCard.draw(batch);
             }
         }
 
         if (currentInGameState == playingState) {
-
+            batch.draw(backCardTextureRegion, cardDefaultX, cardDefaultY, cardWidth, cardHeight);
+            currentCard.draw(batch);
+            currentCard.setRotation(20);
         }
     }
 

@@ -68,8 +68,10 @@
         }
 
         public void debug() {
-//            GameScreen gameScreen = new GameScreen(epochsGame);
-//            epochsGame.setScreen(gameScreen);
+//            epochsGame.splashScreen = new SplashScreen(epochsGame);
+//            epochsGame.setScreen(epochsGame.splashScreen);
+            GameScreen gameScreen = new GameScreen(epochsGame);
+            epochsGame.setScreen(new GameScreen(epochsGame));
 //            gameScreen.currentGameState = gameScreen.playingState;
         }
 
@@ -175,8 +177,8 @@
             if (epochsGame.assetManager.update()) {
                 loadingText = "Launching Epoch's Game";
                 if (timerNext >= 5) {
-                    epochsGame.splashScreen = new SplashScreen(epochsGame);
-                    epochsGame.setScreen(epochsGame.splashScreen);
+//                    epochsGame.splashScreen = new SplashScreen(epochsGame);
+//                    epochsGame.setScreen(epochsGame.splashScreen);
                     dispose();
                     debug();
                 }
