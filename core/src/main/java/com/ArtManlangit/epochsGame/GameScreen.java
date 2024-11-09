@@ -1,5 +1,6 @@
 package com.ArtManlangit.epochsGame;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -8,9 +9,15 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class GameScreen implements Screen {
     //access to epochsGame and the main assetManager
@@ -25,7 +32,16 @@ public class GameScreen implements Screen {
 
 
     //textures for assets in inGameState
+    TextureAtlas mainBgsLogos;
+    TextureAtlas playingBgs;
+    TextureAtlas cards;
+    TextureRegion currentBackground;
+    TextureRegion backCardTextureRegion;
 
+    //backCards
+    ArrayList<Card> backCards;
+
+    //fontCards
 
     //Audio and sound effects
     Music backgroundMusic;
@@ -81,18 +97,35 @@ public class GameScreen implements Screen {
     }
 
     public void loadAssets() {
+        loadTextures();
         loadFonts();
         loadAudio();
+        setupCards();
+    }
+
+    public void loadTextures() {
+        mainBgsLogos = assetManager.get("packedTextures/mainBgsLogos.atlas", TextureAtlas.class);
+        playingBgs = assetManager.get("packedTextures/playingBgs.atlas", TextureAtlas.class);
+        cards = assetManager.get("packedTextures/cards.atlas", TextureAtlas.class);
+        currentBackground = playingBgs.findRegion("bg1");
+        backCardTextureRegion = cards.findRegion("backCardTesting");
+
     }
 
     public void loadAudio() {
         yearCountSoundEffect = assetManager.get("audio/yearCountSoundEffect.mp3");
+        backgroundMusic = assetManager.get("audio/playing.mp3");
+        backgroundMusic.setLooping(true);
     }
 
     public void loadFonts() {
         headingMainFont = assetManager.get("setbackt50.ttf", BitmapFont.class);
         subHeadingMainFont = assetManager.get("setbackt40.ttf", BitmapFont.class);
         bodyMainFont = assetManager.get("setbackt25.ttf", BitmapFont.class);
+    }
+
+    public void setupCards() {
+
     }
 
     public void setGameDefaults() {
@@ -117,7 +150,31 @@ public class GameScreen implements Screen {
     }
 
     public void input() {
+        if (currentGameState == countState) {
+            if (Gdx.input.isTouched()) {
+                if (countDownYearCurrent >= countDownYearFinish) {
+                    currentGameState = inGameState;
 
+                    //reset parameters
+                    timer = 0;
+                    countDownYearCurrent = 0;
+                    colorValue = 1;
+
+                    //play background music of playing
+                    backgroundMusic.play();
+                }
+            }
+        }
+
+        if (currentGameState == inGameState) {
+            if (currentInGameState == shuffleState){
+
+            }
+
+            if (currentInGameState == playingState) {
+
+            }
+        }
     }
 
     public void logic(float delta) {
@@ -149,7 +206,13 @@ public class GameScreen implements Screen {
 
         //logic for inGameState
         if (currentGameState == inGameState) {
+            if (currentInGameState == shuffleState){
 
+            }
+
+            if (currentInGameState == playingState) {
+
+            }
         }
     }
 
@@ -158,9 +221,6 @@ public class GameScreen implements Screen {
         camera.update();
         viewport.apply();
         batch.setProjectionMatrix(camera.combined);
-
-        //sets colorvalue before drawing
-        batch.setColor(colorValue, colorValue, colorValue, 1);
 
         //begin draw
         batch.begin();
@@ -191,7 +251,14 @@ public class GameScreen implements Screen {
     }
 
     public void drawInGameState() {
+        batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+        if (currentInGameState == shuffleState){
 
+        }
+
+        if (currentInGameState == playingState) {
+
+        }
     }
 
     @Override

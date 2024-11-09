@@ -4,17 +4,16 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Card {
-    float height, width;
-    float xPosition, yPosition;
-    TextureRegion image;
-    Sprite cardSprite;
-
-    public Card() {
-
+public class Card extends Sprite{
+    public Card(TextureRegion image, float xPosition, float yPosition, float width, float height) {
+        super(image);
+        this.setPosition(xPosition, yPosition);
+        this.setSize(width, height);
+        this.setOriginCenter();
     }
 
-    public void draw(SpriteBatch batch) {
-        cardSprite.draw(batch);
+    public void update(float xPosition, float yPosition, float rotation) {
+        this.setPosition(xPosition, yPosition);
+        this.setRotation(rotation);
     }
 }

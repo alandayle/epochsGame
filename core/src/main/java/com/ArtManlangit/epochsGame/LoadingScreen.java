@@ -18,6 +18,7 @@
     import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
     import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
     import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
+    import com.badlogic.gdx.utils.Align;
     import com.badlogic.gdx.utils.viewport.Viewport;
 
     public class LoadingScreen implements Screen {
@@ -34,6 +35,8 @@
         TextureAtlas loading;
         TextureRegion loadingLogo;
         TextureRegion[] loadingImage;
+        BitmapFont mainFont;
+        String loadingText;
 
         //timer
         float timer;
@@ -42,6 +45,8 @@
         //transition to next screen timer
         float timerNext;
 
+        //loading icon size
+        float loadingIconLength;
 
         //drawer
         SpriteBatch batch;
@@ -64,15 +69,37 @@
         public void loadLoadingAssets() {
             assetManager.load("packedTextures/mainBgsLogos.atlas", TextureAtlas.class);
             assetManager.load("packedTextures/loading.atlas", TextureAtlas.class);
+
+            //load fonts
+            FileHandleResolver resolver = new InternalFileHandleResolver();
+            assetManager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
+            assetManager.setLoader(BitmapFont.class, ".otf", new FreetypeFontLoader(resolver));
+            FreetypeFontLoader.FreeTypeFontLoaderParameter typewriter = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+            typewriter.fontFileName = "fonts/typewcond.otf";
+            typewriter.fontParameters.size = 25;
+            assetManager.load("typewcond25.otf", BitmapFont.class, typewriter);
+
+            //finish loading
             assetManager.finishLoading();
+
+            //setup assets for loading screen
             mainBgsLogos = assetManager.get("packedTextures/mainBgsLogos.atlas", TextureAtlas.class);
             loading = assetManager.get("packedTextures/loading.atlas", TextureAtlas.class);
             loadingLogo = mainBgsLogos.findRegion("logo(portrait)");
+            mainFont = assetManager.get("typewcond25.otf", BitmapFont.class);
+
+            //store loadingIcon frames
             loadingImage = new TextureRegion[36];
             for (int i = 0; i < 36; i++) {
                 String fileName = "loading-" + String.valueOf(i + 1) + " (dragged)";
                 loadingImage[i] = loading.findRegion(fileName);
             }
+
+            //sets size for loading Icon
+            loadingIconLength = epochsGame.worldHeight / 7;
+
+            //initial loading text
+            loadingText = "Loading Assets";
         }
 
         public void loadAssets() {
@@ -137,10 +164,14 @@
         public void render(float delta) {
             timerNext+= delta;
             timer+= delta;
-            if (epochsGame.assetManager.update() && timerNext >= 5) {
-                epochsGame.splashScreen = new SplashScreen(epochsGame);
-                epochsGame.setScreen(epochsGame.splashScreen);
-                dispose();
+            loadingText = "Loading Assets " + Math.round(epochsGame.assetManager.getProgress() * 100) + "%";
+            if (epochsGame.assetManager.update()) {
+                loadingText = "Launching Epoch's Game";
+                if (timerNext >= 5) {
+                    epochsGame.splashScreen = new SplashScreen(epochsGame);
+                    epochsGame.setScreen(epochsGame.splashScreen);
+                    dispose();
+                }
             }
 
             if (timer >= 1f / 36f) {
@@ -160,7 +191,8 @@
             //begin draw
             batch.begin();
             batch.draw(loadingLogo, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
-            batch.draw(loadingImage[currentLoadingIndex], epochsGame.worldWidth / 2 - epochsGame.worldHeight / 10, epochsGame.worldHeight / 6, epochsGame.worldHeight / 5, epochsGame.worldHeight / 5);
+            batch.draw(loadingImage[currentLoadingIndex], epochsGame.worldWidth / 2 - loadingIconLength / 2, epochsGame.worldHeight / 6, loadingIconLength, loadingIconLength);
+            mainFont.draw(batch, loadingText, epochsGame.worldWidth / 2, epochsGame.worldHeight / 6, 0, Align.center, false);
             batch.end();
         }
 
