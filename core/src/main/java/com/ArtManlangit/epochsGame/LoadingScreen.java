@@ -1,5 +1,6 @@
     package com.ArtManlangit.epochsGame;
 
+    import com.badlogic.gdx.Game;
     import com.badlogic.gdx.Screen;
     import com.badlogic.gdx.assets.AssetManager;
     import com.badlogic.gdx.assets.loaders.FileHandleResolver;
@@ -64,6 +65,12 @@
 
             //load all assets
             loadAssets();
+        }
+
+        public void debug() {
+            GameScreen gameScreen = new GameScreen(epochsGame);
+            epochsGame.setScreen(gameScreen);
+            gameScreen.currentGameState = gameScreen.playingState;
         }
 
         public void loadLoadingAssets() {
@@ -171,6 +178,7 @@
                     epochsGame.splashScreen = new SplashScreen(epochsGame);
                     epochsGame.setScreen(epochsGame.splashScreen);
                     dispose();
+                    debug();
                 }
             }
 

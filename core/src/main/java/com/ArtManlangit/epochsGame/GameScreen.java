@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -37,11 +38,20 @@ public class GameScreen implements Screen {
     TextureAtlas cards;
     TextureRegion currentBackground;
     TextureRegion backCardTextureRegion;
+    TextureRegion[] frontCards;
+
+    //cards
+    float cardWidth, cardHeight;
+    float cardDefaultX, cardDefaultY;
 
     //backCards
-    ArrayList<Card> backCards;
+    Card[] backCards;
+    int numberOfBackCards;
+    int shuffleSpeed;
+    int offset;
 
-    //fontCards
+    //frontCards
+    int numberOfFrontCards;
 
     //Audio and sound effects
     Music backgroundMusic;
@@ -89,11 +99,12 @@ public class GameScreen implements Screen {
         //set timer to 0
         timer = 0;
 
+        //Game defaults
+        setGameDefaults();
+
         //load and setup assets
         loadAssets();
 
-        //Game defaults
-        setGameDefaults();
     }
 
     public void loadAssets() {
@@ -125,7 +136,31 @@ public class GameScreen implements Screen {
     }
 
     public void setupCards() {
+        //setup card details
+        cardWidth = (epochsGame.worldWidth - epochsGame.worldWidth /6) * 0.8f;
+        cardHeight = epochsGame.worldHeight / 2.11f;
+        cardDefaultX = (epochsGame.worldWidth - cardWidth) / 2;
+        cardDefaultY = epochsGame.worldHeight / 5.82f;
 
+
+        //create backCards for shuffling
+        setupBackCards();
+
+        //setup front cards
+        setupFrontCards();
+    }
+
+    public void setupFrontCards() {
+        frontCards = new Card[numberOfFrontCards];
+    }
+
+    public void setupBackCards() {
+        offset = 400;
+        backCards = new Card[numberOfBackCards];
+        for (int i = 0; i < backCards.length; i++) {
+            backCards[i] = new Card(backCardTextureRegion, cardDefaultX - offset, cardDefaultY + offset, cardWidth, cardHeight);
+            offset += 100;
+        }
     }
 
     public void setGameDefaults() {
@@ -134,6 +169,8 @@ public class GameScreen implements Screen {
         currentInGameState = shuffleState;
         countDownYearCurrent = 0;
         countDownYearFinish = 2024;
+        numberOfBackCards = 18;
+        shuffleSpeed = 1000;
     }
 
 
@@ -207,7 +244,25 @@ public class GameScreen implements Screen {
         //logic for inGameState
         if (currentGameState == inGameState) {
             if (currentInGameState == shuffleState){
+                for(Sprite bCard: backCards) {
+                    float positionX = bCard.getX() + shuffleSpeed * delta;
+                    float positionY = bCard.getY() - shuffleSpeed * delta;
+                    if (positionY <= cardDefaultY) {
+                        positionY = cardDefaultY;
+                    }
+                    if (positionX >= cardDefaultX) {
+                        positionX = cardDefaultX;
+                    }
+                    bCard.setPosition(positionX, positionY);
+                }
 
+                if (backCards[backCards.length - 1].getX() >= cardDefaultX) {
+                    timer+= delta;
+                    if (timer > 1) {
+                        currentInGameState = playingState;
+                        timer = 0;
+                    }
+                }
             }
 
             if (currentInGameState == playingState) {
@@ -253,7 +308,9 @@ public class GameScreen implements Screen {
     public void drawInGameState() {
         batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
         if (currentInGameState == shuffleState){
-
+            for (Card backCard : backCards) {
+                backCard.draw(batch);
+            }
         }
 
         if (currentInGameState == playingState) {
