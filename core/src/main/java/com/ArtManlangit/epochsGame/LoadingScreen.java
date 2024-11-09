@@ -68,9 +68,9 @@
         }
 
         public void debug() {
-            GameScreen gameScreen = new GameScreen(epochsGame);
-            epochsGame.setScreen(gameScreen);
-            gameScreen.currentGameState = gameScreen.playingState;
+//            GameScreen gameScreen = new GameScreen(epochsGame);
+//            epochsGame.setScreen(gameScreen);
+//            gameScreen.currentGameState = gameScreen.playingState;
         }
 
         public void loadLoadingAssets() {
