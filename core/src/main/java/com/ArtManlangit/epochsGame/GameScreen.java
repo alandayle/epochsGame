@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -46,7 +47,6 @@ public class GameScreen implements Screen {
     TextureRegion leftDialogue;
     TextureRegion rightDialogue;
 
-
     //cards
     float cardWidth, cardHeight;
     float cardDefaultX, cardDefaultY;
@@ -62,8 +62,7 @@ public class GameScreen implements Screen {
     FrontCard[] frontCards;
     int numberOfFrontCards;
     FrontCard currentCard;
-
-
+    
     //Audio and sound effects
     Music backgroundMusic;
     Sound yearCountSoundEffect;
@@ -95,6 +94,10 @@ public class GameScreen implements Screen {
     //countdown year
     int countDownYearCurrent;
     int countDownYearFinish;
+
+    //Card movement variables
+    Vector2 initialTouch, touchPosition;
+    boolean isDragging;
 
     //constructor
     public GameScreen(EpochsGame epochsGame) {
@@ -183,6 +186,11 @@ public class GameScreen implements Screen {
             frontCards[i] = new FrontCard(frontCardTextureRegions[i], cardDefaultX, cardDefaultY, cardWidth, cardHeight, leftDialogue, rightDialogue);
         }
         currentCard = frontCards[0];
+
+        //card rotation
+        initialTouch = new Vector2();
+        touchPosition = new Vector2();
+        isDragging = false;
     }
 
     public void setupBackCards() {
@@ -243,7 +251,29 @@ public class GameScreen implements Screen {
             }
 
             if (currentInGameState == playingState) {
+                if (Gdx.input.isTouched()) {
+                    if (!isDragging) {
+                        //get initial touch location
+                        initialTouch.set(Gdx.input.getX(), Gdx.input.getY());
+                        viewport.unproject(initialTouch);
+                        isDragging = true;
+                    }
+                    //get current touch position
+                    touchPosition.set(Gdx.input.getX(), Gdx.input.getY());
+                    viewport.unproject(touchPosition);
 
+                    //get change in touch position in x
+                    float deltaX = touchPosition.x - initialTouch.x;
+
+                    //update current card position based on drag distance
+                    currentCard.setPosition(cardDefaultX + deltaX, cardDefaultY + deltaX / 5);
+                    currentCard.setRotation(-1 * deltaX / 15);
+                } else {
+                    //reset position if not touching
+                    currentCard.setPosition(cardDefaultX, cardDefaultY);
+                    currentCard.setRotation(0);
+                    isDragging = false;
+                }
             }
         }
     }
@@ -361,7 +391,6 @@ public class GameScreen implements Screen {
         if (currentInGameState == playingState) {
             batch.draw(backCardTextureRegion, cardDefaultX, cardDefaultY, cardWidth, cardHeight);
             currentCard.draw(batch);
-            currentCard.setRotation(20);
         }
     }
 

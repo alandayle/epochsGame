@@ -68,11 +68,10 @@
         }
 
         public void debug() {
-//            epochsGame.splashScreen = new SplashScreen(epochsGame);
-//            epochsGame.setScreen(epochsGame.splashScreen);
-            GameScreen gameScreen = new GameScreen(epochsGame);
-            epochsGame.setScreen(new GameScreen(epochsGame));
-//            gameScreen.currentGameState = gameScreen.playingState;
+            epochsGame.splashScreen = new SplashScreen(epochsGame);
+            epochsGame.setScreen(epochsGame.splashScreen);
+//            GameScreen gameScreen = new GameScreen(epochsGame);
+//            epochsGame.setScreen(new GameScreen(epochsGame));
         }
 
         public void loadLoadingAssets() {
@@ -171,12 +170,12 @@
 
         @Override
         public void render(float delta) {
-            timerNext+= delta;
             timer+= delta;
             loadingText = "Loading Assets " + Math.round(epochsGame.assetManager.getProgress() * 100) + "%";
             if (epochsGame.assetManager.update()) {
                 loadingText = "Launching Epoch's Game";
-                if (timerNext >= 5) {
+                timerNext += delta;
+                if (timerNext >= 3) {
 //                    epochsGame.splashScreen = new SplashScreen(epochsGame);
 //                    epochsGame.setScreen(epochsGame.splashScreen);
                     dispose();
