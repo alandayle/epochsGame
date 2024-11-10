@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class FrontCard extends Card{
     Sprite leftDialogue, rightDialogue;
+    String rank;
+    String question;
 
     public FrontCard(TextureRegion image, float xPosition, float yPosition, float width, float height, TextureRegion leftDialogue, TextureRegion rightDialogue) {
         super(image, xPosition, yPosition, width, height);

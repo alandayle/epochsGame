@@ -68,10 +68,18 @@
         }
 
         public void debug() {
+
+            //default
             epochsGame.splashScreen = new SplashScreen(epochsGame);
             epochsGame.setScreen(epochsGame.splashScreen);
+
+            //game Screen
 //            GameScreen gameScreen = new GameScreen(epochsGame);
-//            epochsGame.setScreen(new GameScreen(epochsGame));
+//            epochsGame.setScreen(gameScreen);
+
+//            //mainMenu screen
+//            MainMenuScreen mainMenuScreen = new MainMenuScreen(epochsGame);
+//            epochsGame.setScreen((mainMenuScreen));
         }
 
         public void loadLoadingAssets() {

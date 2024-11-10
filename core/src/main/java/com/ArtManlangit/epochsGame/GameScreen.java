@@ -39,6 +39,9 @@
         TextureAtlas cards;
         TextureRegion currentBackground;
         TextureRegion backCardTextureRegion;
+        TextureRegion lockCardTextureRegion;
+        TextureRegion drop;
+        TextureRegion progress;
         TextureRegion[] frontCardTextureRegions;
         TextureRegion[] frontCardDialogueTextureRegions;
 
@@ -50,6 +53,9 @@
         //cards
         float cardWidth, cardHeight;
         float cardDefaultX, cardDefaultY;
+
+        //Icons, buttons
+        float dropX, dropY, progressX, progressY;
 
         //backCards
         BackCard[] backCards;
@@ -91,7 +97,7 @@
         int settingState = 3;
 
         //fonts
-        BitmapFont headingMainFont, subHeadingMainFont, bodyMainFont;
+        BitmapFont headingMainFont, subHeadingMainFont, bodyMainFont, typeWriter;
 
         //countdown year
         int countDownYearCurrent;
@@ -133,6 +139,14 @@
             loadFonts();
             loadAudio();
             setupCards();
+            setupButtons();
+        }
+
+        public void setupButtons() {
+            dropX = 0.86f * epochsGame.worldWidth;
+            dropY = 0;
+            progressX = 0.83f * epochsGame.worldWidth;
+            progressY = 0.915f * epochsGame.worldHeight;
         }
 
         public void loadTextures() {
@@ -144,9 +158,12 @@
 
             //setup TextureRegions
             currentBackground = playingBgs.findRegion("bg1");
-            backCardTextureRegion = cards.findRegion("backCardTesting");
+            backCardTextureRegion = cards.findRegion("back");
+            lockCardTextureRegion = cards.findRegion("locked");
             leftDialogue = dialogues.findRegion("yes");
             rightDialogue = dialogues.findRegion("no");
+            drop = mainBgsLogos.findRegion("dropMenu");
+            progress = mainBgsLogos.findRegion("progress-50%");
 
             String frontCardFileName;
             //setup texture region for front cards
@@ -169,14 +186,15 @@
             headingMainFont = assetManager.get("setbackt50.ttf", BitmapFont.class);
             subHeadingMainFont = assetManager.get("setbackt40.ttf", BitmapFont.class);
             bodyMainFont = assetManager.get("setbackt25.ttf", BitmapFont.class);
+            typeWriter = assetManager.get("typewcond25.otf", BitmapFont.class);
         }
 
         public void setupCards() {
             //setup card details
-            cardWidth = (epochsGame.worldWidth - epochsGame.worldWidth /6) * 0.8f;
-            cardHeight = epochsGame.worldHeight / 2.11f;
+            cardWidth = epochsGame.worldWidth * 0.62f;
+            cardHeight = epochsGame.worldHeight * 0.47f;
             cardDefaultX = (epochsGame.worldWidth - cardWidth) / 2;
-            cardDefaultY = epochsGame.worldHeight / 5.82f;
+            cardDefaultY = epochsGame.worldHeight * 0.33f;
 
 
             //create backCards for shuffling
@@ -203,6 +221,16 @@
 
             //card change
             change = false;
+
+            //setup dialogues and ranks
+            setupDialoguesRank();
+        }
+
+        public void setupDialoguesRank() {
+            for (FrontCard frontCard : frontCards) {
+                frontCard.rank = "House Keeper";
+                frontCard.question = '"' + "You're a devious one,\nyou know that?" + '"';
+            }
         }
 
         public void setupBackCards() {
@@ -281,7 +309,7 @@
                         currentCard.setPosition(cardDefaultX + deltaX, cardDefaultY + deltaX / 5);
                         currentCard.setRotation(-1 * deltaX / 15);
 
-                        leftDialogueColorValue = -deltaX / (cardWidth / 3.5f);
+                        leftDialogueColorValue = deltaX / (cardWidth / 3.5f);
                         if (leftDialogueColorValue > 1) {
                             leftDialogueColorValue = 1;
                         }
@@ -290,7 +318,7 @@
                             leftDialogueColorValue = 0;
                         }
 
-                        rightDialogueColorValue = deltaX / (cardWidth / 3.5f);
+                        rightDialogueColorValue = -deltaX / (cardWidth / 3.5f);
                         if (rightDialogueColorValue > 1) {
                             rightDialogueColorValue = 1;
                         }
@@ -424,7 +452,15 @@
         }
 
         public void drawInGameState() {
+            //draw background for ingameState
             batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+
+            //draw icons, fonts and buttons
+            subHeadingMainFont.draw(batch, "2024", subHeadingMainFont.getCapHeight() /5 , epochsGame.worldHeight - subHeadingMainFont.getCapHeight());
+            batch.draw(drop, dropX, dropY, 0.110f * epochsGame.worldWidth, 0.064f * epochsGame.worldHeight);
+            batch.draw(progress, progressX, progressY, 0.125f * epochsGame.worldWidth, 0.065f * epochsGame.worldHeight);
+
+            //elements to draw when shuffling
             if (currentInGameState == shuffleState){
                 for (Card backCard : backCards) {
                     backCard.setColor(colorValue, colorValue, colorValue, 1);
@@ -432,11 +468,20 @@
                 }
             }
 
+            //elements to draw when playing
             if (currentInGameState == playingState) {
+                //set opacity for left and right dialogues
                 currentCard.leftDialogue.setColor(1, 1, 1, leftDialogueColorValue);
                 currentCard.rightDialogue.setColor(1, 1, 1, rightDialogueColorValue);
-                batch.draw(backCardTextureRegion, cardDefaultX, cardDefaultY, cardWidth, cardHeight);
+
+                //lock card
+                batch.draw(lockCardTextureRegion, cardDefaultX, cardDefaultY, cardWidth, cardHeight);
+
+                //draw current card
                 currentCard.draw(batch);
+                subHeadingMainFont.draw(batch, currentCard.rank, 20, 150);
+                typeWriter.draw(batch, currentCard.question, 20, 100);
+                //reset dialogues' opacity to prevent bugs
                 currentCard.leftDialogue.setColor(1, 1, 1, 1);
                 currentCard.rightDialogue.setColor(1, 1, 1, 1);
             }
