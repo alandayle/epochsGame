@@ -1,0 +1,13 @@
+settings.png
+size:512,128
+repeat:none
+music(disabled)
+bounds:278,0,92,92
+music(enabled)
+bounds:186,0,92,92
+soundFx(disabled)
+bounds:93,0,93,92
+soundFx(enabled)
+bounds:0,0,93,92
+xButton
+bounds:370,7,85,85

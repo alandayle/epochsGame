@@ -1,0 +1,32 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	greenScreen: {
+		file: Greenscr(2).fnt
+		scaledSize: -1
+		markupEnabled: false
+		flip: false
+	}
+}
+com.badlogic.gdx.graphics.Color: {
+	Pressed: {
+		r: 0.7529412
+		g: 0.5411765
+		b: 0.73333335
+		a: 1
+	}
+	unPressed: {
+		r: 1
+		g: 0.93333334
+		b: 0.99607843
+		a: 1
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: {
+		font: greenScreen
+		fontColor: unPressed
+		downFontColor: Pressed
+		pressedOffsetY: -5
+	}
+}
+}

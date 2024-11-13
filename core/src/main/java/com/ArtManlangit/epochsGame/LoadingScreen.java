@@ -53,7 +53,7 @@
         SpriteBatch batch;
 
         //delay time before launching the game after loading the assets
-        float launchDelay = 3;
+        float launchDelay = 0;
 
         public LoadingScreen(EpochsGame epochsGame) {
             //initialize variables
@@ -72,7 +72,7 @@
 
         public void debug() {
 
-//            //default
+////            //default
             epochsGame.splashScreen = new SplashScreen(epochsGame);
             epochsGame.setScreen(epochsGame.splashScreen);
 
@@ -80,11 +80,11 @@
 //            GameScreen gameScreen = new GameScreen(epochsGame);
 //            epochsGame.setScreen(gameScreen);
 
-            //mainMenu screen
+//            mainMenu screen
 //            MainMenuScreen mainMenuScreen = new MainMenuScreen(epochsGame);
 //            epochsGame.setScreen((mainMenuScreen));
-
-            dispose();
+//
+//            dispose();
         }
 
         public void loadLoadingAssets() {
@@ -128,6 +128,7 @@
             assetManager.load("packedTextures/cards.atlas", TextureAtlas.class);
             assetManager.load("packedTextures/dialogues.atlas", TextureAtlas.class);
             assetManager.load("packedTextures/playingBgs.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/settings.atlas", TextureAtlas.class);
 
             //music files
             assetManager.load("audio/background.mp3", Music.class);
@@ -188,12 +189,11 @@
             if (epochsGame.assetManager.update()) {
                 loadingText = "Launching Epoch's Game";
                 timerNext += delta;
-                debug();
                 if (timerNext >= launchDelay) {
 //                    epochsGame.splashScreen = new SplashScreen(epochsGame);
 //                    epochsGame.setScreen(epochsGame.splashScreen);
-                    dispose();
                     debug();
+                    dispose();
                 }
             }
 

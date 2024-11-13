@@ -42,7 +42,7 @@ public class EpochsGame extends Game {
         //set camera and viewport
         camera = new OrthographicCamera();
         camera.position.set(worldWidth / 2, worldHeight / 2, 0);
-        viewport = new StretchViewport(worldWidth, worldHeight, camera);
+        viewport = new FitViewport(worldWidth, worldHeight, camera);
 
         //create sprite batch
         batch = new SpriteBatch();
