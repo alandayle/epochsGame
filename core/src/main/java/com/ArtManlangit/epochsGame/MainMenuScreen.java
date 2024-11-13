@@ -23,15 +23,9 @@ public class MainMenuScreen implements Screen {
     Camera camera;
 
     //textures for assets
-    TextureAtlas mainBgsLogos;
-    TextureAtlas playingBgs;
+    TextureAtlas mainBgsLogos ,playingBgs;
     TextureRegion[] currentBackground;
-    TextureRegion flare;
-    TextureRegion title;
-    TextureRegion start;
-    TextureRegion settings;
-    TextureRegion archives;
-    TextureRegion about;
+    TextureRegion flare, title, start, settings, archives, about, bars;
 
     //flare properties
     float flareX, flareY, flareWidth, flareHeight;
@@ -52,9 +46,11 @@ public class MainMenuScreen implements Screen {
     //archives properties
     float archivesX, archivesY, archivesWidth, archivesHeight;
 
-    //abbout
+    //about
     float aboutX, aboutY, aboutWidth, aboutHeight;
 
+    //bars
+    float barsX, barsY, barsWidth, barsHeight;
 
     //Audio and sound effects
     Music backgroundMusic;
@@ -65,13 +61,14 @@ public class MainMenuScreen implements Screen {
     //color value for transition
     float colorValue;
     float iconsColorValue;
+    float startButtonColorValue;
 
     //timer for transitions
     float timer;
+    float startTimer;
 
     //variables for moving background
     float[] backgroundX;
-
 
     //constructor
     public MainMenuScreen(EpochsGame epochsGame) {
@@ -82,8 +79,12 @@ public class MainMenuScreen implements Screen {
         camera = epochsGame.camera;
         batch = epochsGame.batch;
 
-        //set colorTransition value to 1 at the start
+        //set default colorValue transitions
         colorValue = 1;
+        startButtonColorValue = 1;
+        iconsColorValue = 0;
+
+
 
         //set timer to 0
         timer = 0;
@@ -109,10 +110,16 @@ public class MainMenuScreen implements Screen {
         flareSprite.setOriginCenter();
 
         //title
-        titleWidth = epochsGame.worldWidth * 0.7f;
-        titleHeight = epochsGame.worldHeight / 4.5f;
+        titleWidth = epochsGame.worldWidth * 0.5f;
+        titleHeight = epochsGame.worldHeight * 0.135f;
         titleX = (epochsGame.worldWidth - titleWidth) / 2;
-        titleY = 0.74f * epochsGame.worldHeight;
+        titleY = 0.795f * epochsGame.worldHeight;
+
+        //bars
+        barsWidth = epochsGame.worldWidth * 0.4f;
+        barsHeight = epochsGame.worldHeight * 0.09f;
+        barsX = (epochsGame.worldWidth - barsWidth) / 2f;
+        barsY = 0.55f * epochsGame.worldHeight;
 
         //start
         startWidth = epochsGame.worldWidth * 0.4f;
@@ -138,6 +145,7 @@ public class MainMenuScreen implements Screen {
         aboutX = (epochsGame.worldWidth - aboutWidth) / 2f;
         aboutY = 0.380f * epochsGame.worldHeight;
 
+
         //background moving
         backgroundX = new float[8];
         for (int i = 0; i < backgroundX.length; i++) {
@@ -148,15 +156,20 @@ public class MainMenuScreen implements Screen {
     }
 
     public void loadAssets() {
+        //load atlas
         mainBgsLogos = assetManager.get("packedTextures/mainBgsLogos.atlas", TextureAtlas.class);
         playingBgs = assetManager.get("packedTextures/playingBgs.atlas", TextureAtlas.class);
+
+        //get texture region from atlas
         flare = mainBgsLogos.findRegion("flare");
         title = mainBgsLogos.findRegion("title");
         start = mainBgsLogos.findRegion("start(unclicked)");
         settings = mainBgsLogos.findRegion("settings(unclicked)");
         archives = mainBgsLogos.findRegion("archives(unclicked)");
         about = mainBgsLogos.findRegion("about(unclicked)");
+        bars = mainBgsLogos.findRegion("bars");
 
+        //setup textureRegion for moving background
         currentBackground = new TextureRegion[8];
         currentBackground[0] = mainBgsLogos.findRegion("mainBackground(portrait)");
         for (int i = 1; i < currentBackground.length; i++) {
@@ -187,8 +200,9 @@ public class MainMenuScreen implements Screen {
     public void logic(float delta) {
         timer += delta;
         flareTimer += delta;
+        startTimer += delta;
 
-        //fade in fade out logic
+        //fade in fade out logic for background and title
         if (timer > 2) {
             if (timer - 2 < 1) {
                 colorValue -= delta / 1.5f;
@@ -200,13 +214,19 @@ public class MainMenuScreen implements Screen {
             }
         }
 
-        //
-        if (timer <= 2) {
+        //icons color value and startButton
+        if (startTimer < 1.5) {
             iconsColorValue += delta;
             if (iconsColorValue >= 1) {
                 iconsColorValue = 1;
             }
-            System.out.println(iconsColorValue);
+            startButtonColorValue = iconsColorValue;
+        } else {
+            startTimer += delta;
+            if (startTimer > 2.15F) {
+                    startButtonColorValue = 1 - startButtonColorValue;
+                    startTimer = 1.5f;
+            }
         }
 
         //limit colorvalue to 0 - 1;
@@ -217,9 +237,10 @@ public class MainMenuScreen implements Screen {
             colorValue = 1;
         }
 
+
         //rotate flare
-        if (flareTimer > 0.04) {
-            flareSprite.setRotation(flareSprite.getRotation() + 1);
+        if (flareTimer > 0.0001f) {
+            flareSprite.setRotation(flareSprite.getRotation() + 0.2f);
             flareTimer = 0;
         }
 
@@ -243,26 +264,31 @@ public class MainMenuScreen implements Screen {
 
         //begin draw
         batch.begin();
+
+        //draw backgrounds
         for (int i = 0; i < currentBackground.length; i++) {
             batch.draw(currentBackground[i], backgroundX[i], 0, epochsGame.worldWidth, epochsGame.worldHeight);
         }
 
-        //don't add fade in fade out to icons
-        batch.setColor(1, 1, 1, 1);
 
         //draws icons
         flareSprite.draw(batch);
-        if (timer <= 1) {
-            batch.setColor(1, 1, 1, iconsColorValue);
-        }
+
+        //controls color value for icons
+        batch.setColor(1, 1, 1, iconsColorValue);
         batch.draw(title, titleX, titleY, titleWidth, titleHeight);
-        batch.draw(start, startX, startY, startWidth, startHeight);
+        batch.draw(bars, barsX, barsY, barsWidth, barsHeight);
         batch.draw(settings, settingsX, settingsY, settingsWidth, settingsHeight);
         batch.draw(archives, archivesX, archivesY, archivesWidth, archivesHeight);
         batch.draw(about, aboutX, aboutY, aboutWidth, aboutHeight);
+
+        //separate color value for startButton
+        batch.setColor(1, 1, 1, startButtonColorValue);
+        batch.draw(start, startX, startY, startWidth, startHeight);
         batch.end();
 
         //reset color value
+        batch.setColor(1, 1, 1, 1);
 
 
     }

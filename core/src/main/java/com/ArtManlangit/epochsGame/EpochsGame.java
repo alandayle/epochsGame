@@ -10,7 +10,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -39,7 +42,7 @@ public class EpochsGame extends Game {
         //set camera and viewport
         camera = new OrthographicCamera();
         camera.position.set(worldWidth / 2, worldHeight / 2, 0);
-        viewport = new FillViewport(worldWidth, worldHeight, camera);
+        viewport = new StretchViewport(worldWidth, worldHeight, camera);
 
         //create sprite batch
         batch = new SpriteBatch();
