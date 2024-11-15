@@ -5,30 +5,65 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import java.util.ArrayList;
+
 public class FrontCard extends Card{
     Sprite leftDialogue, rightDialogue;
+    ArrayList<Sprite> leftDialogues, rightDialogues;
+    ArrayList<String> questions;
     String rank;
     String question;
+    int theme;
 
-    public FrontCard(TextureRegion image, float xPosition, float yPosition, float width, float height, TextureRegion leftDialogue, TextureRegion rightDialogue) {
+    public FrontCard(TextureRegion image, float xPosition, float yPosition, float width, float height) {
         super(image, xPosition, yPosition, width, height);
+        this.setX(xPosition);
+        this.setY(yPosition);
+    }
 
-        //left dialogue
-        this.leftDialogue = new Sprite(leftDialogue);
-        this.leftDialogue.setPosition(xPosition, yPosition);
-        this.leftDialogue.setSize(width, height);
-        this.leftDialogue.setOriginCenter();
+    public void setupDialogue(ArrayList<Sprite> leftDialogues, ArrayList<Sprite> rightDialogues, ArrayList<String> questions, int theme, String rank) {
+        //initialize array
+        this.leftDialogues = new ArrayList<>();
+        this.rightDialogues = new ArrayList<>();
+        this.questions = new ArrayList<>();
 
-        //right dialogue
-        this.rightDialogue = new Sprite(rightDialogue);
-        this.rightDialogue.setPosition(xPosition, yPosition);
-        this.rightDialogue.setSize(width, height);
-        this.rightDialogue.setOriginCenter();
+        //copy array of dialogues
+        this.leftDialogues.addAll(leftDialogues);
+        this.rightDialogues.addAll(rightDialogues);
+
+        //set default properties for dialogues
+        for (Sprite dialogue: leftDialogues) {
+            dialogue.setPosition(this.getX(), this.getY());
+            dialogue.setSize(this.getWidth(), this.getHeight());
+            dialogue.setOriginCenter();
+        }
+
+        for (Sprite dialogue: rightDialogues) {
+            dialogue.setPosition(this.getX(), this.getY());
+            dialogue.setSize(this.getWidth(), this.getHeight());
+            dialogue.setOriginCenter();
+        }
+
+        //copy questions
+        this.questions.addAll(questions);
+
+        //default question
+        question = questions.get(0);
+
+        //default left dialogue
+        this.leftDialogue = leftDialogues.get(0);
+        this.rightDialogue = rightDialogues.get(0);
 
         //set front card position
-        setPosition(xPosition, yPosition);
+        setPosition(this.getX(), this.getY());
+
+        //set theme and rank
+        this.theme = theme;
+        this.rank = rank;
+
 
     }
+
 
     public void draw(Batch batch) {
         super.draw(batch);

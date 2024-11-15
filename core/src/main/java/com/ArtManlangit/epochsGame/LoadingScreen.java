@@ -29,6 +29,7 @@
 
         //viewport and camera
         Viewport viewport;
+        Viewport backgroundViewport;
         Camera camera;
 
         //textures for assets in the loading screen
@@ -53,13 +54,14 @@
         SpriteBatch batch;
 
         //delay time before launching the game after loading the assets
-        float launchDelay = 0;
+        float launchDelay = 3;
 
         public LoadingScreen(EpochsGame epochsGame) {
             //initialize variables
             this.epochsGame = epochsGame;
             this.assetManager = epochsGame.assetManager;
             viewport = epochsGame.viewport;
+            backgroundViewport = epochsGame.backgroundViewport;
             camera = epochsGame.camera;
             batch = epochsGame.batch;
 
@@ -129,6 +131,13 @@
             assetManager.load("packedTextures/dialogues.atlas", TextureAtlas.class);
             assetManager.load("packedTextures/playingBgs.atlas", TextureAtlas.class);
             assetManager.load("packedTextures/settings.atlas", TextureAtlas.class);
+
+            //atlas for dialogues
+            assetManager.load("packedTextures/cultural.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/environmental.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/health.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/technological.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/military.atlas", TextureAtlas.class);
 
             //music files
             assetManager.load("audio/background.mp3", Music.class);
@@ -208,12 +217,19 @@
 
             //setup viewport and camera
             camera.update();
-            viewport.apply();
+            backgroundViewport.apply();
             batch.setProjectionMatrix(camera.combined);
 
             //begin draw
             batch.begin();
             batch.draw(loadingLogo, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+            batch.end();
+
+            //change viewport to avoid stretch
+            viewport.apply();
+            batch.setProjectionMatrix(camera.combined);
+
+            batch.begin();
             batch.draw(loadingImage[currentLoadingIndex], epochsGame.worldWidth / 2 - loadingIconLength / 2, epochsGame.worldHeight / 6, loadingIconLength, loadingIconLength);
             mainFont.draw(batch, loadingText, epochsGame.worldWidth / 2, epochsGame.worldHeight / 6, 0, Align.center, false);
             batch.end();
@@ -221,6 +237,7 @@
 
         @Override
         public void resize(int width, int height) {
+            backgroundViewport.update(width, height, true);
             viewport.update(width, height, true);
         }
 

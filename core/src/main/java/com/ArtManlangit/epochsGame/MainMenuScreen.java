@@ -27,6 +27,7 @@ public class MainMenuScreen implements Screen {
 
     //viewport and camera
     Viewport viewport;
+    Viewport backgroundViewport;
     Camera camera;
 
     //textures for assets
@@ -98,6 +99,7 @@ public class MainMenuScreen implements Screen {
         this.epochsGame = epochsGame;
         this.assetManager = epochsGame.assetManager;
         viewport = epochsGame.viewport;
+        backgroundViewport = epochsGame.backgroundViewport;
         camera = epochsGame.camera;
         batch = epochsGame.batch;
         touchPosition = new Vector2();
@@ -330,10 +332,10 @@ public class MainMenuScreen implements Screen {
             colorValue = 1;
         }
 
-
+        System.out.println(flareTimer);
         //rotate flare
-        if (flareTimer > 0.0001f) {
-            flareSprite.setRotation(flareSprite.getRotation() + 0.2f);
+        if (flareTimer > .02) {
+            flareSprite.setRotation(flareSprite.getRotation() + 0.3f);
             flareTimer = 0;
         }
 
@@ -349,7 +351,7 @@ public class MainMenuScreen implements Screen {
     public void draw() {
         ScreenUtils.clear(Color.BLACK);
         camera.update();
-        viewport.apply();
+        backgroundViewport.apply();
         batch.setProjectionMatrix(camera.combined);
 
         //sets colorvalue before drawing
@@ -362,6 +364,14 @@ public class MainMenuScreen implements Screen {
         for (int i = 0; i < currentBackground.length; i++) {
             batch.draw(currentBackground[i], backgroundX[i], 0, epochsGame.worldWidth, epochsGame.worldHeight);
         }
+        batch.end();
+
+        //controls color value for Screen
+        batch.setColor(1, 1, 1, iconsColorValue);
+
+        viewport.apply();
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
 
         if (menuState == mainMenuState) {
             drawMainMenu();
@@ -407,9 +417,6 @@ public class MainMenuScreen implements Screen {
         //draws icons
         flareSprite.draw(batch);
 
-        //controls color value for icons
-        batch.setColor(1, 1, 1, iconsColorValue);
-
         batch.draw(title, titleX, titleY, titleWidth, titleHeight);
         batch.draw(bars, barsX, barsY, barsWidth, barsHeight);
         batch.draw(settings, settingsX, settingsY, settingsWidth, settingsHeight);
@@ -424,6 +431,7 @@ public class MainMenuScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height, true);
+        backgroundViewport.update(width, height, true);
     }
 
     @Override

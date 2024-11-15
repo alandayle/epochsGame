@@ -10,9 +10,4 @@ public abstract class Card extends Sprite{
         this.setSize(width, height);
         this.setOriginCenter();
     }
-
-    public void update(float xPosition, float yPosition, float rotation) {
-        this.setPosition(xPosition, yPosition);
-        this.setRotation(rotation);
-    }
 }

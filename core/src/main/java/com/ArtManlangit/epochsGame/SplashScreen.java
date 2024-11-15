@@ -20,6 +20,7 @@ public class SplashScreen implements Screen {
 
     //viewport and camera
     Viewport viewport;
+    Viewport backgroundViewport;
     Camera camera;
 
     //textures for assets
@@ -49,6 +50,7 @@ public class SplashScreen implements Screen {
         this.epochsGame = epochsGame;
         this.assetManager = epochsGame.assetManager;
         viewport = epochsGame.viewport;
+        backgroundViewport = epochsGame.backgroundViewport;
         camera = epochsGame.camera;
         batch = epochsGame.batch;
 
@@ -135,7 +137,7 @@ public class SplashScreen implements Screen {
     public void draw() {
         ScreenUtils.clear(Color.BLACK);
         camera.update();
-        viewport.apply();
+        backgroundViewport.apply();
         batch.setProjectionMatrix(camera.combined);
 
         //sets colorvalue before drawing
@@ -154,6 +156,7 @@ public class SplashScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height, true);
+        backgroundViewport.update(width, height, true);
     }
 
     @Override
