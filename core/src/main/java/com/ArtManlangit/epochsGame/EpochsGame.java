@@ -36,7 +36,6 @@ public class EpochsGame extends Game {
     EndScreen endScreen;
     GameScreen gameScreen;
     MainMenuScreen mainMenuScreen;
-    SettingsScreen settingsScreen;
     SplashScreen splashScreen;
 
     @Override

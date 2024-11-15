@@ -22,6 +22,8 @@
     import com.badlogic.gdx.utils.Align;
     import com.badlogic.gdx.utils.viewport.Viewport;
 
+    import javax.print.attribute.HashPrintServiceAttributeSet;
+
     public class LoadingScreen implements Screen {
         //access to epochsGame and the main assetManager
         EpochsGame epochsGame;
@@ -54,7 +56,7 @@
         SpriteBatch batch;
 
         //delay time before launching the game after loading the assets
-        float launchDelay = 3;
+        float launchDelay = 0;
 
         public LoadingScreen(EpochsGame epochsGame) {
             //initialize variables
@@ -75,12 +77,12 @@
         public void debug() {
 
 ////            //default
-            epochsGame.splashScreen = new SplashScreen(epochsGame);
-            epochsGame.setScreen(epochsGame.splashScreen);
+//            epochsGame.splashScreen = new SplashScreen(epochsGame);
+//            epochsGame.setScreen(epochsGame.splashScreen);
 
             //game Screen
-//            GameScreen gameScreen = new GameScreen(epochsGame);
-//            epochsGame.setScreen(gameScreen);
+            GameScreen gameScreen = new GameScreen(epochsGame);
+            epochsGame.setScreen(gameScreen);
 
 //            mainMenu screen
 //            MainMenuScreen mainMenuScreen = new MainMenuScreen(epochsGame);
@@ -131,6 +133,13 @@
             assetManager.load("packedTextures/dialogues.atlas", TextureAtlas.class);
             assetManager.load("packedTextures/playingBgs.atlas", TextureAtlas.class);
             assetManager.load("packedTextures/settings.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/overAllStatusImage.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/gameBackgrounds.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/environmentalStatus.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/culturalStatus.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/technologicalStatus.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/militaryStatus.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/medicineStatus.atlas", TextureAtlas.class);
 
             //atlas for dialogues
             assetManager.load("packedTextures/cultural.atlas", TextureAtlas.class);

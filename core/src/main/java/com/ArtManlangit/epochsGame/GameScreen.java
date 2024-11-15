@@ -31,25 +31,27 @@
         Viewport backgroundViewport;
         Camera camera;
 
-        //textures for assets in CountState
+        //Texture atlas
+        TextureAtlas mainBgsLogos, playingBgs, cards, environmentalCards, dialogues, culturalCards,
+            healthCards, militaryCards, technologicalCards, overallStatusAtlas, gameBackgrounds,
+            environmentalStatusAtlas, technologicalStatusAtlas, culturalStatusAtlas, militaryStatusAtlas, medicineStatusAtlas;
 
+        //Texture Regions
+        TextureRegion currentBackground, backCardTextureRegion, lockCardTextureRegion, leftDialogue, rightDialogue;
+        TextureRegion[] frontCardTextureRegions, gameBackgroundTextureRegions;
 
-        //textures for assets in inGameState
-        TextureAtlas mainBgsLogos, playingBgs, cards, environmentalCards, culturalCards, healthCards, militaryCards, technologicalCards;
-        TextureRegion currentBackground, backCardTextureRegion, lockCardTextureRegion, drop, progress;
-        TextureRegion[] frontCardTextureRegions;
-
-        //testing for left dialogue and right dialogue
-        TextureAtlas dialogues;
-        TextureRegion leftDialogue;
-        TextureRegion rightDialogue;
-
-        //cards
-        float cardWidth, cardHeight;
-        float cardDefaultX, cardDefaultY;
+        //card properties
+        float cardWidth, cardHeight, cardDefaultX, cardDefaultY;
 
         //Icons, buttons
         float dropX, dropY, progressX, progressY;
+
+        //Icon status properties
+        float iconWidth, iconHeight;
+
+        //Icons in game
+        Icon overallIcon, environmentalIcon, technologicalIcon, culturalIcon, militaryIcon, medicineIcon;
+
 
         //backCards
         BackCard[] backCards;
@@ -72,15 +74,13 @@
         //drawer
         SpriteBatch batch;
 
-        //color value for transition
-        float colorValue;
-        float leftDialogueColorValue;
-        float rightDialogueColorValue;
+        //Transition color variables
+        float colorValue, leftDialogueColorValue, rightDialogueColorValue;
 
         //timer for transitions
         float timer;
 
-        //Primary Game States
+        //GameScreen states
         int currentGameState;
         int countState = 1;
         int inGameState = 2;
@@ -102,41 +102,33 @@
         Vector2 initialTouch, touchPosition;
         boolean isDragging;
 
-        //card change
+        //Changing card properties
         boolean change;
         boolean performChange;
         int currentCardIndex;
         int changeCounter;
 
-        //every assets for setting up dialogues
 
+        //every assets for setting up dialogues - IGNORE!
         //card 1
-        ArrayList<TextureRegion> leftCard1;
-        ArrayList<TextureRegion> rightCard1;
         ArrayList<Sprite> leftCard1Sprite;
         ArrayList<Sprite> rightCard1Sprite;
         ArrayList<String> card1Qestions;
         String card1Rank;
 
         //card 2
-        ArrayList<TextureRegion> leftCard2;
-        ArrayList<TextureRegion> rightCard2;
         ArrayList<Sprite> leftCard2Sprite;
         ArrayList<Sprite> rightCard2Sprite;
         ArrayList<String> card2Qestions;
         String card2Rank;
 
         //card 3
-        ArrayList<TextureRegion> leftCard3;
-        ArrayList<TextureRegion> rightCard3;
         ArrayList<Sprite> leftCard3Sprite;
         ArrayList<Sprite> rightCard3Sprite;
         ArrayList<String> card3Qestions;
         String card3Rank;
 
         //card 4
-        ArrayList<TextureRegion> leftCard4;
-        ArrayList<TextureRegion> rightCard4;
         ArrayList<Sprite> leftCard4Sprite;
         ArrayList<Sprite> rightCard4Sprite;
         ArrayList<String> card4Qestions;
@@ -144,96 +136,72 @@
 
 
         //card 5
-        ArrayList<TextureRegion> leftCard5;
-        ArrayList<TextureRegion> rightCard5;
         ArrayList<Sprite> leftCard5Sprite;
         ArrayList<Sprite> rightCard5Sprite;
         ArrayList<String> card5Qestions;
         String card5Rank;
 
         //card 6
-        ArrayList<TextureRegion> leftCard6;
-        ArrayList<TextureRegion> rightCard6;
         ArrayList<Sprite> leftCard6Sprite;
         ArrayList<Sprite> rightCard6Sprite;
         ArrayList<String> card6Qestions;
         String card6Rank;
 
         //card 7
-        ArrayList<TextureRegion> leftCard7;
-        ArrayList<TextureRegion> rightCard7;
         ArrayList<Sprite> leftCard7Sprite;
         ArrayList<Sprite> rightCard7Sprite;
         ArrayList<String> card7Qestions;
         String card7Rank;
 
         //card 8
-        ArrayList<TextureRegion> leftCard8;
-        ArrayList<TextureRegion> rightCard8;
         ArrayList<Sprite> leftCard8Sprite;
         ArrayList<Sprite> rightCard8Sprite;
         ArrayList<String> card8Qestions;
         String card8Rank;
 
         //card 9
-        ArrayList<TextureRegion> leftCard9;
-        ArrayList<TextureRegion> rightCard9;
         ArrayList<Sprite> leftCard9Sprite;
         ArrayList<Sprite> rightCard9Sprite;
         ArrayList<String> card9Qestions;
         String card9Rank;
 
         //card 10
-        ArrayList<TextureRegion> leftCard10;
-        ArrayList<TextureRegion> rightCard10;
         ArrayList<Sprite> leftCard10Sprite;
         ArrayList<Sprite> rightCard10Sprite;
         ArrayList<String> card10Qestions;
         String card10Rank;
 
         //card 11
-        ArrayList<TextureRegion> leftCard11;
-        ArrayList<TextureRegion> rightCard11;
         ArrayList<Sprite> leftCard11Sprite;
         ArrayList<Sprite> rightCard11Sprite;
         ArrayList<String> card11Qestions;
         String card11Rank;
 
         //card 12
-        ArrayList<TextureRegion> leftCard12;
-        ArrayList<TextureRegion> rightCard12;
         ArrayList<Sprite> leftCard12Sprite;
         ArrayList<Sprite> rightCard12Sprite;
         ArrayList<String> card12Qestions;
         String card12Rank;
 
         //card 13
-        ArrayList<TextureRegion> leftCard13;
-        ArrayList<TextureRegion> rightCard13;
         ArrayList<Sprite> leftCard13Sprite;
         ArrayList<Sprite> rightCard13Sprite;
         ArrayList<String> card13Qestions;
         String card13Rank;
 
         //card 14
-        ArrayList<TextureRegion> leftCard14;
-        ArrayList<TextureRegion> rightCard14;
         ArrayList<Sprite> leftCard14Sprite;
         ArrayList<Sprite> rightCard14Sprite;
         ArrayList<String> card14Qestions;
         String card14Rank;
 
         //card 15
-        ArrayList<TextureRegion> leftCard15;
-        ArrayList<TextureRegion> rightCard15;
         ArrayList<Sprite> leftCard15Sprite;
         ArrayList<Sprite> rightCard15Sprite;
         ArrayList<String> card15Qestions;
         String card15Rank;
 
         //card 16
-        ArrayList<TextureRegion> leftCard16;
-        ArrayList<TextureRegion> rightCard16;
         ArrayList<Sprite> leftCard16Sprite;
         ArrayList<Sprite> rightCard16Sprite;
         ArrayList<String> card16Qestions;
@@ -241,8 +209,6 @@
 
 
         //card 17
-        ArrayList<TextureRegion> leftCard17;
-        ArrayList<TextureRegion> rightCard17;
         ArrayList<Sprite> leftCard17Sprite;
         ArrayList<Sprite> rightCard17Sprite;
         ArrayList<String> card17Qestions;
@@ -250,12 +216,11 @@
 
 
         //card 18
-        ArrayList<TextureRegion> leftCard18;
-        ArrayList<TextureRegion> rightCard18;
         ArrayList<Sprite> leftCard18Sprite;
         ArrayList<Sprite> rightCard18Sprite;
         ArrayList<String> card18Qestions;
         String card18Rank;
+
 
         //constructor
         public GameScreen(EpochsGame epochsGame) {
@@ -307,15 +272,28 @@
             technologicalCards = assetManager.get("packedTextures/technological.atlas", TextureAtlas.class);
             healthCards = assetManager.get("packedTextures/health.atlas");
             militaryCards = assetManager.get("packedTextures/military.atlas");
+            overallStatusAtlas = assetManager.get("packedTextures/overAllStatusImage.atlas");
+            environmentalStatusAtlas = assetManager.get("packedTextures/environmentalStatus.atlas");
+            gameBackgrounds = assetManager.get("packedTextures/gameBackgrounds.atlas");
+            technologicalStatusAtlas = assetManager.get("packedTextures/technologicalStatus.atlas");
+            culturalStatusAtlas = assetManager.get("packedTextures/culturalStatus.atlas");
+            militaryStatusAtlas = assetManager.get("packedTextures/militaryStatus.atlas");
+            medicineStatusAtlas = assetManager.get("packedTextures/medicineStatus.atlas");
 
             //setup TextureRegions
-            currentBackground = playingBgs.findRegion("bg1");
             backCardTextureRegion = cards.findRegion("back");
             lockCardTextureRegion = cards.findRegion("locked");
             leftDialogue = dialogues.findRegion("yes");
             rightDialogue = dialogues.findRegion("no");
-            drop = mainBgsLogos.findRegion("dropMenu");
-            progress = mainBgsLogos.findRegion("progress-50%");
+
+            //setup gamebackgrounds
+            gameBackgroundTextureRegions = new TextureRegion[7];
+            for (int i = 0; i < 7; i++) {
+                gameBackgroundTextureRegions[i] = gameBackgrounds.findRegion("bg" + (i+1));
+            }
+
+            //setup default game background
+            currentBackground = gameBackgroundTextureRegions[0];
 
             String frontCardFileName;
             //setup texture region for front cards
@@ -324,6 +302,60 @@
                 frontCardFileName = "npcCard" + (i+1);
                 frontCardTextureRegions[i] = cards.findRegion(frontCardFileName);
             }
+
+            setupStatus();
+        }
+
+        public void setupStatus() {
+            //icon width and height
+            iconWidth = epochsGame.worldWidth;
+            iconHeight = epochsGame.worldHeight;
+            float xPosition = 0;
+            float yPosition = 0;
+
+            //overall Icon
+            TextureRegion[] overallIconImage = new TextureRegion[11];
+            for (int i = 0; i < 11; i++) {
+                overallIconImage[i] = overallStatusAtlas.findRegion("O" + i + "0");
+            }
+            overallIcon = new Icon(overallIconImage, xPosition, yPosition, iconWidth, iconHeight);
+
+            //environmental icon
+            TextureRegion[] environmentalIconImage = new TextureRegion[11];
+            for (int i = 0; i < 11; i++) {
+                environmentalIconImage[i] = environmentalStatusAtlas.findRegion("E" + (i) + "0");
+            }
+            environmentalIcon = new Icon(environmentalIconImage, xPosition, yPosition, iconWidth, iconHeight);
+
+            //technologicalIcon icon
+            TextureRegion[] technologicalIconImage = new TextureRegion[11];
+            for (int i = 0; i < 11; i++) {
+                technologicalIconImage[i] = technologicalStatusAtlas.findRegion("T" + (i) + "0");
+            }
+            technologicalIcon = new Icon(technologicalIconImage, xPosition, yPosition, iconWidth, iconHeight);
+
+            //cultural icon
+            TextureRegion[] culturalIconImage = new TextureRegion[11];
+            for (int i = 0; i < 11; i++) {
+                culturalIconImage[i] = culturalStatusAtlas.findRegion("C" + (i) + "0");
+            }
+            culturalIcon = new Icon(culturalIconImage, xPosition, yPosition, iconWidth, iconHeight);
+
+            //military icon
+            TextureRegion[] militaryIconImage = new TextureRegion[11];
+            for (int i = 0; i < 11; i++) {
+                militaryIconImage[i] = militaryStatusAtlas.findRegion("M" + (i) + "0");
+            }
+            militaryIcon = new Icon(militaryIconImage, xPosition, yPosition, iconWidth, iconHeight);
+
+            //medicineIcon
+            TextureRegion[] medicineIconImage = new TextureRegion[11];
+            for (int i = 0; i < 11; i++) {
+                medicineIconImage[i] = medicineStatusAtlas.findRegion("H" + (i) + "0");
+            }
+            medicineIcon = new Icon(medicineIconImage, xPosition, yPosition, iconWidth, iconHeight);
+
+
 
         }
 
@@ -363,7 +395,7 @@
             }
 
             //default current card
-            currentCardIndex = 0;
+            currentCardIndex = (int) (Math.random() * 18);
             currentCard = frontCards[currentCardIndex];
 
             //card rotation
@@ -819,93 +851,110 @@
         public void logic(float delta) {
             //logic for count state
             if (currentGameState == countState) {
-                timer += delta;
-
-                if (countDownYearCurrent < countDownYearFinish) {
-                    countDownYearCurrent = (int) (countDownYearFinish * (timer /3f));
-                }
-
-                if (countDownYearCurrent >= countDownYearFinish) {
-                    countDownYearCurrent = countDownYearFinish;
-                    int floorValue = (int) Math.floor(timer);
-                    if (floorValue % 2 == 0) {
-                        colorValue -= delta;
-                    } else {
-                        colorValue += delta;
-                    }
-                }
-
-                if (colorValue < 0) {
-                    colorValue = 0;
-                } else if (colorValue > 1) {
-                    colorValue = 1;
-                }
-
+                countStateInput(delta);
             }
 
             //logic for inGameState
             if (currentGameState == inGameState) {
                 if (currentInGameState == shuffleState){
-                    colorValue += delta/2;
-                    if (colorValue >= 1) {
-                        colorValue = 1;
-                    }
-                    for(int i = 0; i < backCards.length; i++) {
-                        float positionX = backCards[i].getX() + shuffleSpeed * 2 * delta;
-                        float positionY = backCards[i].getY() - shuffleSpeed * delta;
-                        if (positionY <= cardDefaultY) {
-                            positionY = cardDefaultY;
-                            //if position equal destination, play shuffle once
-                            if (!shuffledBackCard[i]) {
-                                cardShuffleSoundEffect.play();
-                                shuffledBackCard[i] = true;
-                            }
-                        }
-                        if (positionX >= cardDefaultX) {
-                            positionX = cardDefaultX;
-                        }
-                        backCards[i].setPosition(positionX, positionY);
-                    }
-
-                    if (backCards[backCards.length - 1].getX() >= cardDefaultX) {
-                        timer+= delta;
-                        if (timer > 1) {
-                            currentInGameState = playingState;
-                            timer = 0;
-
-                            //reset card position
-                            offset = 400;
-                            for (int i = 0; i < backCards.length; i++) {
-                                backCards[i].setPosition(cardDefaultX - offset * 2, cardDefaultY + offset);
-                                shuffledBackCard[i] = false;
-                                offset += 100;
-                            }
-                        }
-                    }
+                    shuffleStateInput(delta);
                 }
 
                 if (currentInGameState == playingState) {
-                    if (performChange) {
-                        //pick a random card
-                        int index = (int) (Math.random() * 18);
-                        currentCardIndex = index;
-                        System.out.println(currentCardIndex);
-                        currentCard = frontCards[currentCardIndex];
-                        performChange = false;
+                    playingStateInput(delta);
+                }
+            }
+        }
 
-                        //change counter
-                        changeCounter++;
+        public void countStateInput(float delta) {
+            timer += delta;
 
-                        //shuffle card and increase decade
-                        if (changeCounter >= 10) {
-                            currentInGameState = shuffleState;
-                            currentGameState = countState;
-                            changeCounter = 0;
-                            backgroundMusic.stop();
-                            countDownYearFinish += 150;
-                        }
+            if (countDownYearCurrent < countDownYearFinish) {
+                countDownYearCurrent = (int) (countDownYearFinish * (timer /3f));
+            }
+
+            if (countDownYearCurrent >= countDownYearFinish) {
+                countDownYearCurrent = countDownYearFinish;
+                int floorValue = (int) Math.floor(timer);
+                if (floorValue % 2 == 0) {
+                    colorValue -= delta;
+                } else {
+                    colorValue += delta;
+                }
+            }
+
+            if (colorValue < 0) {
+                colorValue = 0;
+            } else if (colorValue > 1) {
+                colorValue = 1;
+            }
+        }
+
+        public void shuffleStateInput(float delta) {
+            colorValue += delta/2;
+            if (colorValue >= 1) {
+                colorValue = 1;
+            }
+            for(int i = 0; i < backCards.length; i++) {
+                float positionX = backCards[i].getX() + shuffleSpeed * 2 * delta;
+                float positionY = backCards[i].getY() - shuffleSpeed * delta;
+                if (positionY <= cardDefaultY) {
+                    positionY = cardDefaultY;
+                    //if position equal destination, play shuffle once
+                    if (!shuffledBackCard[i]) {
+                        cardShuffleSoundEffect.play();
+                        shuffledBackCard[i] = true;
                     }
                 }
+                if (positionX >= cardDefaultX) {
+                    positionX = cardDefaultX;
+                }
+                backCards[i].setPosition(positionX, positionY);
+            }
+
+            if (backCards[backCards.length - 1].getX() >= cardDefaultX) {
+                timer+= delta;
+                if (timer > 1) {
+                    currentInGameState = playingState;
+                    timer = 0;
+
+                    //reset card position
+                    offset = 400;
+                    for (int i = 0; i < backCards.length; i++) {
+                        backCards[i].setPosition(cardDefaultX - offset * 2, cardDefaultY + offset);
+                        shuffledBackCard[i] = false;
+                        offset += 100;
+                    }
+                }
+            }
+        }
+
+        public void playingStateInput(float delta) {
+
+            //if card change
+            if (performChange) {
+                //pick a random card
+                int index = (int) (Math.random() * 18);
+                currentCardIndex = index;
+                System.out.println(currentCardIndex);
+                currentCard = frontCards[currentCardIndex];
+                performChange = false;
+
+                //change counter
+                changeCounter++;
+
+                //shuffle card and increase decade
+                if (changeCounter >= 10) {
+                    currentInGameState = shuffleState;
+                    currentGameState = countState;
+                    changeCounter = 0;
+                    backgroundMusic.stop();
+                    countDownYearFinish += 150;
+                }
+
+                //test icon health
+                overallIcon.health++;
+                environmentalIcon.health--;
             }
         }
 
@@ -942,20 +991,22 @@
         }
 
         public void drawInGameState() {
+            //use stretching for backgrounds and other icons to avoid black screen for some devices
             camera.update();
             backgroundViewport.apply();
             batch.setProjectionMatrix(camera.combined);
             batch.begin();
+
             //draw background for ingameState
             batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
             batch.end();
+
+            //disable scaling when drawing mainGame scene and some important icons
             viewport.apply();
             batch.setProjectionMatrix(camera.combined);
             batch.begin();
             //draw icons, fonts and buttons
             subHeadingMainFont.draw(batch, "2024", subHeadingMainFont.getCapHeight() /5 , epochsGame.worldHeight - subHeadingMainFont.getCapHeight());
-            batch.draw(drop, dropX, dropY, 0.110f * epochsGame.worldWidth, 0.064f * epochsGame.worldHeight);
-            batch.draw(progress, progressX, progressY, 0.125f * epochsGame.worldWidth, 0.065f * epochsGame.worldHeight);
 
             //elements to draw when shuffling
             if (currentInGameState == shuffleState){
@@ -978,9 +1029,21 @@
                 currentCard.draw(batch);
                 subHeadingMainFont.draw(batch, currentCard.rank, 20, 150);
                 typeWriter.draw(batch, currentCard.question, 20, 100);
+
                 //reset dialogues' opacity to prevent bugs
                 currentCard.leftDialogue.setColor(1, 1, 1, 1);
                 currentCard.rightDialogue.setColor(1, 1, 1, 1);
+
+                //draw overall Icon
+                overallIcon.draw(batch);
+
+                //draw Status Icon
+                environmentalIcon.draw(batch);
+                technologicalIcon.draw(batch);
+                culturalIcon.draw(batch);
+                medicineIcon.draw(batch);
+                militaryIcon.draw(batch);
+
             }
             batch.end();
         }
