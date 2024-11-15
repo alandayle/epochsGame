@@ -33,8 +33,7 @@
 
         //Texture atlas
         TextureAtlas mainBgsLogos, playingBgs, cards, environmentalCards, dialogues, culturalCards,
-            healthCards, militaryCards, technologicalCards, overallStatusAtlas, gameBackgrounds,
-            environmentalStatusAtlas, technologicalStatusAtlas, culturalStatusAtlas, militaryStatusAtlas, medicineStatusAtlas;
+            healthCards, militaryCards, technologicalCards, overallStatusAtlas, gameBackgrounds;
 
         //Texture Regions
         TextureRegion currentBackground, backCardTextureRegion, lockCardTextureRegion, leftDialogue, rightDialogue;
@@ -43,15 +42,9 @@
         //card properties
         float cardWidth, cardHeight, cardDefaultX, cardDefaultY;
 
-        //Icons, buttons
-        float dropX, dropY, progressX, progressY;
-
-        //Icon status properties
-        float iconWidth, iconHeight;
-
         //Icons in game
         Icon overallIcon, environmentalIcon, technologicalIcon, culturalIcon, militaryIcon, medicineIcon;
-
+        IconHandler iconHandler;
 
         //backCards
         BackCard[] backCards;
@@ -124,9 +117,6 @@
             //set colorTransition value to 1 at the start
             colorValue = 1;
 
-            //set timer to 0
-            timer = 0;
-
             //Game defaults
             setGameDefaults();
 
@@ -155,15 +145,8 @@
         }
 
         public void setupAssets() {
+            setupStatus();
             setupCards();
-            setupButtons();
-        }
-
-        public void setupButtons() {
-            dropX = 0.86f * epochsGame.worldWidth;
-            dropY = 0;
-            progressX = 0.83f * epochsGame.worldWidth;
-            progressY = 0.915f * epochsGame.worldHeight;
         }
 
         public void loadTextures() {
@@ -178,12 +161,7 @@
             healthCards = assetManager.get("packedTextures/health.atlas");
             militaryCards = assetManager.get("packedTextures/military.atlas");
             overallStatusAtlas = assetManager.get("packedTextures/overAllStatusImage.atlas");
-            environmentalStatusAtlas = assetManager.get("packedTextures/environmentalStatus.atlas");
             gameBackgrounds = assetManager.get("packedTextures/gameBackgrounds.atlas");
-            technologicalStatusAtlas = assetManager.get("packedTextures/technologicalStatus.atlas");
-            culturalStatusAtlas = assetManager.get("packedTextures/culturalStatus.atlas");
-            militaryStatusAtlas = assetManager.get("packedTextures/militaryStatus.atlas");
-            medicineStatusAtlas = assetManager.get("packedTextures/medicineStatus.atlas");
 
             //setup TextureRegions
             backCardTextureRegion = cards.findRegion("back");
@@ -208,61 +186,10 @@
                 frontCardFileName = "npcCard" + (i+1);
                 frontCardTextureRegions[i] = cards.findRegion(frontCardFileName);
             }
-
-            setupStatus();
         }
 
         public void setupStatus() {
-            //icon width and height
-            iconWidth = epochsGame.worldWidth;
-            iconHeight = epochsGame.worldHeight;
-            float xPosition = 0;
-            float yPosition = 0;
-
-            //overall Icon
-            TextureRegion[] overallIconImage = new TextureRegion[11];
-            for (int i = 0; i < 11; i++) {
-                overallIconImage[i] = overallStatusAtlas.findRegion("O" + i + "0");
-            }
-            overallIcon = new Icon(overallIconImage, xPosition, yPosition, iconWidth, iconHeight);
-
-            //environmental icon
-            TextureRegion[] environmentalIconImage = new TextureRegion[11];
-            for (int i = 0; i < 11; i++) {
-                environmentalIconImage[i] = environmentalStatusAtlas.findRegion("E" + (i) + "0");
-            }
-            environmentalIcon = new Icon(environmentalIconImage, xPosition, yPosition, iconWidth, iconHeight);
-
-            //technologicalIcon icon
-            TextureRegion[] technologicalIconImage = new TextureRegion[11];
-            for (int i = 0; i < 11; i++) {
-                technologicalIconImage[i] = technologicalStatusAtlas.findRegion("T" + (i) + "0");
-            }
-            technologicalIcon = new Icon(technologicalIconImage, xPosition, yPosition, iconWidth, iconHeight);
-
-            //cultural icon
-            TextureRegion[] culturalIconImage = new TextureRegion[11];
-            for (int i = 0; i < 11; i++) {
-                culturalIconImage[i] = culturalStatusAtlas.findRegion("C" + (i) + "0");
-            }
-            culturalIcon = new Icon(culturalIconImage, xPosition, yPosition, iconWidth, iconHeight);
-
-            //military icon
-            TextureRegion[] militaryIconImage = new TextureRegion[11];
-            for (int i = 0; i < 11; i++) {
-                militaryIconImage[i] = militaryStatusAtlas.findRegion("M" + (i) + "0");
-            }
-            militaryIcon = new Icon(militaryIconImage, xPosition, yPosition, iconWidth, iconHeight);
-
-            //medicineIcon
-            TextureRegion[] medicineIconImage = new TextureRegion[11];
-            for (int i = 0; i < 11; i++) {
-                medicineIconImage[i] = medicineStatusAtlas.findRegion("H" + (i) + "0");
-            }
-            medicineIcon = new Icon(medicineIconImage, xPosition, yPosition, iconWidth, iconHeight);
-
-
-
+            iconHandler = new IconHandler(epochsGame);
         }
 
         public void loadAudio() {
@@ -533,8 +460,12 @@
                 }
 
                 //test icon health
-                overallIcon.health++;
-                environmentalIcon.health--;
+                iconHandler.overallIcon.health++;
+                iconHandler.environmentalIcon.health--;
+                iconHandler.militaryIcon.health++;
+                iconHandler.technologicalIcon.health--;
+                iconHandler.culturalIcon.health++;
+                iconHandler.medicineIcon.health--;
             }
         }
 
@@ -624,15 +555,8 @@
             currentCard.leftDialogue.setColor(1, 1, 1, 1);
             currentCard.rightDialogue.setColor(1, 1, 1, 1);
 
-            //draw overall Icon
-            overallIcon.draw(batch);
-
-            //draw Status Icon
-            environmentalIcon.draw(batch);
-            technologicalIcon.draw(batch);
-            culturalIcon.draw(batch);
-            medicineIcon.draw(batch);
-            militaryIcon.draw(batch);
+            //draw icons
+            iconHandler.drawIcons(batch);
         }
 
         @Override
