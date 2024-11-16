@@ -64,6 +64,19 @@ public class FrontCard extends Card{
 
     }
 
+    public void deleteCurrentCard() {
+        //remove
+        questions.remove(question);
+        leftDialogues.remove(leftDialogue);
+        rightDialogues.remove(rightDialogue);
+    }
+
+    public void updateCard(int index) {
+        question = questions.get(index);
+        leftDialogue = leftDialogues.get(index);
+        rightDialogue = rightDialogues.get(index);
+    }
+
 
     public void draw(Batch batch) {
         super.draw(batch);

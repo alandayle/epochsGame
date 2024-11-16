@@ -42,15 +42,12 @@
         //card properties
         float cardWidth, cardHeight, cardDefaultX, cardDefaultY;
 
-        //Icons in game
-        Icon overallIcon, environmentalIcon, technologicalIcon, culturalIcon, militaryIcon, medicineIcon;
+        //handle Icons
         IconHandler iconHandler;
 
         //backCards
         BackCard[] backCards;
-        int numberOfBackCards;
-        int shuffleSpeed;
-        int offset;
+        int numberOfBackCards, shuffleSpeed, offset;
         Boolean[] shuffledBackCard;
 
         //frontCards
@@ -60,8 +57,7 @@
 
         //Audio and sound effects
         Music backgroundMusic;
-        Sound yearCountSoundEffect;
-        Sound cardShuffleSoundEffect;
+        Sound yearCountSoundEffect, cardShuffleSoundEffect;
         boolean yearCountPlayed;
 
         //drawer
@@ -74,35 +70,30 @@
         float timer;
 
         //GameScreen states
-        int currentGameState;
-        int countState = 1;
-        int inGameState = 2;
+        int currentGameState, countState = 1, inGameState = 2;
 
         //inGameStates
-        int currentInGameState;
-        int shuffleState = 1;
-        int playingState = 2;
-        int settingState = 3;
+        int currentInGameState, shuffleState = 1, playingState = 2, settingState = 3;
 
         //fonts
         BitmapFont headingMainFont, subHeadingMainFont, bodyMainFont, typeWriter;
 
         //countdown year
-        int countDownYearCurrent;
-        int countDownYearFinish;
+        int countDownYearCurrent, countDownYearFinish;
 
         //Card movement variables
         Vector2 initialTouch, touchPosition;
         boolean isDragging;
 
         //Changing card properties
-        boolean change;
-        boolean performChange;
-        int currentCardIndex;
-        int changeCounter;
+        boolean change, performChange;
+        int currentCardIndex, changeCounter;
 
         //Setting up dialogues for front cards
         DialogueSetup dialogueSetup;
+
+        //debug variables
+        int cardCounter = 1;
 
         //constructor
         public GameScreen(EpochsGame epochsGame) {
@@ -273,83 +264,91 @@
 
         public void input() {
             if (currentGameState == countState) {
-                if (!yearCountPlayed) {
-                    yearCountSoundEffect.play();
-                    yearCountPlayed = true;
-                }
-                if (Gdx.input.isTouched()) {
-                    if (countDownYearCurrent >= countDownYearFinish) {
-                        currentGameState = inGameState;
-
-                        //reset parameters
-                        timer = 0;
-                        countDownYearCurrent = 0;
-                        colorValue = 0;
-
-                        //play background music of playing
-                        backgroundMusic.play();
-                        yearCountPlayed = false;
-                    }
-                }
+                countStateInput();
             }
 
             if (currentGameState == inGameState) {
-                if (currentInGameState == shuffleState){
+                inGameStateInput();
+            }
+        }
 
+        public void countStateInput() {
+            if (!yearCountPlayed) {
+                yearCountSoundEffect.play();
+                yearCountPlayed = true;
+            }
+            if (Gdx.input.isTouched()) {
+                if (countDownYearCurrent >= countDownYearFinish) {
+                    currentGameState = inGameState;
+
+                    //reset parameters
+                    timer = 0;
+                    countDownYearCurrent = 0;
+                    colorValue = 0;
+
+                    //play background music of playing
+                    backgroundMusic.play();
+                    yearCountPlayed = false;
                 }
+            }
+        }
 
-                if (currentInGameState == playingState) {
-                    if (Gdx.input.isTouched()) {
-                        if (!isDragging) {
-                            //get initial touch location
-                            initialTouch.set(Gdx.input.getX(), Gdx.input.getY());
-                            viewport.unproject(initialTouch);
-                            isDragging = true;
-                        }
-                        //get current touch position
-                        touchPosition.set(Gdx.input.getX(), Gdx.input.getY());
-                        viewport.unproject(touchPosition);
+        public void inGameStateInput() {
+            if (currentInGameState == shuffleState){
 
-                        //get change in touch position in x
-                        float deltaX = touchPosition.x - initialTouch.x;
+            }
 
-                        //update current card position based on drag distance
-                        currentCard.setPosition(cardDefaultX + deltaX, cardDefaultY + deltaX / 5);
-                        currentCard.setRotation(-1 * deltaX / 15);
+            if (currentInGameState == playingState) {
+                if (Gdx.input.isTouched()) {
+                    if (!isDragging) {
+                        //get initial touch location
+                        initialTouch.set(Gdx.input.getX(), Gdx.input.getY());
+                        viewport.unproject(initialTouch);
+                        isDragging = true;
+                    }
+                    //get current touch position
+                    touchPosition.set(Gdx.input.getX(), Gdx.input.getY());
+                    viewport.unproject(touchPosition);
 
-                        leftDialogueColorValue = deltaX / (cardWidth / 3.5f);
-                        if (leftDialogueColorValue > 1) {
-                            leftDialogueColorValue = 1;
-                        }
+                    //get change in touch position in x
+                    float deltaX = touchPosition.x - initialTouch.x;
 
-                        if (leftDialogueColorValue < 0) {
-                            leftDialogueColorValue = 0;
-                        }
+                    //update current card position based on drag distance
+                    currentCard.setPosition(cardDefaultX + deltaX, cardDefaultY + deltaX / 5);
+                    currentCard.setRotation(-1 * deltaX / 15);
 
-                        rightDialogueColorValue = -deltaX / (cardWidth / 3.5f);
-                        if (rightDialogueColorValue > 1) {
-                            rightDialogueColorValue = 1;
-                        }
+                    leftDialogueColorValue = deltaX / (cardWidth / 3.5f);
+                    if (leftDialogueColorValue > 1) {
+                        leftDialogueColorValue = 1;
+                    }
 
-                        if (rightDialogueColorValue < 0) {
-                            rightDialogueColorValue = 0;
-                        }
-
-                        //change if drag is greater than absolute value of card width divide by 3
-                        change = deltaX > cardWidth / 3.5f || deltaX < -cardWidth / 3.5f;
-
-
-                    } else {
-                        //reset position if not touching
-                        currentCard.setPosition(cardDefaultX, cardDefaultY);
-                        currentCard.setRotation(0);
-                        isDragging = false;
+                    if (leftDialogueColorValue < 0) {
                         leftDialogueColorValue = 0;
+                    }
+
+                    rightDialogueColorValue = -deltaX / (cardWidth / 3.5f);
+                    if (rightDialogueColorValue > 1) {
+                        rightDialogueColorValue = 1;
+                    }
+
+                    if (rightDialogueColorValue < 0) {
                         rightDialogueColorValue = 0;
-                        if (change) {
-                            performChange = true;
-                            change = false;
-                        }
+                    }
+
+                    //change if drag is greater than absolute value of card width divide by 3
+                    change = deltaX > cardWidth / 3.5f || deltaX < -cardWidth / 3.5f;
+
+
+                } else {
+                    //reset position if not touching
+                    currentCard.setPosition(cardDefaultX, cardDefaultY);
+                    currentCard.setRotation(0);
+                    isDragging = false;
+                    leftDialogueColorValue = 0;
+                    rightDialogueColorValue = 0;
+                    if (change) {
+                        performChange = true;
+                        change = false;
                     }
                 }
             }
@@ -358,22 +357,22 @@
         public void logic(float delta) {
             //logic for count state
             if (currentGameState == countState) {
-                countStateInput(delta);
+                countStateLogic(delta);
             }
 
             //logic for inGameState
             if (currentGameState == inGameState) {
                 if (currentInGameState == shuffleState){
-                    shuffleStateInput(delta);
+                    shuffleStateLogic(delta);
                 }
 
                 if (currentInGameState == playingState) {
-                    playingStateInput(delta);
+                    playingStateLogic(delta);
                 }
             }
         }
 
-        public void countStateInput(float delta) {
+        public void countStateLogic(float delta) {
             timer += delta;
 
             if (countDownYearCurrent < countDownYearFinish) {
@@ -397,7 +396,7 @@
             }
         }
 
-        public void shuffleStateInput(float delta) {
+        public void shuffleStateLogic(float delta) {
             colorValue += delta/2;
             if (colorValue >= 1) {
                 colorValue = 1;
@@ -436,15 +435,27 @@
             }
         }
 
-        public void playingStateInput(float delta) {
+        public void playingStateLogic(float delta) {
 
             //if card change
             if (performChange) {
-                //pick a random card
-                int index = (int) (Math.random() * 18);
-                currentCardIndex = index;
-                System.out.println(currentCardIndex);
-                currentCard = frontCards[currentCardIndex];
+                cardCounter++;
+                System.out.println("Counter: " + cardCounter);
+                //first delete the current card
+                currentCard.deleteCurrentCard();
+
+                //pick another not empty card
+                do {
+                    int index2 = (int) (Math.random() * 18);
+                    currentCardIndex = index2;
+                    currentCard = frontCards[currentCardIndex];
+                } while (currentCard.questions.isEmpty());
+
+                //pick a random dialogue
+                int dialogueIndex = (int) (Math.random() * currentCard.questions.size());
+                currentCard.updateCard(dialogueIndex);
+
+                //Only change once
                 performChange = false;
 
                 //change counter
