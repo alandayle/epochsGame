@@ -239,7 +239,7 @@
 
             currentCard = frontCards[currentCardIndex];
             currentTheme = currentCard.theme;
-            currentDialogueIndex = (int) (Math.random() * currentCard.questions.size());
+            currentDialogueIndex = (int) (Math.random() * currentCard.questions.size()); //updated this part because of the bug
             currentCard.updateCard(currentDialogueIndex);
         }
 
@@ -488,7 +488,7 @@
                         int index2 = (int) (Math.random() * 18);
                         currentCardIndex = index2;
                         currentCard = frontCards[currentCardIndex];
-                    } while (currentCard.questions.isEmpty());
+                    } while (currentCard.questions.isEmpty());  //Late commit, updated this part because of the bug
 
                     //debug card
 //                currentCard = frontCards[11];
