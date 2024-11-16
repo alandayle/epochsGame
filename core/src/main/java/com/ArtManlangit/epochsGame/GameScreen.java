@@ -443,13 +443,14 @@
                 System.out.println("Counter: " + cardCounter);
                 //first delete the current card
                 currentCard.deleteCurrentCard();
+                currentCard.numberOfTimesCardUsed++;
 
                 //pick another not empty card
                 do {
                     int index2 = (int) (Math.random() * 18);
                     currentCardIndex = index2;
                     currentCard = frontCards[currentCardIndex];
-                } while (currentCard.questions.isEmpty());
+                } while (currentCard.questions.isEmpty() || currentCard.numberOfTimesCardUsed >= currentCard.maxNumberOfTimes);
 
                 //pick a random dialogue
                 int dialogueIndex = (int) (Math.random() * currentCard.questions.size());
@@ -468,6 +469,11 @@
                     changeCounter = 0;
                     backgroundMusic.stop();
                     countDownYearFinish += 150;
+
+                    //reset number of cards used in the decade
+                    for (int i = 0; i < numberOfFrontCards; i++) {
+                        frontCards[i].numberOfTimesCardUsed = 0;
+                    }
                 }
 
                 //test icon health

@@ -14,6 +14,8 @@ public class FrontCard extends Card{
     String rank;
     String question;
     int theme;
+    int numberOfTimesCardUsed;
+    int maxNumberOfTimes;
 
     public FrontCard(TextureRegion image, float xPosition, float yPosition, float width, float height) {
         super(image, xPosition, yPosition, width, height);
@@ -21,7 +23,7 @@ public class FrontCard extends Card{
         this.setY(yPosition);
     }
 
-    public void setupDialogue(ArrayList<Sprite> leftDialogues, ArrayList<Sprite> rightDialogues, ArrayList<String> questions, int theme, String rank) {
+    public void setupDialogue(ArrayList<Sprite> leftDialogues, ArrayList<Sprite> rightDialogues, ArrayList<String> questions, int theme, String rank, int maxNumberOfTimes) {
         //initialize array
         this.leftDialogues = new ArrayList<>();
         this.rightDialogues = new ArrayList<>();
@@ -57,9 +59,10 @@ public class FrontCard extends Card{
         //set front card position
         setPosition(this.getX(), this.getY());
 
-        //set theme and rank
+        //set theme, rank and max numberofChnage
         this.theme = theme;
         this.rank = rank;
+        this.maxNumberOfTimes = maxNumberOfTimes;
 
 
     }
