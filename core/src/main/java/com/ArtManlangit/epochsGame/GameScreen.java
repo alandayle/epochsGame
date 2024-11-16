@@ -76,10 +76,10 @@
         int currentInGameState, shuffleState = 1, playingState = 2, settingState = 3;
 
         //fonts
-        BitmapFont headingMainFont, subHeadingMainFont, bodyMainFont, typeWriter;
+        BitmapFont headingMainFont, subHeadingMainFont, bodyMainFont, typeWriter, greenScreen25, greenScreen30;
 
         //countdown year
-        int countDownYearCurrent, countDownYearFinish;
+        int countDownYearCurrent, countDownYearFinish, countDownYearStart;
 
         //Card movement variables
         Vector2 initialTouch, touchPosition;
@@ -133,7 +133,8 @@
             currentGameState = countState;
             currentInGameState = shuffleState;
             countDownYearCurrent = 0;
-            countDownYearFinish = 2024;
+            countDownYearStart = 0;
+            countDownYearFinish = (int)(Math.random() * 101) + 2000;
             numberOfBackCards = 10;
             numberOfFrontCards = 18;
             shuffleSpeed = 850;
@@ -213,7 +214,9 @@
             headingMainFont = assetManager.get("setbackt50.ttf", BitmapFont.class);
             subHeadingMainFont = assetManager.get("setbackt40.ttf", BitmapFont.class);
             bodyMainFont = assetManager.get("setbackt25.ttf", BitmapFont.class);
-            typeWriter = assetManager.get("typewcond25.otf", BitmapFont.class);
+            typeWriter = assetManager.get("typewcond20.otf", BitmapFont.class);
+            greenScreen25 = assetManager.get("Greenscr25.ttf", BitmapFont.class);
+            greenScreen30 = assetManager.get("Greenscr30.ttf", BitmapFont.class);
         }
 
         public void setupCards() {
@@ -410,7 +413,7 @@
             timer += delta;
 
             if (countDownYearCurrent < countDownYearFinish) {
-                countDownYearCurrent = (int) (countDownYearFinish * (timer /3f));
+                countDownYearCurrent = countDownYearStart + (int) ((countDownYearFinish- countDownYearStart) * (timer /3f));
             }
 
             if (countDownYearCurrent >= countDownYearFinish) {
@@ -509,7 +512,9 @@
                         currentGameState = countState;
                         changeCounter = 0;
                         backgroundMusic.stop();
-                        countDownYearFinish += 150;
+                        countDownYearCurrent = countDownYearFinish;
+                        countDownYearStart = countDownYearFinish;
+                        countDownYearFinish += (int) (Math.random() * 300 + 100);
 
                         //reset number of cards used in the decade
                         for (int i = 0; i < numberOfFrontCards; i++) {
@@ -692,22 +697,19 @@
             batch.setProjectionMatrix(camera.combined);
             batch.begin();
 
-            //draw background for ingameState
+            //Elements to draw while in game state
             batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
-
+            batch.draw(foregroundTextureRegions[0], 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+            iconHandler.drawIcons(batch);
+            greenScreen30.draw(batch, String.valueOf(countDownYearFinish),
+                greenScreen30.getCapHeight() * 0.5f , epochsGame.worldHeight - greenScreen30.getCapHeight() * 0.9f);
             batch.end();
 
             //disable scaling when drawing mainGame scene and some important icons
             viewport.apply();
             batch.setProjectionMatrix(camera.combined);
             batch.begin();
-            //draw icons, fonts and buttons
-            subHeadingMainFont.draw(batch, "2024", subHeadingMainFont.getCapHeight() /5 , epochsGame.worldHeight - subHeadingMainFont.getCapHeight());
-            batch.draw(foregroundTextureRegions[0], 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
-            //draw icons
-            iconHandler.drawIcons(batch);
 
-            //elements to draw when shuffling
             if (currentInGameState == shuffleState){
                 drawShuffleState();
             }
@@ -736,8 +738,13 @@
 
             //draw current card
             currentCard.draw(batch);
-            subHeadingMainFont.draw(batch, currentCard.rank, 20, 150);
-            typeWriter.draw(batch, currentCard.question, 20, 100);
+            greenScreen25.draw(batch, currentCard.rank, 0, cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 2, epochsGame.worldWidth, Align.center, true);
+
+            //debug
+//            greenScreen25.draw(batch, String.valueOf(currentCard.leftChoiceTrue), 0, cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 4, epochsGame.worldWidth, Align.center, true);
+
+            typeWriter.draw(batch, currentCard.question, epochsGame.worldWidth * 0.05f, cardDefaultY - greenScreen25.getCapHeight(), epochsGame.worldWidth * 0.9f, Align.center, true);
+
 
             //reset dialogues' opacity to prevent bugs
             currentCard.leftDialogue.setColor(1, 1, 1, 1);

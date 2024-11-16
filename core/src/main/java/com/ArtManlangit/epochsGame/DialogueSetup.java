@@ -511,7 +511,7 @@ public class DialogueSetup {
         card16Qestions.add("A team of scientists proposes to inject some viruses to healthy individuals bit by bit, in order for them to develop some immunity and for the scientists to study how to create a vaccine from it. What would you say?");
         card16Qestions.add("Medical research is now making strides, but it requires immense funding. Should we invest in it heavily, or divert the funds to more immediate healthcare needs?");
         card16Qestions.add("Talks about forcing the terminally ill to end their lives in exchange for freeing up medical resources for others has been going around. What is your decision?");
-        card16Qestions.add("Medical researchers have found a new treatment that can prevent the spread of certain viruses. However, the production of such must be extracted from newborn babies, with a chance of them dying along the process. Aligned with reducing the population and advancing with this treatment, what is your call?");
+        card16Qestions.add("Researchers found a treatment to prevent virus spread, but it requires extracting from newborns, risking their lives. Considering population control and medical progress, what is your call?");
         card16Rank = "Dr. G.";
         dialogueSwipeLeftTrueCard16 = new ArrayList<>();
         dialogueSwipeLeftTrueCard16.add(false);

@@ -102,6 +102,7 @@
             FreetypeFontLoader.FreeTypeFontLoaderParameter typewriter = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
             typewriter.fontFileName = "fonts/typewcond.otf";
             typewriter.fontParameters.size = 25;
+            typewriter.fontParameters.spaceY = -0;
             assetManager.load("typewcond25.otf", BitmapFont.class, typewriter);
 
             //finish loading
@@ -195,6 +196,26 @@
             heading.fontParameters.borderWidth = 3.6f;
             heading.fontParameters.borderColor = new Color(0,0,0,0.3f);
             assetManager.load("setbackt50.ttf", BitmapFont.class, heading);
+
+            //load fonts
+            FreetypeFontLoader.FreeTypeFontLoaderParameter typewriter = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+            typewriter.fontFileName = "fonts/typewcond.otf";
+            typewriter.fontParameters.size = 20;
+            typewriter.fontParameters.spaceY = 0;
+            assetManager.load("typewcond20.otf", BitmapFont.class, typewriter);
+
+            //load fonts
+            FreetypeFontLoader.FreeTypeFontLoaderParameter greenScreen = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+            greenScreen.fontFileName = "fonts/GreenScr.ttf";
+            greenScreen.fontParameters.size = 25;
+            greenScreen.fontParameters.spaceY = 0;
+            assetManager.load("Greenscr25.ttf", BitmapFont.class, greenScreen);
+
+            FreetypeFontLoader.FreeTypeFontLoaderParameter greenScreen30 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+            greenScreen30.fontFileName = "fonts/GreenScr.ttf";
+            greenScreen30.fontParameters.size = 35;
+            greenScreen30.fontParameters.spaceY = 0;
+            assetManager.load("Greenscr30.ttf", BitmapFont.class, greenScreen30);
         }
 
         @Override
