@@ -140,6 +140,7 @@
             assetManager.load("packedTextures/technologicalStatus.atlas", TextureAtlas.class);
             assetManager.load("packedTextures/militaryStatus.atlas", TextureAtlas.class);
             assetManager.load("packedTextures/medicineStatus.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/foreground.atlas", TextureAtlas.class);
 
             //atlas for dialogues
             assetManager.load("packedTextures/cultural.atlas", TextureAtlas.class);

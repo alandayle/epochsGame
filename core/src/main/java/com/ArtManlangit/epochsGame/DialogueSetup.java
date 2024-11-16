@@ -14,24 +14,28 @@ public class DialogueSetup {
     ArrayList<Sprite> rightCard1Sprite;
     ArrayList<String> card1Qestions;
     String card1Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard1;
 
     //card 2
     ArrayList<Sprite> leftCard2Sprite;
     ArrayList<Sprite> rightCard2Sprite;
     ArrayList<String> card2Qestions;
     String card2Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard2;
 
     //card 3
     ArrayList<Sprite> leftCard3Sprite;
     ArrayList<Sprite> rightCard3Sprite;
     ArrayList<String> card3Qestions;
     String card3Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard3;
 
     //card 4
     ArrayList<Sprite> leftCard4Sprite;
     ArrayList<Sprite> rightCard4Sprite;
     ArrayList<String> card4Qestions;
     String card4Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard4;
 
 
     //card 5
@@ -39,72 +43,84 @@ public class DialogueSetup {
     ArrayList<Sprite> rightCard5Sprite;
     ArrayList<String> card5Qestions;
     String card5Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard5;
 
     //card 6
     ArrayList<Sprite> leftCard6Sprite;
     ArrayList<Sprite> rightCard6Sprite;
     ArrayList<String> card6Qestions;
     String card6Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard6;
 
     //card 7
     ArrayList<Sprite> leftCard7Sprite;
     ArrayList<Sprite> rightCard7Sprite;
     ArrayList<String> card7Qestions;
     String card7Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard7;
 
     //card 8
     ArrayList<Sprite> leftCard8Sprite;
     ArrayList<Sprite> rightCard8Sprite;
     ArrayList<String> card8Qestions;
     String card8Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard8;
 
     //card 9
     ArrayList<Sprite> leftCard9Sprite;
     ArrayList<Sprite> rightCard9Sprite;
     ArrayList<String> card9Qestions;
     String card9Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard9;
 
     //card 10
     ArrayList<Sprite> leftCard10Sprite;
     ArrayList<Sprite> rightCard10Sprite;
     ArrayList<String> card10Qestions;
     String card10Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard10;
 
     //card 11
     ArrayList<Sprite> leftCard11Sprite;
     ArrayList<Sprite> rightCard11Sprite;
     ArrayList<String> card11Qestions;
     String card11Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard11;
 
     //card 12
     ArrayList<Sprite> leftCard12Sprite;
     ArrayList<Sprite> rightCard12Sprite;
     ArrayList<String> card12Qestions;
     String card12Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard12;
 
     //card 13
     ArrayList<Sprite> leftCard13Sprite;
     ArrayList<Sprite> rightCard13Sprite;
     ArrayList<String> card13Qestions;
     String card13Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard13;
 
     //card 14
     ArrayList<Sprite> leftCard14Sprite;
     ArrayList<Sprite> rightCard14Sprite;
     ArrayList<String> card14Qestions;
     String card14Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard14;
 
     //card 15
     ArrayList<Sprite> leftCard15Sprite;
     ArrayList<Sprite> rightCard15Sprite;
     ArrayList<String> card15Qestions;
     String card15Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard15;
 
     //card 16
     ArrayList<Sprite> leftCard16Sprite;
     ArrayList<Sprite> rightCard16Sprite;
     ArrayList<String> card16Qestions;
     String card16Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard16;
 
 
     //card 17
@@ -112,6 +128,7 @@ public class DialogueSetup {
     ArrayList<Sprite> rightCard17Sprite;
     ArrayList<String> card17Qestions;
     String card17Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard17;
 
 
     //card 18
@@ -119,6 +136,7 @@ public class DialogueSetup {
     ArrayList<Sprite> rightCard18Sprite;
     ArrayList<String> card18Qestions;
     String card18Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard18;
 
 
     //constructor
@@ -143,7 +161,16 @@ public class DialogueSetup {
         card1Qestions.add("Aquatic life is at risk due to polluted water. We can either establish conservation areas or focus on cleaning the waterways. What should we do?");
         card1Qestions.add("Solid waste management is a growing issue. Implement waste-to-energy programs.");
         card1Rank = "Gardener M.";
-        gameScreen.frontCards[0].setupDialogue(leftCard1Sprite, rightCard1Sprite, card1Qestions, 1, card1Rank, 1);
+
+        //checking for good or bad swipe. Swiping left is true
+        dialogueSwipeLeftTrueCard1 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard1.add(true);
+        dialogueSwipeLeftTrueCard1.add(true);
+        dialogueSwipeLeftTrueCard1.add(true);
+        dialogueSwipeLeftTrueCard1.add(true);
+        dialogueSwipeLeftTrueCard1.add(false);
+
+        gameScreen.frontCards[0].setupDialogue(leftCard1Sprite, rightCard1Sprite, card1Qestions, 1, card1Rank, 1, dialogueSwipeLeftTrueCard1);
 
 
 
@@ -163,7 +190,14 @@ public class DialogueSetup {
         card2Qestions.add("Reforestation projects can offset carbon emissions. Should we invest in these projects or increase green urban spaces?");
         card2Qestions.add("Reforestation requires community involvement. We can either launch an awareness campaign or provide incentives for participation. What should we do?");
         card2Rank = "Farmer E.";
-        gameScreen.frontCards[1].setupDialogue(leftCard2Sprite, rightCard2Sprite, card2Qestions, 1, card2Rank, 1);
+        dialogueSwipeLeftTrueCard2 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard2.add(false);
+        dialogueSwipeLeftTrueCard2.add(true);
+        dialogueSwipeLeftTrueCard2.add(true);
+        dialogueSwipeLeftTrueCard2.add(true);
+        dialogueSwipeLeftTrueCard2.add(false);
+        gameScreen.frontCards[1].setupDialogue(leftCard2Sprite, rightCard2Sprite, card2Qestions, 1, card2Rank, 1, dialogueSwipeLeftTrueCard2);
+
 
         //card 3
         leftCard3Sprite = new ArrayList<>();
@@ -182,7 +216,15 @@ public class DialogueSetup {
         card3Qestions.add("Our solar and wind farms are producing more energy than our grid can handle. Invest in energy storage systems to store excess energy.");
         card3Qestions.add("Our reliance on fossil fuels is causing severe pollution. Should we invest in carbon capture technology or continue focusing on economic growth?");
         card3Rank = "Environmentalist S.";
-        gameScreen.frontCards[2].setupDialogue(leftCard3Sprite, rightCard3Sprite, card3Qestions, 1, card3Rank, 1);
+        dialogueSwipeLeftTrueCard3 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard3.add(true);
+        dialogueSwipeLeftTrueCard3.add(true);
+        dialogueSwipeLeftTrueCard3.add(false);
+        dialogueSwipeLeftTrueCard3.add(true);
+        dialogueSwipeLeftTrueCard3.add(true);
+        dialogueSwipeLeftTrueCard3.add(true);
+
+        gameScreen.frontCards[2].setupDialogue(leftCard3Sprite, rightCard3Sprite, card3Qestions, 1, card3Rank, 1, dialogueSwipeLeftTrueCard3);
 
         //card4
         leftCard4Sprite = new ArrayList<>();
@@ -201,7 +243,15 @@ public class DialogueSetup {
         card4Qestions.add("We’ve developed efficient renewable energy sources! Mandate their use across all industries!");
         card4Qestions.add("5G technology offers faster internet but has health concerns. Should we proceed with worldwide deployment or conduct further research on health impacts?");
         card4Rank = "Engr. A.";
-        gameScreen.frontCards[3].setupDialogue(leftCard4Sprite, rightCard4Sprite, card4Qestions, 1, card4Rank, 1);
+        dialogueSwipeLeftTrueCard4 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard4.add(false);
+        dialogueSwipeLeftTrueCard4.add(true);
+        dialogueSwipeLeftTrueCard4.add(false);
+        dialogueSwipeLeftTrueCard4.add(false);
+        dialogueSwipeLeftTrueCard4.add(true);
+        dialogueSwipeLeftTrueCard4.add(false);
+
+        gameScreen.frontCards[3].setupDialogue(leftCard4Sprite, rightCard4Sprite, card4Qestions, 1, card4Rank, 1, dialogueSwipeLeftTrueCard4);
 
         //card 5
         leftCard5Sprite = new ArrayList<>();
@@ -219,7 +269,14 @@ public class DialogueSetup {
         card5Qestions.add("Cyber threats are unfortunately increasing. Should we invest heavily in cybersecurity infrastructure or focus on public education and preventive measures?");
         card5Qestions.add("Digital currencies offer efficiency but can disrupt economies. We can either adopt a national digital currency or regulate existing crypto currencies. What should we do?");
         card5Rank = "Agent B.";
-        gameScreen.frontCards[4].setupDialogue(leftCard5Sprite, rightCard5Sprite, card5Qestions, 1, card5Rank, 1);
+        dialogueSwipeLeftTrueCard5 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard5.add(false);
+        dialogueSwipeLeftTrueCard5.add(true);
+        dialogueSwipeLeftTrueCard5.add(true);
+        dialogueSwipeLeftTrueCard5.add(true);
+        dialogueSwipeLeftTrueCard5.add(false);
+
+        gameScreen.frontCards[4].setupDialogue(leftCard5Sprite, rightCard5Sprite, card5Qestions, 1, card5Rank, 1, dialogueSwipeLeftTrueCard5);
 
         //card 6
         leftCard6Sprite = new ArrayList<>();
@@ -234,7 +291,10 @@ public class DialogueSetup {
         card6Qestions.add("Our investment in scientific research is yielding breakthroughs but is draining resources from immediate social programs. ");
         card6Qestions.add("Quantum computing promises immense power but risks data security. Prioritize developing quantum encryption.");
         card6Rank = "Sec. R.";
-        gameScreen.frontCards[5].setupDialogue(leftCard6Sprite, rightCard6Sprite, card6Qestions, 1, card6Rank, 1);
+        dialogueSwipeLeftTrueCard6 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard6.add(true);
+        dialogueSwipeLeftTrueCard6.add(false);
+        gameScreen.frontCards[5].setupDialogue(leftCard6Sprite, rightCard6Sprite, card6Qestions, 1, card6Rank, 1, dialogueSwipeLeftTrueCard6);
 
 //            //card 7
         leftCard7Sprite = new ArrayList<>();
@@ -250,7 +310,11 @@ public class DialogueSetup {
         card7Qestions.add("We can now genetically modify humans! Permit genetic enhancements for non-medical uses NOW!");
         card7Qestions.add("Developing Artificial General Intelligences (AGI) poses ethical and safety concerns. Impose strict regulations on AGI research.");
         card7Rank = "Researcher J.";
-        gameScreen.frontCards[6].setupDialogue(leftCard7Sprite, rightCard7Sprite, card7Qestions, 1, card7Rank, 1);
+        dialogueSwipeLeftTrueCard7 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard7.add(false);
+        dialogueSwipeLeftTrueCard7.add(false);
+        dialogueSwipeLeftTrueCard7.add(false);
+        gameScreen.frontCards[6].setupDialogue(leftCard7Sprite, rightCard7Sprite, card7Qestions, 1, card7Rank, 1, dialogueSwipeLeftTrueCard7);
 
 //            //card 8
         leftCard8Sprite = new ArrayList<>();
@@ -267,7 +331,12 @@ public class DialogueSetup {
         card8Qestions.add("Integrating native languages languages requires curriculum changes. Should we also include indigenous history and traditions in the curriculum, or keep the focus on contemporary subjects?");
         card8Qestions.add("Open immigration requires strong community support systems. We must fund community integration programs for immigrants.");
         card8Rank = "First Lady";
-        gameScreen.frontCards[7].setupDialogue(leftCard8Sprite, rightCard8Sprite, card8Qestions, 1, card8Rank, 4);
+        dialogueSwipeLeftTrueCard8 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard8.add(false);
+        dialogueSwipeLeftTrueCard8.add(false);
+        dialogueSwipeLeftTrueCard8.add(true);
+        dialogueSwipeLeftTrueCard8.add(false);
+        gameScreen.frontCards[7].setupDialogue(leftCard8Sprite, rightCard8Sprite, card8Qestions, 1, card8Rank, 4, dialogueSwipeLeftTrueCard8);
 
 //            //card 9
         leftCard9Sprite = new ArrayList<>();
@@ -284,7 +353,12 @@ public class DialogueSetup {
         card9Qestions.add("Celebrating cultural diversity may require new policies. We should draft new policies to support cultural diversity and inclusion.");
         card9Qestions.add("Our cultural expressions are being used commercially without consent. Should we implement stricter intellectual property (IP) laws to protect cultural heritage, or encourage open sharing to promote cultural exchange?");
         card9Rank = "Father K.";
-        gameScreen.frontCards[8].setupDialogue(leftCard9Sprite, rightCard9Sprite, card9Qestions, 1, card9Rank, 1);
+        dialogueSwipeLeftTrueCard9 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard9.add(false);
+        dialogueSwipeLeftTrueCard9.add(true);
+        dialogueSwipeLeftTrueCard9.add(false);
+        dialogueSwipeLeftTrueCard9.add(true);
+        gameScreen.frontCards[8].setupDialogue(leftCard9Sprite, rightCard9Sprite, card9Qestions, 1, card9Rank, 1, dialogueSwipeLeftTrueCard9);
 
 //            //card 10
         leftCard10Sprite = new ArrayList<>();
@@ -301,7 +375,12 @@ public class DialogueSetup {
         card10Qestions.add("Increasing tourism puts pressure on heritage sites. We should implement strict conservation measures to protect these sites.");
         card10Qestions.add("Expanding cultural diversity in art prompts museums to diversify their exhibits. We should seek international pieces for a global perspective.");
         card10Rank = "Chef Q.";
-        gameScreen.frontCards[9].setupDialogue(leftCard10Sprite, rightCard10Sprite, card10Qestions, 1, card10Rank, 1);
+        dialogueSwipeLeftTrueCard10 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard10.add(true);
+        dialogueSwipeLeftTrueCard10.add(true);
+        dialogueSwipeLeftTrueCard10.add(false);
+        dialogueSwipeLeftTrueCard10.add(false);
+        gameScreen.frontCards[9].setupDialogue(leftCard10Sprite, rightCard10Sprite, card10Qestions, 1, card10Rank, 1, dialogueSwipeLeftTrueCard10);
 
 //            //card 11
         leftCard11Sprite = new ArrayList<>();
@@ -318,7 +397,13 @@ public class DialogueSetup {
         card11Qestions.add("As cultural diversity increases, should we mandate diversity quotas in media productions, or encourage voluntary diversity initiatives by media companies?");
         card11Qestions.add("International artifacts in museums spark interest in cultural exchange. Should we establish cultural exchange programs with other countries, or focus on enhancing local cultural programs?");
         card11Rank = "Historian Z.";
-        gameScreen.frontCards[10].setupDialogue(leftCard11Sprite, rightCard11Sprite, card11Qestions, 1, card11Rank, 1);
+        dialogueSwipeLeftTrueCard11 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard11.add(false);
+        dialogueSwipeLeftTrueCard11.add(false);
+        dialogueSwipeLeftTrueCard11.add(false);
+        dialogueSwipeLeftTrueCard11.add(true);
+
+        gameScreen.frontCards[10].setupDialogue(leftCard11Sprite, rightCard11Sprite, card11Qestions, 1, card11Rank, 1, dialogueSwipeLeftTrueCard11);
 
 //            //card 12
         leftCard12Sprite = new ArrayList<>();
@@ -335,7 +420,12 @@ public class DialogueSetup {
         card12Qestions.add("Our defense budget is heavily strained. Should we prioritize cutting-edge technology investments or focus on maintaining current military readiness?");
         card12Qestions.add("Reports of misconduct are unfortunately rising. Implement stricter penalties for violations.");
         card12Rank = "Major E.";
-        gameScreen.frontCards[11].setupDialogue(leftCard12Sprite, rightCard12Sprite, card12Qestions, 1, card12Rank, 1);
+        dialogueSwipeLeftTrueCard12 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard12.add(true);
+        dialogueSwipeLeftTrueCard12.add(false);
+        dialogueSwipeLeftTrueCard12.add(true);
+        dialogueSwipeLeftTrueCard12.add(true);
+        gameScreen.frontCards[11].setupDialogue(leftCard12Sprite, rightCard12Sprite, card12Qestions, 1, card12Rank, 1, dialogueSwipeLeftTrueCard12);
 
 //            //card 13
         leftCard13Sprite = new ArrayList<>();
@@ -352,7 +442,12 @@ public class DialogueSetup {
         card13Qestions.add("Our global military presence ensures influence but is costly. Should we reduce overseas bases to cut costs or maintain them to support global stability?");
         card13Qestions.add("Tensions between civilian authorities and military leaders are growing at an exponential rate. Implement stronger civilian oversight!");
         card13Rank = "Spy X";
-        gameScreen.frontCards[12].setupDialogue(leftCard13Sprite, rightCard13Sprite, card13Qestions, 1, card13Rank, 1);
+        dialogueSwipeLeftTrueCard13 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard13.add(false);
+        dialogueSwipeLeftTrueCard13.add(true);
+        dialogueSwipeLeftTrueCard13.add(true);
+        dialogueSwipeLeftTrueCard13.add(false);
+        gameScreen.frontCards[12].setupDialogue(leftCard13Sprite, rightCard13Sprite, card13Qestions, 1, card13Rank, 1, dialogueSwipeLeftTrueCard13);
 
 //            //card 14
         leftCard14Sprite = new ArrayList<>();
@@ -369,7 +464,12 @@ public class DialogueSetup {
         card14Qestions.add("Artificial Intelligence (AI) in warfare could enhance operational efficiency but poses risks. Proceed with caution, prioritizing human oversight.");
         card14Qestions.add("Military exercises are damaging the environment. Should we invest in eco-friendly training alternatives or accept the environmental costs for the sake of preparedness?");
         card14Rank = "Colonel T.";
-        gameScreen.frontCards[13].setupDialogue(leftCard14Sprite, rightCard14Sprite, card14Qestions, 1, card14Rank, 1);
+        dialogueSwipeLeftTrueCard14 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard14.add(true);
+        dialogueSwipeLeftTrueCard14.add(false);
+        dialogueSwipeLeftTrueCard14.add(false);
+        dialogueSwipeLeftTrueCard14.add(true);
+        gameScreen.frontCards[13].setupDialogue(leftCard14Sprite, rightCard14Sprite, card14Qestions, 1, card14Rank, 1, dialogueSwipeLeftTrueCard14);
 
 //            //card 15
         leftCard15Sprite = new ArrayList<>();
@@ -386,7 +486,13 @@ public class DialogueSetup {
         card15Qestions.add("Our troops are requested for international peacekeeping missions. Should we commit to these missions, risking personnel, or focus on national defense?");
         card15Qestions.add("Our military is often called for disaster response. Expand military disaster response capabilities!");
         card15Rank = "Lieutenant R.";
-        gameScreen.frontCards[14].setupDialogue(leftCard15Sprite, rightCard15Sprite, card15Qestions, 1, card15Rank, 1);
+        dialogueSwipeLeftTrueCard15 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard15.add(true);
+        dialogueSwipeLeftTrueCard15.add(true);
+        dialogueSwipeLeftTrueCard15.add(false);
+        dialogueSwipeLeftTrueCard15.add(false);
+
+        gameScreen.frontCards[14].setupDialogue(leftCard15Sprite, rightCard15Sprite, card15Qestions, 1, card15Rank, 1, dialogueSwipeLeftTrueCard15);
 
 //            //card 16
         leftCard16Sprite = new ArrayList<>();
@@ -407,7 +513,16 @@ public class DialogueSetup {
         card16Qestions.add("Talks about forcing the terminally ill to end their lives in exchange for freeing up medical resources for others has been going around. What is your decision?");
         card16Qestions.add("Medical researchers have found a new treatment that can prevent the spread of certain viruses. However, the production of such must be extracted from newborn babies, with a chance of them dying along the process. Aligned with reducing the population and advancing with this treatment, what is your call?");
         card16Rank = "Dr. G.";
-        gameScreen.frontCards[15].setupDialogue(leftCard16Sprite, rightCard16Sprite, card16Qestions, 1, card16Rank, 1);
+        dialogueSwipeLeftTrueCard16 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard16.add(true);
+        dialogueSwipeLeftTrueCard16.add(true);
+        dialogueSwipeLeftTrueCard16.add(true);
+        dialogueSwipeLeftTrueCard16.add(false);
+        dialogueSwipeLeftTrueCard16.add(false);
+        dialogueSwipeLeftTrueCard16.add(true);
+        dialogueSwipeLeftTrueCard16.add(false);
+        dialogueSwipeLeftTrueCard16.add(false);
+        gameScreen.frontCards[15].setupDialogue(leftCard16Sprite, rightCard16Sprite, card16Qestions, 1, card16Rank, 1, dialogueSwipeLeftTrueCard16);
 
         //card 17
         leftCard17Sprite = new ArrayList<>();
@@ -424,7 +539,12 @@ public class DialogueSetup {
         card17Qestions.add("We can no longer provide healthcare for everyone. We can force the injured or sick to contribute to society for them to receive treatment. What should we do?");
         card17Qestions.add("The government has proposed a law that obligates dying individuals for their organs to be harvested. What should we do?");
         card17Rank = "Housekeeper E.";
-        gameScreen.frontCards[16].setupDialogue(leftCard17Sprite, rightCard17Sprite, card17Qestions, 1, card17Rank, 1);
+        dialogueSwipeLeftTrueCard17 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard17.add(false);
+        dialogueSwipeLeftTrueCard17.add(true);
+        dialogueSwipeLeftTrueCard17.add(false);
+        dialogueSwipeLeftTrueCard17.add(false);
+        gameScreen.frontCards[16].setupDialogue(leftCard17Sprite, rightCard17Sprite, card17Qestions, 1, card17Rank, 1, dialogueSwipeLeftTrueCard17);
 
         //card 18
         leftCard18Sprite = new ArrayList<>();
@@ -441,6 +561,11 @@ public class DialogueSetup {
         card18Qestions.add("A new virus has caused an epidemic to ensue in a bustling city. This city is one of the major economic hubs for the country. What will you do?");
         card18Qestions.add("We need to prevent further strain in our healthcare systems by regulating births. Only the healthiest can reproduce, while others will be forced to use contraceptives. What do you think?");
         card18Rank = "Little R.";
-        gameScreen.frontCards[17].setupDialogue(leftCard18Sprite, rightCard18Sprite, card18Qestions, 1, card18Rank, 1);
+        dialogueSwipeLeftTrueCard18 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard18.add(false);
+        dialogueSwipeLeftTrueCard18.add(false);
+        dialogueSwipeLeftTrueCard18.add(false);
+        dialogueSwipeLeftTrueCard18.add(false);
+        gameScreen.frontCards[17].setupDialogue(leftCard18Sprite, rightCard18Sprite, card18Qestions, 1, card18Rank, 1, dialogueSwipeLeftTrueCard18);
     }
 }

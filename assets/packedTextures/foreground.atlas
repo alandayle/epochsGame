@@ -1,0 +1,17 @@
+foreground.png
+size:8192,2048
+repeat:none
+fg1
+bounds:4320,0,1080,1920
+fg2
+bounds:1080,0,1080,1920
+fg3
+bounds:6480,0,1080,1920
+fg4
+bounds:3240,0,1080,1920
+fg5
+bounds:0,0,1080,1920
+fg6
+bounds:5400,0,1080,1920
+fg7
+bounds:2160,0,1080,1920

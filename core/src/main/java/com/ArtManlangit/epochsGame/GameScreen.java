@@ -33,11 +33,11 @@
 
         //Texture atlas
         TextureAtlas mainBgsLogos, playingBgs, cards, environmentalCards, dialogues, culturalCards,
-            healthCards, militaryCards, technologicalCards, overallStatusAtlas, gameBackgrounds;
+            healthCards, militaryCards, technologicalCards, overallStatusAtlas, gameBackgrounds, foregroundAtlas;
 
         //Texture Regions
         TextureRegion currentBackground, backCardTextureRegion, lockCardTextureRegion, leftDialogue, rightDialogue;
-        TextureRegion[] frontCardTextureRegions, gameBackgroundTextureRegions;
+        TextureRegion[] frontCardTextureRegions, gameBackgroundTextureRegions, foregroundTextureRegions;
 
         //card properties
         float cardWidth, cardHeight, cardDefaultX, cardDefaultY;
@@ -153,6 +153,7 @@
             militaryCards = assetManager.get("packedTextures/military.atlas");
             overallStatusAtlas = assetManager.get("packedTextures/overAllStatusImage.atlas");
             gameBackgrounds = assetManager.get("packedTextures/gameBackgrounds.atlas");
+            foregroundAtlas = assetManager.get("packedTextures/foreground.atlas");
 
             //setup TextureRegions
             backCardTextureRegion = cards.findRegion("back");
@@ -176,6 +177,14 @@
             for (int i = 0; i < numberOfFrontCards; i++) {
                 frontCardFileName = "npcCard" + (i+1);
                 frontCardTextureRegions[i] = cards.findRegion(frontCardFileName);
+            }
+
+            String foregroundFileName;
+            //setup texture regions for foregrounds
+            foregroundTextureRegions = new TextureRegion[7];
+            for (int i = 0; i < 7; i++) {
+                foregroundFileName = "fg" + (i+1);
+                foregroundTextureRegions[i] = foregroundAtlas.findRegion(foregroundFileName);
             }
         }
 
@@ -527,6 +536,11 @@
 
             //draw background for ingameState
             batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+            batch.draw(foregroundTextureRegions[0], 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+
+            //draw icons
+            iconHandler.drawIcons(batch);
+
             batch.end();
 
             //disable scaling when drawing mainGame scene and some important icons
@@ -572,8 +586,6 @@
             currentCard.leftDialogue.setColor(1, 1, 1, 1);
             currentCard.rightDialogue.setColor(1, 1, 1, 1);
 
-            //draw icons
-            iconHandler.drawIcons(batch);
         }
 
         @Override

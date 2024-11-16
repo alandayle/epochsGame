@@ -17,21 +17,26 @@ public class FrontCard extends Card{
     int numberOfTimesCardUsed;
     int maxNumberOfTimes;
 
+    //determining if swiping left is good or bad
+    ArrayList<Boolean> dialogueSwipeLeftTrue;
+
     public FrontCard(TextureRegion image, float xPosition, float yPosition, float width, float height) {
         super(image, xPosition, yPosition, width, height);
         this.setX(xPosition);
         this.setY(yPosition);
     }
 
-    public void setupDialogue(ArrayList<Sprite> leftDialogues, ArrayList<Sprite> rightDialogues, ArrayList<String> questions, int theme, String rank, int maxNumberOfTimes) {
+    public void setupDialogue(ArrayList<Sprite> leftDialogues, ArrayList<Sprite> rightDialogues, ArrayList<String> questions, int theme, String rank, int maxNumberOfTimes, ArrayList<Boolean> dialogueSwipeLeftTrue) {
         //initialize array
         this.leftDialogues = new ArrayList<>();
         this.rightDialogues = new ArrayList<>();
         this.questions = new ArrayList<>();
+        this.dialogueSwipeLeftTrue = new ArrayList<>();
 
-        //copy array of dialogues
+        //copy array of dialogues and booleans
         this.leftDialogues.addAll(leftDialogues);
         this.rightDialogues.addAll(rightDialogues);
+        this.dialogueSwipeLeftTrue.addAll(dialogueSwipeLeftTrue);
 
         //set default properties for dialogues
         for (Sprite dialogue: leftDialogues) {
