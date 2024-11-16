@@ -1,0 +1,17 @@
+endingScreen.png
+size:8192,2048
+repeat:none
+badEnding
+bounds:0,0,1080,1920
+culturalEnding
+bounds:3240,0,1080,1920
+environmentalEnding
+bounds:2160,0,1080,1920
+healthcareEnding
+bounds:5400,0,1080,1920
+militaryEnding
+bounds:1080,0,1080,1920
+neutralEnding
+bounds:4320,0,1080,1920
+techEndingpng
+bounds:6480,0,1080,1920

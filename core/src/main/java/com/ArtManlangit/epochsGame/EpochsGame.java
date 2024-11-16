@@ -38,6 +38,9 @@ public class EpochsGame extends Game {
     MainMenuScreen mainMenuScreen;
     SplashScreen splashScreen;
 
+    //ending
+    int endingScenario;
+
     @Override
     public void create() {
         //set camera and viewport

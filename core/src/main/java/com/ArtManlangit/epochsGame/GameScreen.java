@@ -102,6 +102,9 @@
         //debug variables
         int cardCounter = 1;
 
+        //endScene scenario
+        int endingScenario;
+
         //constructor
         public GameScreen(EpochsGame epochsGame) {
             //initialize variables
@@ -236,7 +239,7 @@
 
             currentCard = frontCards[currentCardIndex];
             currentTheme = currentCard.theme;
-            currentDialogueIndex = (int) (Math.random() * 4);
+            currentDialogueIndex = (int) (Math.random() * currentCard.questions.size());
             currentCard.updateCard(currentDialogueIndex);
         }
 
@@ -480,44 +483,91 @@
                 currentCard.deleteCurrentCard();
 
                 //pick another not empty card
-                if(cardCounter <= 80) {
+                if (cardCounter <= 80) {
                     do {
                         int index2 = (int) (Math.random() * 18);
                         currentCardIndex = index2;
                         currentCard = frontCards[currentCardIndex];
                     } while (currentCard.questions.isEmpty());
-                }
 
-                //debug card
-                currentCard = frontCards[11];
+                    //debug card
+//                currentCard = frontCards[11];
 
-                //pick a random dialogue
-                int dialogueIndex = (int) (Math.random() * currentCard.questions.size());
-                currentCard.updateCard(dialogueIndex);
+                    //pick a random dialogue
+                    int dialogueIndex = (int) (Math.random() * currentCard.questions.size());
+                    currentCard.updateCard(dialogueIndex);
 
-                //update current theme
-                currentTheme = currentCard.theme;
+                    //update current theme
+                    currentTheme = currentCard.theme;
 
-                //Only change once
-                performChange = false;
+                    //change counter
+                    changeCounter++;
 
-                //change counter
-                changeCounter++;
+                    //shuffle card and increase decade
+                    if (changeCounter >= 10) {
+                        currentInGameState = shuffleState;
+                        currentGameState = countState;
+                        changeCounter = 0;
+                        backgroundMusic.stop();
+                        countDownYearFinish += 150;
 
-                //shuffle card and increase decade
-                if (changeCounter >= 10) {
-                    currentInGameState = shuffleState;
-                    currentGameState = countState;
-                    changeCounter = 0;
-                    backgroundMusic.stop();
-                    countDownYearFinish += 150;
-
-                    //reset number of cards used in the decade
-                    for (int i = 0; i < numberOfFrontCards; i++) {
-                        frontCards[i].numberOfTimesCardUsed = 0;
+                        //reset number of cards used in the decade
+                        for (int i = 0; i < numberOfFrontCards; i++) {
+                            frontCards[i].numberOfTimesCardUsed = 0;
+                        }
                     }
                 }
 
+                //Only change once
+                performChange = false;
+            }
+            checkWinningState();
+        }
+
+        public void checkWinningState() {
+            if (cardCounter >= 80) {
+                if (iconHandler.overallIcon.health <= 3) {
+                    endingScenario = 7;
+                } else {
+                    endingScenario = 6;
+                }
+                backgroundMusic.stop();
+                epochsGame.endScreen = new EndScreen(epochsGame);
+                epochsGame.setScreen(epochsGame.endScreen);
+            }
+            if (iconHandler.environmentalIcon.health <= 0) {
+                endingScenario = 1;
+                backgroundMusic.stop();
+                epochsGame.endScreen = new EndScreen(epochsGame);
+                epochsGame.setScreen(epochsGame.endScreen);
+            }
+
+            if (iconHandler.technologicalIcon.health <= 0) {
+                endingScenario = 2;
+                backgroundMusic.stop();
+                epochsGame.endScreen = new EndScreen(epochsGame);
+                epochsGame.setScreen(epochsGame.endScreen);
+            }
+
+            if (iconHandler.culturalIcon.health <= 0) {
+                endingScenario = 3;
+                backgroundMusic.stop();
+                epochsGame.endScreen = new EndScreen(epochsGame);
+                epochsGame.setScreen(epochsGame.endScreen);
+            }
+
+            if (iconHandler.militaryIcon.health <= 0) {
+                endingScenario = 4;
+                backgroundMusic.stop();
+                epochsGame.endScreen = new EndScreen(epochsGame);
+                epochsGame.setScreen(epochsGame.endScreen);
+            }
+
+            if (iconHandler.medicineIcon.health <= 0) {
+                endingScenario = 5;
+                backgroundMusic.stop();
+                epochsGame.endScreen = new EndScreen(epochsGame);
+                epochsGame.setScreen(epochsGame.endScreen);
             }
         }
 
