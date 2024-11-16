@@ -224,7 +224,7 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard3.add(true);
         dialogueSwipeLeftTrueCard3.add(true);
 
-        gameScreen.frontCards[2].setupDialogue(leftCard3Sprite, rightCard3Sprite, card3Qestions, 1, card3Rank, 1, dialogueSwipeLeftTrueCard3);
+        gameScreen.frontCards[2].setupDialogue(leftCard3Sprite, rightCard3Sprite, card3Qestions, 1, card3Rank, 2, dialogueSwipeLeftTrueCard3);
 
         //card4
         leftCard4Sprite = new ArrayList<>();
@@ -251,7 +251,7 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard4.add(true);
         dialogueSwipeLeftTrueCard4.add(false);
 
-        gameScreen.frontCards[3].setupDialogue(leftCard4Sprite, rightCard4Sprite, card4Qestions, 1, card4Rank, 1, dialogueSwipeLeftTrueCard4);
+        gameScreen.frontCards[3].setupDialogue(leftCard4Sprite, rightCard4Sprite, card4Qestions, 2, card4Rank, 2, dialogueSwipeLeftTrueCard4);
 
         //card 5
         leftCard5Sprite = new ArrayList<>();
@@ -276,7 +276,7 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard5.add(true);
         dialogueSwipeLeftTrueCard5.add(false);
 
-        gameScreen.frontCards[4].setupDialogue(leftCard5Sprite, rightCard5Sprite, card5Qestions, 1, card5Rank, 1, dialogueSwipeLeftTrueCard5);
+        gameScreen.frontCards[4].setupDialogue(leftCard5Sprite, rightCard5Sprite, card5Qestions, 2, card5Rank, 1, dialogueSwipeLeftTrueCard5);
 
         //card 6
         leftCard6Sprite = new ArrayList<>();
@@ -294,7 +294,7 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard6 = new ArrayList<>();
         dialogueSwipeLeftTrueCard6.add(true);
         dialogueSwipeLeftTrueCard6.add(false);
-        gameScreen.frontCards[5].setupDialogue(leftCard6Sprite, rightCard6Sprite, card6Qestions, 1, card6Rank, 1, dialogueSwipeLeftTrueCard6);
+        gameScreen.frontCards[5].setupDialogue(leftCard6Sprite, rightCard6Sprite, card6Qestions, 2, card6Rank, 1, dialogueSwipeLeftTrueCard6);
 
 //            //card 7
         leftCard7Sprite = new ArrayList<>();
@@ -314,7 +314,7 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard7.add(false);
         dialogueSwipeLeftTrueCard7.add(false);
         dialogueSwipeLeftTrueCard7.add(false);
-        gameScreen.frontCards[6].setupDialogue(leftCard7Sprite, rightCard7Sprite, card7Qestions, 1, card7Rank, 1, dialogueSwipeLeftTrueCard7);
+        gameScreen.frontCards[6].setupDialogue(leftCard7Sprite, rightCard7Sprite, card7Qestions, 2, card7Rank, 1, dialogueSwipeLeftTrueCard7);
 
 //            //card 8
         leftCard8Sprite = new ArrayList<>();
@@ -332,11 +332,11 @@ public class DialogueSetup {
         card8Qestions.add("Open immigration requires strong community support systems. We must fund community integration programs for immigrants.");
         card8Rank = "First Lady";
         dialogueSwipeLeftTrueCard8 = new ArrayList<>();
-        dialogueSwipeLeftTrueCard8.add(false);
-        dialogueSwipeLeftTrueCard8.add(false);
         dialogueSwipeLeftTrueCard8.add(true);
         dialogueSwipeLeftTrueCard8.add(false);
-        gameScreen.frontCards[7].setupDialogue(leftCard8Sprite, rightCard8Sprite, card8Qestions, 1, card8Rank, 4, dialogueSwipeLeftTrueCard8);
+        dialogueSwipeLeftTrueCard8.add(false);
+        dialogueSwipeLeftTrueCard8.add(false);
+        gameScreen.frontCards[7].setupDialogue(leftCard8Sprite, rightCard8Sprite, card8Qestions, 3, card8Rank, 4, dialogueSwipeLeftTrueCard8);
 
 //            //card 9
         leftCard9Sprite = new ArrayList<>();
@@ -355,10 +355,10 @@ public class DialogueSetup {
         card9Rank = "Father K.";
         dialogueSwipeLeftTrueCard9 = new ArrayList<>();
         dialogueSwipeLeftTrueCard9.add(false);
-        dialogueSwipeLeftTrueCard9.add(true);
         dialogueSwipeLeftTrueCard9.add(false);
-        dialogueSwipeLeftTrueCard9.add(true);
-        gameScreen.frontCards[8].setupDialogue(leftCard9Sprite, rightCard9Sprite, card9Qestions, 1, card9Rank, 1, dialogueSwipeLeftTrueCard9);
+        dialogueSwipeLeftTrueCard9.add(false);
+        dialogueSwipeLeftTrueCard9.add(false);
+        gameScreen.frontCards[8].setupDialogue(leftCard9Sprite, rightCard9Sprite, card9Qestions, 3, card9Rank, 1, dialogueSwipeLeftTrueCard9);
 
 //            //card 10
         leftCard10Sprite = new ArrayList<>();
@@ -377,10 +377,10 @@ public class DialogueSetup {
         card10Rank = "Chef Q.";
         dialogueSwipeLeftTrueCard10 = new ArrayList<>();
         dialogueSwipeLeftTrueCard10.add(true);
+        dialogueSwipeLeftTrueCard10.add(false);
         dialogueSwipeLeftTrueCard10.add(true);
-        dialogueSwipeLeftTrueCard10.add(false);
-        dialogueSwipeLeftTrueCard10.add(false);
-        gameScreen.frontCards[9].setupDialogue(leftCard10Sprite, rightCard10Sprite, card10Qestions, 1, card10Rank, 1, dialogueSwipeLeftTrueCard10);
+        dialogueSwipeLeftTrueCard10.add(true);
+        gameScreen.frontCards[9].setupDialogue(leftCard10Sprite, rightCard10Sprite, card10Qestions, 3, card10Rank, 1, dialogueSwipeLeftTrueCard10);
 
 //            //card 11
         leftCard11Sprite = new ArrayList<>();
@@ -398,12 +398,12 @@ public class DialogueSetup {
         card11Qestions.add("International artifacts in museums spark interest in cultural exchange. Should we establish cultural exchange programs with other countries, or focus on enhancing local cultural programs?");
         card11Rank = "Historian Z.";
         dialogueSwipeLeftTrueCard11 = new ArrayList<>();
-        dialogueSwipeLeftTrueCard11.add(false);
-        dialogueSwipeLeftTrueCard11.add(false);
+        dialogueSwipeLeftTrueCard11.add(true);
+        dialogueSwipeLeftTrueCard11.add(true);
         dialogueSwipeLeftTrueCard11.add(false);
         dialogueSwipeLeftTrueCard11.add(true);
 
-        gameScreen.frontCards[10].setupDialogue(leftCard11Sprite, rightCard11Sprite, card11Qestions, 1, card11Rank, 1, dialogueSwipeLeftTrueCard11);
+        gameScreen.frontCards[10].setupDialogue(leftCard11Sprite, rightCard11Sprite, card11Qestions, 3, card11Rank, 1, dialogueSwipeLeftTrueCard11);
 
 //            //card 12
         leftCard12Sprite = new ArrayList<>();
@@ -425,7 +425,7 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard12.add(false);
         dialogueSwipeLeftTrueCard12.add(true);
         dialogueSwipeLeftTrueCard12.add(true);
-        gameScreen.frontCards[11].setupDialogue(leftCard12Sprite, rightCard12Sprite, card12Qestions, 1, card12Rank, 1, dialogueSwipeLeftTrueCard12);
+        gameScreen.frontCards[11].setupDialogue(leftCard12Sprite, rightCard12Sprite, card12Qestions, 4, card12Rank, 1, dialogueSwipeLeftTrueCard12);
 
 //            //card 13
         leftCard13Sprite = new ArrayList<>();
@@ -443,11 +443,11 @@ public class DialogueSetup {
         card13Qestions.add("Tensions between civilian authorities and military leaders are growing at an exponential rate. Implement stronger civilian oversight!");
         card13Rank = "Spy X";
         dialogueSwipeLeftTrueCard13 = new ArrayList<>();
-        dialogueSwipeLeftTrueCard13.add(false);
         dialogueSwipeLeftTrueCard13.add(true);
         dialogueSwipeLeftTrueCard13.add(true);
+        dialogueSwipeLeftTrueCard13.add(true);
         dialogueSwipeLeftTrueCard13.add(false);
-        gameScreen.frontCards[12].setupDialogue(leftCard13Sprite, rightCard13Sprite, card13Qestions, 1, card13Rank, 1, dialogueSwipeLeftTrueCard13);
+        gameScreen.frontCards[12].setupDialogue(leftCard13Sprite, rightCard13Sprite, card13Qestions, 4, card13Rank, 1, dialogueSwipeLeftTrueCard13);
 
 //            //card 14
         leftCard14Sprite = new ArrayList<>();
@@ -465,11 +465,11 @@ public class DialogueSetup {
         card14Qestions.add("Military exercises are damaging the environment. Should we invest in eco-friendly training alternatives or accept the environmental costs for the sake of preparedness?");
         card14Rank = "Colonel T.";
         dialogueSwipeLeftTrueCard14 = new ArrayList<>();
-        dialogueSwipeLeftTrueCard14.add(true);
         dialogueSwipeLeftTrueCard14.add(false);
         dialogueSwipeLeftTrueCard14.add(false);
+        dialogueSwipeLeftTrueCard14.add(false);
         dialogueSwipeLeftTrueCard14.add(true);
-        gameScreen.frontCards[13].setupDialogue(leftCard14Sprite, rightCard14Sprite, card14Qestions, 1, card14Rank, 1, dialogueSwipeLeftTrueCard14);
+        gameScreen.frontCards[13].setupDialogue(leftCard14Sprite, rightCard14Sprite, card14Qestions, 4, card14Rank, 1, dialogueSwipeLeftTrueCard14);
 
 //            //card 15
         leftCard15Sprite = new ArrayList<>();
@@ -488,11 +488,11 @@ public class DialogueSetup {
         card15Rank = "Lieutenant R.";
         dialogueSwipeLeftTrueCard15 = new ArrayList<>();
         dialogueSwipeLeftTrueCard15.add(true);
+        dialogueSwipeLeftTrueCard15.add(false);
         dialogueSwipeLeftTrueCard15.add(true);
         dialogueSwipeLeftTrueCard15.add(false);
-        dialogueSwipeLeftTrueCard15.add(false);
 
-        gameScreen.frontCards[14].setupDialogue(leftCard15Sprite, rightCard15Sprite, card15Qestions, 1, card15Rank, 1, dialogueSwipeLeftTrueCard15);
+        gameScreen.frontCards[14].setupDialogue(leftCard15Sprite, rightCard15Sprite, card15Qestions, 4, card15Rank, 1, dialogueSwipeLeftTrueCard15);
 
 //            //card 16
         leftCard16Sprite = new ArrayList<>();
@@ -514,15 +514,15 @@ public class DialogueSetup {
         card16Qestions.add("Medical researchers have found a new treatment that can prevent the spread of certain viruses. However, the production of such must be extracted from newborn babies, with a chance of them dying along the process. Aligned with reducing the population and advancing with this treatment, what is your call?");
         card16Rank = "Dr. G.";
         dialogueSwipeLeftTrueCard16 = new ArrayList<>();
-        dialogueSwipeLeftTrueCard16.add(true);
-        dialogueSwipeLeftTrueCard16.add(true);
+        dialogueSwipeLeftTrueCard16.add(false);
+        dialogueSwipeLeftTrueCard16.add(false);
+        dialogueSwipeLeftTrueCard16.add(false);
+        dialogueSwipeLeftTrueCard16.add(false);
+        dialogueSwipeLeftTrueCard16.add(false);
         dialogueSwipeLeftTrueCard16.add(true);
         dialogueSwipeLeftTrueCard16.add(false);
         dialogueSwipeLeftTrueCard16.add(false);
-        dialogueSwipeLeftTrueCard16.add(true);
-        dialogueSwipeLeftTrueCard16.add(false);
-        dialogueSwipeLeftTrueCard16.add(false);
-        gameScreen.frontCards[15].setupDialogue(leftCard16Sprite, rightCard16Sprite, card16Qestions, 1, card16Rank, 1, dialogueSwipeLeftTrueCard16);
+        gameScreen.frontCards[15].setupDialogue(leftCard16Sprite, rightCard16Sprite, card16Qestions, 5, card16Rank, 1, dialogueSwipeLeftTrueCard16);
 
         //card 17
         leftCard17Sprite = new ArrayList<>();
@@ -540,11 +540,11 @@ public class DialogueSetup {
         card17Qestions.add("The government has proposed a law that obligates dying individuals for their organs to be harvested. What should we do?");
         card17Rank = "Housekeeper E.";
         dialogueSwipeLeftTrueCard17 = new ArrayList<>();
-        dialogueSwipeLeftTrueCard17.add(false);
         dialogueSwipeLeftTrueCard17.add(true);
         dialogueSwipeLeftTrueCard17.add(false);
         dialogueSwipeLeftTrueCard17.add(false);
-        gameScreen.frontCards[16].setupDialogue(leftCard17Sprite, rightCard17Sprite, card17Qestions, 1, card17Rank, 1, dialogueSwipeLeftTrueCard17);
+        dialogueSwipeLeftTrueCard17.add(false);
+        gameScreen.frontCards[16].setupDialogue(leftCard17Sprite, rightCard17Sprite, card17Qestions, 5, card17Rank, 2, dialogueSwipeLeftTrueCard17);
 
         //card 18
         leftCard18Sprite = new ArrayList<>();
@@ -564,8 +564,8 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard18 = new ArrayList<>();
         dialogueSwipeLeftTrueCard18.add(false);
         dialogueSwipeLeftTrueCard18.add(false);
-        dialogueSwipeLeftTrueCard18.add(false);
-        dialogueSwipeLeftTrueCard18.add(false);
-        gameScreen.frontCards[17].setupDialogue(leftCard18Sprite, rightCard18Sprite, card18Qestions, 1, card18Rank, 1, dialogueSwipeLeftTrueCard18);
+        dialogueSwipeLeftTrueCard18.add(true);
+        dialogueSwipeLeftTrueCard18.add(true);
+        gameScreen.frontCards[17].setupDialogue(leftCard18Sprite, rightCard18Sprite, card18Qestions, 5, card18Rank, 1, dialogueSwipeLeftTrueCard18);
     }
 }

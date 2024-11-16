@@ -17,8 +17,9 @@ public class FrontCard extends Card{
     int numberOfTimesCardUsed;
     int maxNumberOfTimes;
 
-    //determining if swiping left is good or bad
+    //determining if left choice is good or bad
     ArrayList<Boolean> dialogueSwipeLeftTrue;
+    boolean leftChoiceTrue;
 
     public FrontCard(TextureRegion image, float xPosition, float yPosition, float width, float height) {
         super(image, xPosition, yPosition, width, height);
@@ -77,12 +78,14 @@ public class FrontCard extends Card{
         questions.remove(question);
         leftDialogues.remove(leftDialogue);
         rightDialogues.remove(rightDialogue);
+        dialogueSwipeLeftTrue.remove(leftChoiceTrue);
     }
 
     public void updateCard(int index) {
         question = questions.get(index);
         leftDialogue = leftDialogues.get(index);
         rightDialogue = rightDialogues.get(index);
+        leftChoiceTrue = dialogueSwipeLeftTrue.get(index);
     }
 
 

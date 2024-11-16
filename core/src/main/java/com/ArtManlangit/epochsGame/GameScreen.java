@@ -87,10 +87,17 @@
 
         //Changing card properties
         boolean change, performChange;
-        int currentCardIndex, changeCounter;
+        int currentCardIndex, changeCounter, currentDialogueIndex;
 
         //Setting up dialogues for front cards
         DialogueSetup dialogueSetup;
+
+        //card choice detector 0 for left, 1 for right
+        int cardChoice;
+        int currentTheme;
+        int environmentalTheme = 1, technologicalTheme = 2, culturalTheme = 3, militaryTheme = 4, medicineTheme = 5;
+        final int leftChoice = 0;
+        final int rightChoice = 1;
 
         //debug variables
         int cardCounter = 1;
@@ -124,7 +131,7 @@
             currentInGameState = shuffleState;
             countDownYearCurrent = 0;
             countDownYearFinish = 2024;
-            numberOfBackCards = 18;
+            numberOfBackCards = 10;
             numberOfFrontCards = 18;
             shuffleSpeed = 850;
         }
@@ -219,6 +226,18 @@
 
             //setup front cards
             setupFrontCards();
+
+            //setup default cards
+            //default current card
+            currentCardIndex = (int) (Math.random() * 18);
+
+            //debug start
+
+
+            currentCard = frontCards[currentCardIndex];
+            currentTheme = currentCard.theme;
+            currentDialogueIndex = (int) (Math.random() * 4);
+            currentCard.updateCard(currentDialogueIndex);
         }
 
         public void setupFrontCards() {
@@ -227,9 +246,6 @@
                 frontCards[i] = new FrontCard(frontCardTextureRegions[i], cardDefaultX, cardDefaultY, cardWidth, cardHeight);
             }
 
-            //default current card
-            currentCardIndex = (int) (Math.random() * 18);
-            currentCard = frontCards[currentCardIndex];
 
             //card rotation
             initialTouch = new Vector2();
@@ -347,6 +363,12 @@
                     //change if drag is greater than absolute value of card width divide by 3
                     change = deltaX > cardWidth / 3.5f || deltaX < -cardWidth / 3.5f;
 
+                    //change direction based on delta x
+                    if (deltaX > 0) {
+                        cardChoice = leftChoice;
+                    } else {
+                        cardChoice = rightChoice;
+                    }
 
                 } else {
                     //reset position if not touching
@@ -449,21 +471,32 @@
             //if card change
             if (performChange) {
                 cardCounter++;
-                System.out.println("Counter: " + cardCounter);
-                //first delete the current card
+                System.out.println("Current card: Card " + cardCounter);
+                //update health based on card choice
+                //test icon health
+                updateHealth();
+
+                //delete the current card
                 currentCard.deleteCurrentCard();
-                currentCard.numberOfTimesCardUsed++;
 
                 //pick another not empty card
-                do {
-                    int index2 = (int) (Math.random() * 18);
-                    currentCardIndex = index2;
-                    currentCard = frontCards[currentCardIndex];
-                } while (currentCard.questions.isEmpty() || currentCard.numberOfTimesCardUsed >= currentCard.maxNumberOfTimes);
+                if(cardCounter <= 80) {
+                    do {
+                        int index2 = (int) (Math.random() * 18);
+                        currentCardIndex = index2;
+                        currentCard = frontCards[currentCardIndex];
+                    } while (currentCard.questions.isEmpty());
+                }
+
+                //debug card
+                currentCard = frontCards[11];
 
                 //pick a random dialogue
                 int dialogueIndex = (int) (Math.random() * currentCard.questions.size());
                 currentCard.updateCard(dialogueIndex);
+
+                //update current theme
+                currentTheme = currentCard.theme;
 
                 //Only change once
                 performChange = false;
@@ -485,16 +518,91 @@
                     }
                 }
 
-                //test icon health
-                iconHandler.overallIcon.health++;
-                iconHandler.environmentalIcon.health--;
-                iconHandler.militaryIcon.health++;
-                iconHandler.technologicalIcon.health--;
-                iconHandler.culturalIcon.health++;
-                iconHandler.medicineIcon.health--;
             }
         }
 
+        public void updateHealth() {
+            //update health based on card choice
+            //add  = 1 or subtract = -1
+            int operation;
+            System.out.println(currentCard.leftChoiceTrue);
+            if (currentCard.leftChoiceTrue) {
+                if (cardChoice == leftChoice) {
+                    //add health
+                    operation = 1;
+                } else {
+                    //subtract health
+                    operation = -1;
+                }
+            } else {
+                if (cardChoice == leftChoice) {
+                    //subtract health
+                    operation = -1;
+                } else {
+                    //add health
+                    operation = 1;
+                }
+            }
+
+            switch (currentTheme) {
+                case 1:
+                    iconHandler.environmentalIcon.health += operation;
+                    //limit health
+                    if (iconHandler.environmentalIcon.health >= 10) {
+                        iconHandler.environmentalIcon.health = 10;
+                    }
+                    if (iconHandler.environmentalIcon.health <= 0) {
+                        iconHandler.environmentalIcon.health = 0;
+                    }
+                    break;
+                case 2:
+                    iconHandler.technologicalIcon.health += operation;
+                    //limit health
+                    if (iconHandler.technologicalIcon.health >= 10) {
+                        iconHandler.technologicalIcon.health = 10;
+                    }
+                    if (iconHandler.technologicalIcon.health <= 0) {
+                        iconHandler.technologicalIcon.health = 0;
+                    }
+                    break;
+                case 3:
+                    iconHandler.culturalIcon.health += operation;
+                    //limit health
+                    if (iconHandler.culturalIcon.health >= 10) {
+                        iconHandler.culturalIcon.health = 10;
+                    }
+                    if (iconHandler.culturalIcon.health <= 0) {
+                        iconHandler.culturalIcon.health = 0;
+                    }
+                    break;
+                case 4:
+                    iconHandler.militaryIcon.health += operation;
+                    //limit health
+                    if (iconHandler.militaryIcon.health >= 10) {
+                        iconHandler.militaryIcon.health = 10;
+                    }
+                    if (iconHandler.militaryIcon.health <= 0) {
+                        iconHandler.militaryIcon.health = 0;
+                    }
+                    break;
+                case 5:
+                    iconHandler.medicineIcon.health += operation;
+                    //limit health
+                    if (iconHandler.medicineIcon.health >= 10) {
+                        iconHandler.medicineIcon.health = 10;
+                    }
+                    if (iconHandler.medicineIcon.health <= 0) {
+                        iconHandler.medicineIcon.health = 0;
+                    }
+                    break;
+            }
+
+            iconHandler.overallIcon.health = (int) Math.round((iconHandler.medicineIcon.health + iconHandler.militaryIcon.health +
+                iconHandler.culturalIcon.health + iconHandler.environmentalIcon.health +
+                iconHandler.technologicalIcon.health) / 5f);
+
+            System.out.println(iconHandler.overallIcon.health);
+        }
         public void draw() {
             ScreenUtils.clear(Color.BLACK);
 
@@ -536,10 +644,6 @@
 
             //draw background for ingameState
             batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
-            batch.draw(foregroundTextureRegions[0], 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
-
-            //draw icons
-            iconHandler.drawIcons(batch);
 
             batch.end();
 
@@ -549,6 +653,9 @@
             batch.begin();
             //draw icons, fonts and buttons
             subHeadingMainFont.draw(batch, "2024", subHeadingMainFont.getCapHeight() /5 , epochsGame.worldHeight - subHeadingMainFont.getCapHeight());
+            batch.draw(foregroundTextureRegions[0], 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+            //draw icons
+            iconHandler.drawIcons(batch);
 
             //elements to draw when shuffling
             if (currentInGameState == shuffleState){
