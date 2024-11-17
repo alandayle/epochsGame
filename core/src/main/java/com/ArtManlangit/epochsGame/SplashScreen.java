@@ -148,6 +148,22 @@ public class SplashScreen implements Screen {
         batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
         batch.end();
 
+        //avoid scaling
+        camera.update();
+        viewport.apply();
+        batch.setProjectionMatrix(camera.combined);
+
+        //sets colorvalue before drawing
+        batch.setColor(colorValue, colorValue, colorValue, 1);
+
+        //begin draw
+        batch.begin();
+
+        if (currentBackground != mainMenu) {
+            batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+        }
+        batch.end();
+
         //reset color value
         batch.setColor(1, 1,1, 1);
 

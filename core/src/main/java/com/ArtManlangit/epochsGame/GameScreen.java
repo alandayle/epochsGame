@@ -76,7 +76,7 @@
         int currentGameState, countState = 1, inGameState = 2;
 
         //inGameStates
-        int currentInGameState, shuffleState = 1, playingState = 2, guideState = 3;
+        int currentInGameState, shuffleState = 1, playingState = 2, guideState = 3, transitionState = 4;
         boolean guideDone;
 
         //fonts
@@ -99,7 +99,6 @@
         //card choice detector 0 for left, 1 for right
         int cardChoice;
         int currentTheme;
-        int environmentalTheme = 1, technologicalTheme = 2, culturalTheme = 3, militaryTheme = 4, medicineTheme = 5;
         final int leftChoice = 0;
         final int rightChoice = 1;
 
@@ -108,6 +107,7 @@
 
         //endScene scenario
         int endingScenario;
+
 
         //constructor
         public GameScreen(EpochsGame epochsGame) {
@@ -710,9 +710,15 @@
                     break;
             }
 
-            iconHandler.overallIcon.health = (int) Math.round((iconHandler.medicineIcon.health + iconHandler.militaryIcon.health +
+            double healthComputation = (iconHandler.medicineIcon.health + iconHandler.militaryIcon.health +
                 iconHandler.culturalIcon.health + iconHandler.environmentalIcon.health +
-                iconHandler.technologicalIcon.health) / 5f);
+                iconHandler.technologicalIcon.health) / 5f;
+            if (healthComputation - Math.floor(healthComputation) > 0.5) {
+                healthComputation = Math.round(healthComputation);
+            } else {
+                healthComputation = Math.floor(healthComputation);
+            }
+            iconHandler.overallIcon.health = (int) healthComputation;
 
             System.out.println(iconHandler.overallIcon.health);
         }
@@ -732,6 +738,22 @@
             batch.setColor(1, 1,1, 1);
         }
 
+        public void drawTransitionState() {
+            //set opacity for left and right dialogues
+
+
+            //lock card
+            batch.draw(lockCardTextureRegion, cardDefaultX, cardDefaultY, cardWidth, cardHeight);
+
+            //draw current card
+            currentCard.draw(batch);
+            greenScreen25.draw(batch, currentCard.rank, 0, cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 2, epochsGame.worldWidth, Align.center, true);
+            typeWriter.draw(batch, currentCard.question, epochsGame.worldWidth * 0.05f, cardDefaultY - greenScreen25.getCapHeight(), epochsGame.worldWidth * 0.9f, Align.center, true);
+
+            //reset dialogues' opacity to prevent bugs
+            currentCard.leftDialogue.setColor(1, 1, 1, 1);
+            currentCard.rightDialogue.setColor(1, 1, 1, 1);
+        }
         public void drawCountState () {
             camera.update();
             viewport.apply();
@@ -783,6 +805,11 @@
             if (currentInGameState == playingState) {
                 drawPlayingState();
             }
+
+            if (currentInGameState == transitionState) {
+                drawTransitionState();
+            }
+
             batch.end();
         }
 

@@ -20,6 +20,7 @@
     import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
     import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
     import com.badlogic.gdx.utils.Align;
+    import com.badlogic.gdx.utils.ScreenUtils;
     import com.badlogic.gdx.utils.viewport.Viewport;
 
     import javax.print.attribute.HashPrintServiceAttributeSet;
@@ -77,8 +78,8 @@
         public void debug() {
 
 //            //default
-//            epochsGame.splashScreen = new SplashScreen(epochsGame);
-//            epochsGame.setScreen(epochsGame.splashScreen);
+            epochsGame.splashScreen = new SplashScreen(epochsGame);
+            epochsGame.setScreen(epochsGame.splashScreen);
 
             //game Screen
 //            epochsGame.gameScreen = new GameScreen(epochsGame);
@@ -89,10 +90,10 @@
 //            epochsGame.setScreen((mainMenuScreen));
 
             //endScreen shortcut
-            epochsGame.gameScreen = new GameScreen(epochsGame);
-            epochsGame.gameScreen.guideDone = true;
-            epochsGame.gameScreen.cardCounter = 80;
-            epochsGame.setScreen(epochsGame.gameScreen);
+//            epochsGame.gameScreen = new GameScreen(epochsGame);
+//            epochsGame.gameScreen.guideDone = true;
+//            epochsGame.gameScreen.cardCounter = 80;
+//            epochsGame.setScreen(epochsGame.gameScreen);
 //            dispose();
         }
 
@@ -232,6 +233,7 @@
 
         @Override
         public void render(float delta) {
+            ScreenUtils.clear(new Color(0x221843FF));
             timer+= delta;
             loadingText = "Loading Assets " + Math.round(epochsGame.assetManager.getProgress() * 100) + "%";
             if (epochsGame.assetManager.update()) {
@@ -261,7 +263,6 @@
 
             //begin draw
             batch.begin();
-            batch.draw(loadingLogo, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
             batch.end();
 
             //change viewport to avoid stretch
@@ -269,6 +270,7 @@
             batch.setProjectionMatrix(camera.combined);
 
             batch.begin();
+            batch.draw(loadingLogo, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
             batch.draw(loadingImage[currentLoadingIndex], epochsGame.worldWidth / 2 - loadingIconLength / 2, epochsGame.worldHeight / 6, loadingIconLength, loadingIconLength);
             mainFont.draw(batch, loadingText, epochsGame.worldWidth / 2, epochsGame.worldHeight / 6, 0, Align.center, false);
             batch.end();
