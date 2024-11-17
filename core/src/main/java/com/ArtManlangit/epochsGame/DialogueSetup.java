@@ -342,7 +342,7 @@ public class DialogueSetup {
         card8Qestions = new ArrayList<>();
         card8Qestions.add("The new education reforms are in place, focusing on technology and innovation. Traditional subjects are receiving less attention. ");
         card8Qestions.add("Supporting cultural identity has led to a resurgence in native languages. We should integrate these languages into public education.");
-        card8Qestions.add("Integrating native languages languages requires curriculum changes. Should we also include indigenous history and traditions in the curriculum, or keep the focus on contemporary subjects?");
+        card8Qestions.add("Integrating native languages requires curriculum changes. Should we also include indigenous history and traditions in the curriculum, or keep the focus on contemporary subjects?");
         card8Qestions.add("Open immigration requires strong community support systems. We must fund community integration programs for immigrants.");
         card8Rank = "First Lady";
         dialogueSwipeLeftTrueCard8 = new ArrayList<>();

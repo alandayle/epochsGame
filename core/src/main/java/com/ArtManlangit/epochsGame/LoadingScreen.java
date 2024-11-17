@@ -81,13 +81,18 @@
 //            epochsGame.setScreen(epochsGame.splashScreen);
 
             //game Screen
-            epochsGame.gameScreen = new GameScreen(epochsGame);
-            epochsGame.setScreen(epochsGame.gameScreen);
+//            epochsGame.gameScreen = new GameScreen(epochsGame);
+//            epochsGame.setScreen(epochsGame.gameScreen);
 
 //            mainMenu screen
 //            MainMenuScreen mainMenuScreen = new MainMenuScreen(epochsGame);
 //            epochsGame.setScreen((mainMenuScreen));
-//
+
+            //endScreen shortcut
+            epochsGame.gameScreen = new GameScreen(epochsGame);
+            epochsGame.gameScreen.guideDone = true;
+            epochsGame.gameScreen.cardCounter = 80;
+            epochsGame.setScreen(epochsGame.gameScreen);
 //            dispose();
         }
 

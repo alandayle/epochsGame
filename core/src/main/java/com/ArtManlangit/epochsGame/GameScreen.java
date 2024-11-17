@@ -249,7 +249,7 @@
             //default current card guide card
             currentCard = frontCards[18];
             currentTheme = currentCard.theme;
-            currentDialogueIndex = (int) (Math.random() * currentCard.questions.size()); //updated this part because of the bug
+            currentDialogueIndex = 0;  //updated this part because of the bug
             currentCard.updateCard(currentDialogueIndex);
         }
 
@@ -405,9 +405,8 @@
             }
 
             //logic for inGameState
-
-            //scrolling background
             if (currentGameState == inGameState) {
+                //scrolling background
                 for (int i = 0; i < scrollingBackground.length;i++) {
                     scrollingBackgroundX[i] -= delta * 30;
                     if (scrollingBackgroundX[i] <= -epochsGame.worldWidth) {
