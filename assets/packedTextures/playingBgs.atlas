@@ -2,7 +2,7 @@ playingBgs.png
 size:8192,4096
 repeat:none
 bg1
-bounds:3240,1920,1080,1920
+bounds:3240,0,1080,1920
 bg2
 bounds:1080,0,1080,1920
 bg3
@@ -12,8 +12,10 @@ bounds:2160,0,1080,1920
 bg5
 bounds:1080,1920,1080,1920
 bg6
-bounds:3240,0,1080,1920
+bounds:4320,1920,1080,1920
 bg7
 bounds:2160,1920,1080,1920
 bg8
 bounds:0,0,1080,1920
+bg9
+bounds:3240,1920,1080,1920

@@ -179,10 +179,11 @@ public class MainMenuScreen implements Screen {
         xButtonY = 0.9f * epochsGame.worldHeight;
 
         //background moving
-        backgroundX = new float[8];
-        for (int i = 0; i < backgroundX.length; i++) {
+        backgroundX = new float[9];
+        for (int i = 0; i < backgroundX.length - 1; i++) {
             backgroundX[i] = (i) * epochsGame.worldWidth;
         }
+        backgroundX[8] = epochsGame.worldWidth;
 
 
     }
@@ -204,7 +205,7 @@ public class MainMenuScreen implements Screen {
         xButton = settingsAssets.findRegion("xButton");
 
         //setup textureRegion for moving background
-        currentBackground = new TextureRegion[8];
+        currentBackground = new TextureRegion[9];
         currentBackground[0] = mainBgsLogos.findRegion("mainBackground(portrait)");
         for (int i = 1; i < currentBackground.length; i++) {
             currentBackground[i] = playingBgs.findRegion("bg" + (i+1));
@@ -340,12 +341,17 @@ public class MainMenuScreen implements Screen {
         }
 
         //move background
-        for (int i = 0; i < backgroundX.length; i++) {
+        for (int i = 0; i < backgroundX.length - 1; i++) {
             backgroundX[i] -= delta * 30;
             if (backgroundX[i] <= -epochsGame.worldWidth * 7) {
                 backgroundX[i] = epochsGame.worldWidth;
             }
         }
+
+//        backgroundX[8] -= delta * 30;
+//        if (backgroundX[8] <= -epochsGame.worldWidth) {
+//            backgroundX[8] = epochsGame.worldWidth;
+//        }
     }
 
     public void draw() {

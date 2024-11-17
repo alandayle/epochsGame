@@ -26,6 +26,8 @@ public class EndScreen implements Screen {
     //texture atlas for game backgrounds
     TextureAtlas gameBackgroundsAtlas;
     TextureRegion endingScreenBackground;
+    TextureRegion[] background;
+    float[] backgroundX;
 
 
     //constructor
@@ -36,10 +38,21 @@ public class EndScreen implements Screen {
         this.backgroundViewport = epochsGame.backgroundViewport;
         this.camera = epochsGame.camera;
 
+        setupMovingBackground();
+
         //setupTextures
         setupTextures();
 
         batch = epochsGame.batch;
+
+
+    }
+
+    public void setupMovingBackground() {
+        background = new TextureRegion[2];
+        backgroundX = new float[2];
+        backgroundX[0] = 0;
+        backgroundX[1] = epochsGame.worldWidth;
     }
 
     public void setupTextures() {
@@ -48,31 +61,38 @@ public class EndScreen implements Screen {
         switch (epochsGame.gameScreen.endingScenario) {
             case 1:
                 assert gameBackgroundsAtlas != null;
-                endingScreenBackground = gameBackgroundsAtlas.findRegion("environmentalEnding");
+                background[0] = gameBackgroundsAtlas.findRegion("environmentalEnding");
+                background[1] = gameBackgroundsAtlas.findRegion("environmentalEnding");
                 break;
             case 2:
                 assert gameBackgroundsAtlas != null;
-                endingScreenBackground = gameBackgroundsAtlas.findRegion("techEndingpng");
+                background[0] = gameBackgroundsAtlas.findRegion("techEndingpng");
+                background[1] = gameBackgroundsAtlas.findRegion("techEndingpng");
                 break;
             case 3:
                 assert gameBackgroundsAtlas != null;
-                endingScreenBackground = gameBackgroundsAtlas.findRegion("culturalEnding");
+                background[0] = gameBackgroundsAtlas.findRegion("culturalEnding");
+                background[1] = gameBackgroundsAtlas.findRegion("culturalEnding");
                 break;
             case 4:
                 assert gameBackgroundsAtlas != null;
-                endingScreenBackground = gameBackgroundsAtlas.findRegion("militaryEnding");
+                background[0] = gameBackgroundsAtlas.findRegion("militaryEnding");
+                background[1] = gameBackgroundsAtlas.findRegion("militaryEnding");
                 break;
             case 5:
                 assert gameBackgroundsAtlas != null;
-                endingScreenBackground = gameBackgroundsAtlas.findRegion("healthcareEnding");
+                background[0] = gameBackgroundsAtlas.findRegion("healthcareEnding");
+                background[1] = gameBackgroundsAtlas.findRegion("healthcareEnding");
                 break;
             case 6:
                 assert gameBackgroundsAtlas != null;
-                endingScreenBackground = gameBackgroundsAtlas.findRegion("neutralEnding");
+                background[0] = gameBackgroundsAtlas.findRegion("neutralEnding");
+                background[1] = gameBackgroundsAtlas.findRegion("neutralEnding");
                 break;
             case 7:
                 assert gameBackgroundsAtlas != null;
-                endingScreenBackground = gameBackgroundsAtlas.findRegion("badEnding");
+                background[0] = gameBackgroundsAtlas.findRegion("badEnding");
+                background[1] = gameBackgroundsAtlas.findRegion("badEnding");
                 break;
         }
     }
@@ -85,7 +105,7 @@ public class EndScreen implements Screen {
     @Override
     public void render(float delta) {
         input();
-        logic();
+        logic(delta);
         draw();
     }
 
@@ -93,13 +113,23 @@ public class EndScreen implements Screen {
 
     }
 
-    public void logic() {
-
+    public void logic(float delta) {
+        for (int i = 0; i < backgroundX.length;i++) {
+            backgroundX[i] -= delta * 30;
+            if (backgroundX[i] <= -epochsGame.worldWidth) {
+                backgroundX[i] = epochsGame.worldWidth;
+            }
+        }
     }
 
     public void draw() {
+        camera.update();
+        backgroundViewport.apply();
+        batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        batch.draw(endingScreenBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+        for (int i = 0; i < backgroundX.length;i++) {
+            batch.draw(background[i], backgroundX[i], 0, epochsGame.worldWidth, epochsGame.worldHeight);
+        }
         batch.end();
     }
 

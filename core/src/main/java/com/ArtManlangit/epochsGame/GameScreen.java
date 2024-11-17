@@ -38,6 +38,8 @@
 
         //Texture Regions
         TextureRegion currentBackground, backCardTextureRegion, lockCardTextureRegion, leftDialogue, rightDialogue;
+        TextureRegion[] scrollingBackground;
+        float[] scrollingBackgroundX;
         TextureRegion[] frontCardTextureRegions, gameBackgroundTextureRegions, foregroundTextureRegions;
 
         //card properties
@@ -181,6 +183,15 @@
 
             //setup default game background
             currentBackground = gameBackgroundTextureRegions[0];
+
+            //scrolling background
+            scrollingBackground = new TextureRegion[2];
+            scrollingBackground[0] = gameBackgroundTextureRegions[0];
+            scrollingBackground[1] = gameBackgroundTextureRegions[0];
+            scrollingBackgroundX = new float[2];
+            scrollingBackgroundX[0] = 0;
+            scrollingBackgroundX[1] = epochsGame.worldWidth;
+
 
             String frontCardFileName;
 
@@ -394,7 +405,17 @@
             }
 
             //logic for inGameState
+
+            //scrolling background
             if (currentGameState == inGameState) {
+                for (int i = 0; i < scrollingBackground.length;i++) {
+                    scrollingBackgroundX[i] -= delta * 30;
+                    if (scrollingBackgroundX[i] <= -epochsGame.worldWidth) {
+                        scrollingBackgroundX[i] = epochsGame.worldWidth;
+                    }
+                }
+
+
                 if (currentInGameState == shuffleState){
                     shuffleStateLogic(delta);
                 }
@@ -736,7 +757,10 @@
             batch.begin();
 
             //Elements to draw while in game state
-            batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+//            batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+            for (int i = 0; i < scrollingBackgroundX.length; i++) {
+                batch.draw(scrollingBackground[i], scrollingBackgroundX[i], 0, epochsGame.worldWidth, epochsGame.worldHeight);
+            }
             batch.draw(foregroundTextureRegions[0], 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
             iconHandler.drawIcons(batch);
             greenScreen30.draw(batch, String.valueOf(countDownYearFinish),
@@ -774,7 +798,6 @@
             //draw current card
             currentCard.draw(batch);
             greenScreen25.draw(batch, currentCard.rank, 0, cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 2, epochsGame.worldWidth, Align.center, true);
-
             typeWriter.draw(batch, currentCard.question, epochsGame.worldWidth * 0.05f, cardDefaultY - greenScreen25.getCapHeight(), epochsGame.worldWidth * 0.9f, Align.center, true);
 
             //reset dialogues' opacity to prevent bugs
@@ -802,7 +825,7 @@
             greenScreen25.draw(batch, currentCard.rank, 0, cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 2, epochsGame.worldWidth, Align.center, true);
 
             //debug
-//            greenScreen25.draw(batch, String.valueOf(currentCard.leftChoiceTrue), 0, cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 4, epochsGame.worldWidth, Align.center, true);
+            greenScreen25.draw(batch, String.valueOf(currentCard.leftChoiceTrue), 0, cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 4, epochsGame.worldWidth, Align.center, true);
 
             typeWriter.draw(batch, currentCard.question, epochsGame.worldWidth * 0.05f, cardDefaultY - greenScreen25.getCapHeight(), epochsGame.worldWidth * 0.9f, Align.center, true);
 
