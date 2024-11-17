@@ -56,7 +56,7 @@
         SpriteBatch batch;
 
         //delay time before launching the game after loading the assets
-        float launchDelay = 0;
+        float launchDelay = 3;
 
         public LoadingScreen(EpochsGame epochsGame) {
             //initialize variables
@@ -76,7 +76,7 @@
 
         public void debug() {
 
-////            //default
+//            //default
 //            epochsGame.splashScreen = new SplashScreen(epochsGame);
 //            epochsGame.setScreen(epochsGame.splashScreen);
 
@@ -143,6 +143,7 @@
             assetManager.load("packedTextures/medicineStatus.atlas", TextureAtlas.class);
             assetManager.load("packedTextures/foreground.atlas", TextureAtlas.class);
             assetManager.load("packedTextures/endingScreen.atlas", TextureAtlas.class);
+            assetManager.load("packedTextures/guideDialogues.atlas", TextureAtlas.class);
 
             //atlas for dialogues
             assetManager.load("packedTextures/cultural.atlas", TextureAtlas.class);
@@ -179,6 +180,7 @@
             mySmallFont.fontParameters.borderColor = new Color(0,0,0,0.3f);
             assetManager.load("setbackt25.ttf", BitmapFont.class, mySmallFont);
 
+
             // Next, let's define the params and then load our bigger font
             FreetypeFontLoader.FreeTypeFontLoaderParameter subHeading = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
             subHeading.fontFileName = "fonts/setbackt.ttf";
@@ -197,6 +199,18 @@
             heading.fontParameters.borderColor = new Color(0,0,0,0.3f);
             assetManager.load("setbackt50.ttf", BitmapFont.class, heading);
 
+            FreetypeFontLoader.FreeTypeFontLoaderParameter greenScreen = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+            greenScreen.fontFileName = "fonts/Greenscr.ttf";
+            greenScreen.fontParameters.size = 25;
+            greenScreen.fontParameters.spaceY = 0;
+            assetManager.load("Greenscr25.ttf", BitmapFont.class, greenScreen);
+
+            FreetypeFontLoader.FreeTypeFontLoaderParameter greenScreen30 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+            greenScreen30.fontFileName = "fonts/Greenscr.ttf";
+            greenScreen30.fontParameters.size = 35;
+            greenScreen30.fontParameters.spaceY = 0;
+            assetManager.load("Greenscr30.ttf", BitmapFont.class, greenScreen30);
+
             //load fonts
             FreetypeFontLoader.FreeTypeFontLoaderParameter typewriter = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
             typewriter.fontFileName = "fonts/typewcond.otf";
@@ -204,18 +218,6 @@
             typewriter.fontParameters.spaceY = 0;
             assetManager.load("typewcond20.otf", BitmapFont.class, typewriter);
 
-            //load fonts
-            FreetypeFontLoader.FreeTypeFontLoaderParameter greenScreen = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-            greenScreen.fontFileName = "fonts/GreenScr.ttf";
-            greenScreen.fontParameters.size = 25;
-            greenScreen.fontParameters.spaceY = 0;
-            assetManager.load("Greenscr25.ttf", BitmapFont.class, greenScreen);
-
-            FreetypeFontLoader.FreeTypeFontLoaderParameter greenScreen30 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-            greenScreen30.fontFileName = "fonts/GreenScr.ttf";
-            greenScreen30.fontParameters.size = 35;
-            greenScreen30.fontParameters.spaceY = 0;
-            assetManager.load("Greenscr30.ttf", BitmapFont.class, greenScreen30);
         }
 
         @Override

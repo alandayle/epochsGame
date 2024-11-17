@@ -33,7 +33,8 @@
 
         //Texture atlas
         TextureAtlas mainBgsLogos, playingBgs, cards, environmentalCards, dialogues, culturalCards,
-            healthCards, militaryCards, technologicalCards, overallStatusAtlas, gameBackgrounds, foregroundAtlas;
+            healthCards, militaryCards, technologicalCards, overallStatusAtlas, gameBackgrounds, foregroundAtlas,
+            guideCardsAtlas;
 
         //Texture Regions
         TextureRegion currentBackground, backCardTextureRegion, lockCardTextureRegion, leftDialogue, rightDialogue;
@@ -73,7 +74,8 @@
         int currentGameState, countState = 1, inGameState = 2;
 
         //inGameStates
-        int currentInGameState, shuffleState = 1, playingState = 2, settingState = 3;
+        int currentInGameState, shuffleState = 1, playingState = 2, guideState = 3;
+        boolean guideDone;
 
         //fonts
         BitmapFont headingMainFont, subHeadingMainFont, bodyMainFont, typeWriter, greenScreen25, greenScreen30;
@@ -136,7 +138,7 @@
             countDownYearStart = 0;
             countDownYearFinish = (int)(Math.random() * 101) + 2000;
             numberOfBackCards = 10;
-            numberOfFrontCards = 18;
+            numberOfFrontCards = 19;
             shuffleSpeed = 850;
         }
 
@@ -165,12 +167,11 @@
             overallStatusAtlas = assetManager.get("packedTextures/overAllStatusImage.atlas");
             gameBackgrounds = assetManager.get("packedTextures/gameBackgrounds.atlas");
             foregroundAtlas = assetManager.get("packedTextures/foreground.atlas");
+            guideCardsAtlas = assetManager.get("packedTextures/guideDialogues.atlas");
 
             //setup TextureRegions
             backCardTextureRegion = cards.findRegion("back");
             lockCardTextureRegion = cards.findRegion("locked");
-            leftDialogue = dialogues.findRegion("yes");
-            rightDialogue = dialogues.findRegion("no");
 
             //setup gamebackgrounds
             gameBackgroundTextureRegions = new TextureRegion[7];
@@ -234,13 +235,8 @@
             setupFrontCards();
 
             //setup default cards
-            //default current card
-            currentCardIndex = (int) (Math.random() * 18);
-
-            //debug start
-
-
-            currentCard = frontCards[currentCardIndex];
+            //default current card guide card
+            currentCard = frontCards[18];
             currentTheme = currentCard.theme;
             currentDialogueIndex = (int) (Math.random() * currentCard.questions.size()); //updated this part because of the bug
             currentCard.updateCard(currentDialogueIndex);
@@ -329,7 +325,7 @@
 
             }
 
-            if (currentInGameState == playingState) {
+            if (currentInGameState == playingState || currentInGameState == guideState) {
                 if (Gdx.input.isTouched()) {
                     if (!isDragging) {
                         //get initial touch location
@@ -406,6 +402,9 @@
                 if (currentInGameState == playingState) {
                     playingStateLogic(delta);
                 }
+                if (currentInGameState == guideState) {
+                    guideStateLogic(delta);
+                }
             }
         }
 
@@ -438,6 +437,8 @@
             if (colorValue >= 1) {
                 colorValue = 1;
             }
+
+            //shuffle cards
             for(int i = 0; i < backCards.length; i++) {
                 float positionX = backCards[i].getX() + shuffleSpeed * 2 * delta;
                 float positionY = backCards[i].getY() - shuffleSpeed * delta;
@@ -455,10 +456,15 @@
                 backCards[i].setPosition(positionX, positionY);
             }
 
+            //check if shuffling is done
             if (backCards[backCards.length - 1].getX() >= cardDefaultX) {
                 timer+= delta;
                 if (timer > 1) {
-                    currentInGameState = playingState;
+                    if (!guideDone) {
+                        currentInGameState = guideState;
+                    } else {
+                        currentInGameState = playingState;
+                    }
                     timer = 0;
 
                     //reset card position
@@ -469,6 +475,38 @@
                         offset += 100;
                     }
                 }
+            }
+        }
+
+        public void guideStateLogic(float delta) {
+            if (performChange) {
+                changeCounter++;
+                //delete the current card
+                if (changeCounter >= 5) {
+                    guideDone = true;
+                    currentInGameState = shuffleState;
+                    currentGameState = countState;
+                    changeCounter = 0;
+                    backgroundMusic.stop();
+                    countDownYearCurrent = 0;
+                    countDownYearStart = 0;
+                    countDownYearFinish += (int) (Math.random() * 300 + 100);
+
+                    //default current card for actual play
+                    currentCardIndex = (int) (Math.random() * 18);
+                    currentCard = frontCards[currentCardIndex];
+                    currentTheme = currentCard.theme;
+                    currentDialogueIndex = (int) (Math.random() * currentCard.questions.size()); //updated this part because of the bug
+                    currentCard.updateCard(currentDialogueIndex);
+                } else {
+                    currentCard.deleteCurrentCard();
+                    currentCard.updateCard(0);
+                    System.out.println(changeCounter);
+                }
+
+                //perform change once
+                performChange = false;
+
             }
         }
 
@@ -714,11 +752,34 @@
                 drawShuffleState();
             }
 
+            if (currentInGameState == guideState) {
+                drawGuideState();
+            }
+
             //elements to draw when playing
             if (currentInGameState == playingState) {
                 drawPlayingState();
             }
             batch.end();
+        }
+
+        public void drawGuideState() {
+            //set opacity for left and right dialogues
+            currentCard.leftDialogue.setColor(1, 1, 1, leftDialogueColorValue);
+            currentCard.rightDialogue.setColor(1, 1, 1, rightDialogueColorValue);
+
+            //lock card
+            batch.draw(lockCardTextureRegion, cardDefaultX, cardDefaultY, cardWidth, cardHeight);
+
+            //draw current card
+            currentCard.draw(batch);
+            greenScreen25.draw(batch, currentCard.rank, 0, cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 2, epochsGame.worldWidth, Align.center, true);
+
+            typeWriter.draw(batch, currentCard.question, epochsGame.worldWidth * 0.05f, cardDefaultY - greenScreen25.getCapHeight(), epochsGame.worldWidth * 0.9f, Align.center, true);
+
+            //reset dialogues' opacity to prevent bugs
+            currentCard.leftDialogue.setColor(1, 1, 1, 1);
+            currentCard.rightDialogue.setColor(1, 1, 1, 1);
         }
 
         public void drawShuffleState() {

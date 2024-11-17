@@ -138,6 +138,20 @@ public class DialogueSetup {
     String card18Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard18;
 
+    //card 19
+    ArrayList<Sprite> leftCard19Sprite;
+    ArrayList<Sprite> rightCard19Sprite;
+    ArrayList<String> card19Qestions;
+    String card19Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard19;
+
+    //card 20
+    ArrayList<Sprite> leftCard20Sprite;
+    ArrayList<Sprite> rightCard20Sprite;
+    ArrayList<String> card20Qestions;
+    String card20Rank;
+    ArrayList<Boolean> dialogueSwipeLeftTrueCard20;
+
 
     //constructor
     public DialogueSetup(GameScreen gameScreen) {
@@ -567,5 +581,29 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard18.add(true);
         dialogueSwipeLeftTrueCard18.add(true);
         gameScreen.frontCards[17].setupDialogue(leftCard18Sprite, rightCard18Sprite, card18Qestions, 5, card18Rank, 1, dialogueSwipeLeftTrueCard18);
+
+        //card 19
+        leftCard19Sprite = new ArrayList<>();
+        rightCard19Sprite = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Sprite leftCardSprite = new Sprite(gameScreen.guideCardsAtlas.findRegion("card0Dialogue" + (i+1) + ".1"));
+            Sprite rightCardSprite = new Sprite(gameScreen.guideCardsAtlas.findRegion("card0Dialogue" + (i+1) + ".2"));
+            leftCard19Sprite.add(leftCardSprite);
+            rightCard19Sprite.add(rightCardSprite);
+        }
+        card19Qestions = new ArrayList<>();
+        card19Qestions.add("Greetings, Overseer. This is a world reshaped by the hands of humanity and scarred by time itself. Swipe left or right to proceed.");
+        card19Qestions.add("Long has the civilization thrived, and longer has it endured. But now... the Epoch draws to its end.");
+        card19Qestions.add("Your goal is simple, yet grave: navigate the ruins, confront the choices of past ages, and shape what remains.");
+        card19Qestions.add("Be warned: each choice ripples, every action echoes. The end is inevitable-but how it unfolds... that duty rests on you.");
+        card19Qestions.add("Take this heed Overseer, there is no going back.");
+        card19Rank = "Guide";
+        dialogueSwipeLeftTrueCard19 = new ArrayList<>();
+        dialogueSwipeLeftTrueCard19.add(false);
+        dialogueSwipeLeftTrueCard19.add(false);
+        dialogueSwipeLeftTrueCard19.add(true);
+        dialogueSwipeLeftTrueCard19.add(true);
+        dialogueSwipeLeftTrueCard19.add(true);
+        gameScreen.frontCards[18].setupDialogue(leftCard19Sprite, rightCard19Sprite, card19Qestions, 5, card19Rank, 1, dialogueSwipeLeftTrueCard19);
     }
 }
