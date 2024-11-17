@@ -3,10 +3,12 @@ package com.ArtManlangit.epochsGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -57,9 +59,13 @@ public class EndScreen implements Screen {
 
     //scrolling text variables
     float scrollingTextY;
+    GlyphLayout layout;
 
     String[] scrollingText;
     String currentScrollingText;
+
+    //music
+    Music backgroundMusic;
 
     //constructor
     public EndScreen(EpochsGame epochsGame) {
@@ -182,6 +188,7 @@ public class EndScreen implements Screen {
                 background[1] = gameBackgroundsAtlas.findRegion("environmentalEnding");
                 card.question = card.questions.get(0);
                 currentScrollingText = scrollingText[0];
+                backgroundMusic = assetManager.get("audio/environmental.mp3");
                 break;
             case 2:
                 assert gameBackgroundsAtlas != null;
@@ -189,6 +196,7 @@ public class EndScreen implements Screen {
                 background[1] = gameBackgroundsAtlas.findRegion("techEndingpng");
                 card.question = card.questions.get(1);
                 currentScrollingText = scrollingText[1];
+                backgroundMusic = assetManager.get("audio/technology.mp3");
                 break;
             case 3:
                 assert gameBackgroundsAtlas != null;
@@ -196,6 +204,7 @@ public class EndScreen implements Screen {
                 background[1] = gameBackgroundsAtlas.findRegion("culturalEnding");
                 card.question = card.questions.get(2);
                 currentScrollingText = scrollingText[2];
+                backgroundMusic = assetManager.get("audio/cultural.mp3");
                 break;
             case 4:
                 assert gameBackgroundsAtlas != null;
@@ -203,6 +212,7 @@ public class EndScreen implements Screen {
                 background[1] = gameBackgroundsAtlas.findRegion("militaryEnding");
                 card.question = card.questions.get(3);
                 currentScrollingText = scrollingText[3];
+                backgroundMusic = assetManager.get("audio/military.mp3");
                 break;
             case 5:
                 assert gameBackgroundsAtlas != null;
@@ -210,6 +220,7 @@ public class EndScreen implements Screen {
                 background[1] = gameBackgroundsAtlas.findRegion("healthcareEnding");
                 card.question = card.questions.get(4);
                 currentScrollingText = scrollingText[4];
+                backgroundMusic = assetManager.get("audio/medicine.mp3");
                 break;
             case 6:
                 assert gameBackgroundsAtlas != null;
@@ -217,6 +228,7 @@ public class EndScreen implements Screen {
                 background[1] = gameBackgroundsAtlas.findRegion("neutralEnding");
                 card.question = card.questions.get(5);
                 currentScrollingText = scrollingText[5];
+                backgroundMusic = assetManager.get("audio/neutral.mp3");
                 break;
             case 7:
                 assert gameBackgroundsAtlas != null;
@@ -224,8 +236,10 @@ public class EndScreen implements Screen {
                 background[1] = gameBackgroundsAtlas.findRegion("badEnding");
                 card.question = card.questions.get(6);
                 currentScrollingText = scrollingText[6];
+                backgroundMusic = assetManager.get("audio/bad.mp3");
                 break;
         }
+        backgroundMusic.setLooping(true);
     }
 
     @Override
@@ -320,11 +334,23 @@ public class EndScreen implements Screen {
     public void scrollingStateLogic(float delta) {
         //logic for moving background
         movingBackgroundLogic(delta);
-        scrollingTextY += delta * 20;
+        layout = new GlyphLayout();
+        layout.setText(typewriter, currentScrollingText);
+
+        if (scrollingTextY >= (backgroundViewport.getWorldHeight() / 2) + (layout.height * 1.5)) {
+            scrollingTextY = (backgroundViewport.getWorldHeight() / 2) + (layout.height * 1.5f);
+        } else {
+            scrollingTextY += delta * 20;
+        }
+
+// Access the height of the text
+        float textHeight = layout.height;
+
     }
 
     public void cardStateLogic(float delta) {
         if (performChange) {
+            backgroundMusic.play();
             performChange = false;
             currentState = scrolllingState;
         }

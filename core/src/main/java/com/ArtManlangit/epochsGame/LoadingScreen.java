@@ -161,11 +161,19 @@
             //music files
             assetManager.load("audio/background.mp3", Music.class);
             assetManager.load("audio/playing.mp3", Music.class);
+            assetManager.load("audio/bad.mp3", Music.class);
+            assetManager.load("audio/cultural.mp3", Music.class);
+            assetManager.load("audio/medicine.mp3", Music.class);
+            assetManager.load("audio/military.mp3", Music.class);
+            assetManager.load("audio/neutral.mp3", Music.class);
+            assetManager.load("audio/technology.mp3", Music.class);
+            assetManager.load("audio/environmental.mp3", Music.class);
 
             //sound files
             assetManager.load("audio/cardShuffle.mp3", Sound.class);
             assetManager.load("audio/tick.mp3", Sound.class);
             assetManager.load("audio/yearCountSoundEffect.mp3", Sound.class);
+            assetManager.load("audio/outro.mp3", Sound.class);
 
             //Font files
             loadFonts();

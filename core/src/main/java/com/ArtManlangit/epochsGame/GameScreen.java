@@ -60,7 +60,7 @@
 
         //Audio and sound effects
         Music backgroundMusic;
-        Sound yearCountSoundEffect, cardShuffleSoundEffect;
+        Sound yearCountSoundEffect, cardShuffleSoundEffect, endingSoundEffect;
         boolean yearCountPlayed;
 
         //drawer
@@ -225,6 +225,7 @@
             backgroundMusic = assetManager.get("audio/playing.mp3");
             backgroundMusic.setLooping(true);
             cardShuffleSoundEffect = assetManager.get("audio/cardShuffle.mp3");
+            endingSoundEffect = assetManager.get("audio/outro.mp3");
         }
 
         public void loadFonts() {
@@ -623,12 +624,14 @@
                 backgroundMusic.stop();
                 epochsGame.endScreen = new EndScreen(epochsGame);
                 epochsGame.setScreen(epochsGame.endScreen);
+                endingSoundEffect.play();
             }
             if (iconHandler.environmentalIcon.health <= 0) {
                 endingScenario = 1;
                 backgroundMusic.stop();
                 epochsGame.endScreen = new EndScreen(epochsGame);
                 epochsGame.setScreen(epochsGame.endScreen);
+                endingSoundEffect.play();
             }
 
             if (iconHandler.technologicalIcon.health <= 0) {
@@ -636,6 +639,7 @@
                 backgroundMusic.stop();
                 epochsGame.endScreen = new EndScreen(epochsGame);
                 epochsGame.setScreen(epochsGame.endScreen);
+                endingSoundEffect.play();
             }
 
             if (iconHandler.culturalIcon.health <= 0) {
@@ -643,6 +647,7 @@
                 backgroundMusic.stop();
                 epochsGame.endScreen = new EndScreen(epochsGame);
                 epochsGame.setScreen(epochsGame.endScreen);
+                endingSoundEffect.play();
             }
 
             if (iconHandler.militaryIcon.health <= 0) {
@@ -650,6 +655,7 @@
                 backgroundMusic.stop();
                 epochsGame.endScreen = new EndScreen(epochsGame);
                 epochsGame.setScreen(epochsGame.endScreen);
+                endingSoundEffect.play();
             }
 
             if (iconHandler.medicineIcon.health <= 0) {
@@ -657,6 +663,7 @@
                 backgroundMusic.stop();
                 epochsGame.endScreen = new EndScreen(epochsGame);
                 epochsGame.setScreen(epochsGame.endScreen);
+                endingSoundEffect.play();
             }
         }
 
