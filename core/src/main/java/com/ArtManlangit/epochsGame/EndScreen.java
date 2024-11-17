@@ -55,6 +55,12 @@ public class EndScreen implements Screen {
     float leftDialogueColorValue, rightDialogueColorValue;
     TextureRegion lockCard;
 
+    //scrolling text variables
+    float scrollingTextY;
+
+    String[] scrollingText;
+    String currentScrollingText;
+
     //constructor
     public EndScreen(EpochsGame epochsGame) {
         //important gameScreen and drawing properties
@@ -74,11 +80,45 @@ public class EndScreen implements Screen {
         //moving background
         setupMovingBackground();
 
+        //setup scrolling text
+        setupScrollingText();
+
         //setupTextures
         setupTextures();
 
         //loadFonts();
         loadFonts();
+
+    }
+
+    public void setupScrollingText() {
+        scrollingTextY = 0;
+        scrollingText = new String[7];
+        scrollingText[0] = "You were given the power to shape humanity’s fate, yet at each turn, the path chosen was one of neglect, delay, and disregard. Now, the consequences stand before us, stark and unforgiving.\n\n" +
+            "The seas have swallowed our coastal cities; the air is thick with smog, choking out life itself. The land lies barren, and our waters run dry, poisoned by our own hands. Nature’s final cries echo in the empty streets, in rivers of plastic, and in forests razed to dust.\n\n" +
+            "We have lost the harmony once found between humanity and the world it called home. The storms, the droughts, the unbreathable air—they are no longer warnings, but judgments. We prioritized convenience over conscience, growth over grace, power over preservation.\n\n" +
+            "The Epoch is at its end, and what remains is but a shadow, a faint whisper of what once was. You have failed the world. This is the end you have chosen.\n\n";
+        scrollingText[1] = "Your choices, driven by convenience and unchecked ambition, have birthed a new age of unprecedented technological power, but at what cost?\n\n" +
+            "Technologies designed to benefit society have instead become instruments of division, surveillance, and unchecked power. Rights have been sacrificed for convenience, and the balance between innovation and ethical responsibility has been lost.\n\n" +
+            "We stand at the edge of a new age—one where humanity no longer governs technology, but is governed by it. The consequences are clear: a fractured society, ethical decay, and a future controlled by the very systems that were meant to serve us.\n\n" +
+            "This is the end you have created, Overseer. A world where the promise of a brighter tomorrow has been overshadowed by the recklessness of today.\n\n";
+        scrollingText[2] = "In your pursuit of progress, you have disregarded the importance of diversity, heritage, and the delicate balance that holds society together.\n\n" +
+            "Traditional values have been eroded, while cultural heritage and identity have been commodified. The fabric of society, once rich with history and diverse expression, now faces division and neglect.\n\n" +
+            "This is the world you have created—a world where the cost of ‘advancement’ has left our cultural roots barren, and the rich diversity that once united us is now fragmented and forgotten.\n\n";
+        scrollingText[3] = "In your quest for control, you have disregarded the sanctity of life, pushing forward with choices that sacrifice the well-being of countless individuals.\n\n" +
+            "You’ve prioritized resources over people, and health over humanity. Your decisions have left society divided, with the most vulnerable paying the highest price.\n\n" +
+            "This is the world you have created—a world where medical advancements come at the cost of life, choice, and dignity, and where the future of humanity is written in compromise and disregard for our shared values.\n\n";
+        scrollingText[4] = "In your pursuit of security, you have abandoned the principles of freedom, ethics, and diplomacy. The military now controls not only borders but the very fabric of society.\n\n" +
+            "Unchecked military expansion, erosion of privacy, and the abandonment of human oversight have led to a future where force rules over reason. Your decisions have left us vulnerable to global unrest, internal corruption, and environmental damage.\n\n" +
+            "This is the world you have created—a world where the balance between safety and humanity has been lost, and the cost of progress is too high to bear.\n\n";
+        scrollingText[5] = "You have guided humanity through a hundred decades, steering the world through challenges and uncertainties. Yet, though survival has been achieved, it is far from harmonious.\n\n" +
+            "The environment, though not wholly ravaged, struggles under the weight of compromise and delay. Cities stand, but their air remains heavy; rivers flow, but not without contamination. Forests endure, yet in fragments. The world you’ve shaped exists in a precarious balance, neither thriving nor falling completely to ruin.\n\n" +
+            "Your decisions have allowed humanity to persevere, but the price was a world that can only endure—not flourish. Hope lingers, fragile and uncertain, as the legacy of your choices rests on the precipice of both renewal and decay.\n\n" +
+            "This is the Epoch you have sustained—a world neither lost nor found, where survival remains the singular triumph.\n\n";
+        scrollingText[6] = "Humanity has endured the ages, yet what remains is a world on the brink of collapse. Your choices, though sufficient for survival, were insufficient to sustain balance and growth.\n\n" +
+            "The environment bears the weight of compromise—its rivers poisoned, its lands barren, and its skies choked with ash. Natural harmony has been replaced by a fragile dependence on dwindling resources and fleeting innovations. What remains is a shadow of what could have been—a world clinging to survival, but void of true vitality.\n\n" +
+            "Your leadership has brought the Epoch to its centennial milestone, yet the future looms uncertain and unstable. The lessons of the past have not been fully heeded, and humanity teeters between endurance and oblivion.\n\n" +
+            "This is the Epoch you have created—a world that endures but at a cost too steep to secure a lasting legacy.\n\n";
     }
 
     public void loadFonts() {
@@ -141,42 +181,49 @@ public class EndScreen implements Screen {
                 background[0] = gameBackgroundsAtlas.findRegion("environmentalEnding");
                 background[1] = gameBackgroundsAtlas.findRegion("environmentalEnding");
                 card.question = card.questions.get(0);
+                currentScrollingText = scrollingText[0];
                 break;
             case 2:
                 assert gameBackgroundsAtlas != null;
                 background[0] = gameBackgroundsAtlas.findRegion("techEndingpng");
                 background[1] = gameBackgroundsAtlas.findRegion("techEndingpng");
                 card.question = card.questions.get(1);
+                currentScrollingText = scrollingText[1];
                 break;
             case 3:
                 assert gameBackgroundsAtlas != null;
                 background[0] = gameBackgroundsAtlas.findRegion("culturalEnding");
                 background[1] = gameBackgroundsAtlas.findRegion("culturalEnding");
                 card.question = card.questions.get(2);
+                currentScrollingText = scrollingText[2];
                 break;
             case 4:
                 assert gameBackgroundsAtlas != null;
                 background[0] = gameBackgroundsAtlas.findRegion("militaryEnding");
                 background[1] = gameBackgroundsAtlas.findRegion("militaryEnding");
                 card.question = card.questions.get(3);
+                currentScrollingText = scrollingText[3];
                 break;
             case 5:
                 assert gameBackgroundsAtlas != null;
                 background[0] = gameBackgroundsAtlas.findRegion("healthcareEnding");
                 background[1] = gameBackgroundsAtlas.findRegion("healthcareEnding");
                 card.question = card.questions.get(4);
+                currentScrollingText = scrollingText[4];
                 break;
             case 6:
                 assert gameBackgroundsAtlas != null;
                 background[0] = gameBackgroundsAtlas.findRegion("neutralEnding");
                 background[1] = gameBackgroundsAtlas.findRegion("neutralEnding");
                 card.question = card.questions.get(5);
+                currentScrollingText = scrollingText[5];
                 break;
             case 7:
                 assert gameBackgroundsAtlas != null;
                 background[0] = gameBackgroundsAtlas.findRegion("badEnding");
                 background[1] = gameBackgroundsAtlas.findRegion("badEnding");
                 card.question = card.questions.get(6);
+                currentScrollingText = scrollingText[6];
                 break;
         }
     }
@@ -265,10 +312,15 @@ public class EndScreen implements Screen {
         if (currentState == cardState) {
             cardStateLogic(delta);
         } else if (currentState == scrolllingState) {
-            //logic for moving background
-            movingBackgroundLogic(delta);
+            scrollingStateLogic(delta);
         }
 
+    }
+
+    public void scrollingStateLogic(float delta) {
+        //logic for moving background
+        movingBackgroundLogic(delta);
+        scrollingTextY += delta * 20;
     }
 
     public void cardStateLogic(float delta) {
@@ -297,6 +349,27 @@ public class EndScreen implements Screen {
         }
 
         //draw scrollingState
+        if(currentState == scrolllingState) {
+            drawScrollingState();
+        }
+    }
+
+    public void drawScrollingState() {
+        //update camera
+        camera.update();
+
+        //disable scaling for drawing card state
+        backgroundViewport.apply();
+        batch.setProjectionMatrix(camera.combined);
+
+        //begin draw
+        batch.begin();
+
+        typewriter.draw(batch, currentScrollingText, epochsGame.worldWidth * 0.05f,
+            scrollingTextY, epochsGame.worldWidth * 0.9f, Align.center, true);
+
+        //end draw
+        batch.end();
     }
 
     public void drawCardState() {
