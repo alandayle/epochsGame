@@ -78,6 +78,7 @@
         //inGameStates
         int currentInGameState, shuffleState = 1, playingState = 2, guideState = 3, transitionState = 4;
         boolean guideDone;
+        int previousGameState;
 
         //fonts
         BitmapFont headingMainFont, subHeadingMainFont, bodyMainFont, typeWriter, greenScreen25, greenScreen30;
@@ -107,6 +108,10 @@
 
         //endScene scenario
         int endingScenario;
+
+        //transitioning variables
+        float transitionColorValue;
+        float transitionTimer;
 
 
         //constructor
@@ -425,6 +430,20 @@
                 if (currentInGameState == guideState) {
                     guideStateLogic(delta);
                 }
+
+                if (currentInGameState == transitionState) {
+                    transitionStateLogic(delta);
+                }
+            }
+        }
+
+        public void transitionStateLogic(float delta) {
+            transitionTimer += delta;
+            transitionColorValue = transitionTimer * 3f;
+            if (transitionTimer >= 0.5f) {
+                currentInGameState = previousGameState;
+                transitionTimer = 0;
+                transitionColorValue = 0;
             }
         }
 
@@ -500,6 +519,8 @@
 
         public void guideStateLogic(float delta) {
             if (performChange) {
+                previousGameState = currentInGameState;
+                currentInGameState = transitionState;
                 changeCounter++;
                 //delete the current card
                 if (changeCounter >= 5) {
@@ -519,6 +540,7 @@
                     currentDialogueIndex = (int) (Math.random() * currentCard.questions.size()); //updated this part because of the bug
                     currentCard.updateCard(currentDialogueIndex);
                 } else {
+                    cardShuffleSoundEffect.play();
                     currentCard.deleteCurrentCard();
                     currentCard.updateCard(0);
                     System.out.println(changeCounter);
@@ -534,6 +556,8 @@
 
             //if card change
             if (performChange) {
+                previousGameState = currentInGameState;
+                currentInGameState = transitionState;
                 cardCounter++;
                 System.out.println("Current card: Card " + cardCounter);
                 //update health based on card choice
@@ -578,6 +602,8 @@
                         for (int i = 0; i < numberOfFrontCards; i++) {
                             frontCards[i].numberOfTimesCardUsed = 0;
                         }
+                    } else {
+                        cardShuffleSoundEffect.play();
                     }
                 }
 
@@ -739,20 +765,24 @@
         }
 
         public void drawTransitionState() {
-            //set opacity for left and right dialogues
-
-
             //lock card
             batch.draw(lockCardTextureRegion, cardDefaultX, cardDefaultY, cardWidth, cardHeight);
 
+            //set opacity for left and right dialogues
+            currentCard.leftDialogue.setColor(0, 0, 0, 0);
+            currentCard.rightDialogue.setColor(0, 0, 0, 0);
+            currentCard.setColor(1, 1, 1, transitionColorValue);
+
             //draw current card
             currentCard.draw(batch);
+
             greenScreen25.draw(batch, currentCard.rank, 0, cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 2, epochsGame.worldWidth, Align.center, true);
             typeWriter.draw(batch, currentCard.question, epochsGame.worldWidth * 0.05f, cardDefaultY - greenScreen25.getCapHeight(), epochsGame.worldWidth * 0.9f, Align.center, true);
 
-            //reset dialogues' opacity to prevent bugs
+            //reset colors
             currentCard.leftDialogue.setColor(1, 1, 1, 1);
             currentCard.rightDialogue.setColor(1, 1, 1, 1);
+            currentCard.setColor(1, 1, 1, 1);
         }
         public void drawCountState () {
             camera.update();
@@ -851,7 +881,9 @@
             greenScreen25.draw(batch, currentCard.rank, 0, cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 2, epochsGame.worldWidth, Align.center, true);
 
             //debug
-            greenScreen25.draw(batch, String.valueOf(currentCard.leftChoiceTrue), 0, cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 4, epochsGame.worldWidth, Align.center, true);
+//            greenScreen25.draw(batch, String.valueOf(currentCard.leftChoiceTrue), 0,
+//                cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 4, epochsGame.worldWidth,
+//                Align.center, true);
 
             typeWriter.draw(batch, currentCard.question, epochsGame.worldWidth * 0.05f, cardDefaultY - greenScreen25.getCapHeight(), epochsGame.worldWidth * 0.9f, Align.center, true);
 

@@ -57,7 +57,7 @@
         SpriteBatch batch;
 
         //delay time before launching the game after loading the assets
-        float launchDelay = 3;
+        float launchDelay = 0;
 
         public LoadingScreen(EpochsGame epochsGame) {
             //initialize variables
@@ -78,12 +78,12 @@
         public void debug() {
 
 //            //default
-            epochsGame.splashScreen = new SplashScreen(epochsGame);
-            epochsGame.setScreen(epochsGame.splashScreen);
+//            epochsGame.splashScreen = new SplashScreen(epochsGame);
+//            epochsGame.setScreen(epochsGame.splashScreen);
 
             //game Screen
-//            epochsGame.gameScreen = new GameScreen(epochsGame);
-//            epochsGame.setScreen(epochsGame.gameScreen);
+            epochsGame.gameScreen = new GameScreen(epochsGame);
+            epochsGame.setScreen(epochsGame.gameScreen);
 
 //            mainMenu screen
 //            MainMenuScreen mainMenuScreen = new MainMenuScreen(epochsGame);
