@@ -81,7 +81,13 @@
         int previousGameState;
 
         //fonts
-        BitmapFont headingMainFont, subHeadingMainFont, bodyMainFont, typeWriter, greenScreen25, greenScreen30, greenScreen20;
+        BitmapFont headingMainFont;
+        BitmapFont subHeadingMainFont;
+        BitmapFont bodyMainFont;
+        BitmapFont typeWriter;
+        BitmapFont greenScreen25;
+        BitmapFont greenScreen30;
+        BitmapFont greenScreen20;
 
         //countdown year
         int countDownYearCurrent, countDownYearFinish, countDownYearStart;
@@ -655,8 +661,8 @@
                 }
 
                 backgroundMusic.stop();
-                epochsGame.endScreen = new EndScreen(epochsGame);
-                epochsGame.setScreen(epochsGame.endScreen);
+                epochsGame.loadingScreen.currentLoading = epochsGame.loadingScreen.endScreen;
+                epochsGame.setScreen(epochsGame.loadingScreen);
                 endingSoundEffect.play();
             }
         }

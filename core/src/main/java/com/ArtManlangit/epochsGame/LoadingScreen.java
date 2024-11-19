@@ -172,7 +172,6 @@
                 assetManager.load("packedTextures/militaryStatus.atlas", TextureAtlas.class);
                 assetManager.load("packedTextures/medicineStatus.atlas", TextureAtlas.class);
 
-
                 //sounds
                 assetManager.load("audio/yearCountSoundEffect.mp3", Sound.class);
                 assetManager.load("audio/playing.mp3", Music.class);
@@ -237,13 +236,29 @@
 
 
             } else if (currentLoading == endScreen) {
-                assetManager.load("audio/bad.mp3", Music.class);
-                assetManager.load("audio/cultural.mp3", Music.class);
-                assetManager.load("audio/medicine.mp3", Music.class);
-                assetManager.load("audio/military.mp3", Music.class);
-                assetManager.load("audio/neutral.mp3", Music.class);
-                assetManager.load("audio/technology.mp3", Music.class);
-                assetManager.load("audio/environmental.mp3", Music.class);
+                switch (epochsGame.gameScreen.endingScenario) {
+                    case 1:
+                        assetManager.load("audio/environmental.mp3", Music.class);
+                        break;
+                    case 2:
+                        assetManager.load("audio/technology.mp3", Music.class);
+                        break;
+                    case 3:
+                        assetManager.load("audio/cultural.mp3", Music.class);
+                        break;
+                    case 4:
+                        assetManager.load("audio/military.mp3", Music.class);
+                        break;
+                    case 5:
+                        assetManager.load("audio/medicine.mp3", Music.class);
+                        break;
+                    case 6:
+                        assetManager.load("audio/neutral.mp3", Music.class);
+                        break;
+                    case 7:
+                        assetManager.load("audio/bad.mp3", Music.class);
+                        break;
+                }
                 assetManager.load("packedTextures/endingScreen.atlas", TextureAtlas.class);
             }
         }
