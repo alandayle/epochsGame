@@ -67,6 +67,9 @@ public class EndScreen implements Screen {
     //music
     Music backgroundMusic;
 
+    //fade in transition
+    float colorValue;
+
     //constructor
     public EndScreen(EpochsGame epochsGame) {
         //important gameScreen and drawing properties
@@ -349,6 +352,12 @@ public class EndScreen implements Screen {
     }
 
     public void cardStateLogic(float delta) {
+        //transition
+        colorValue += delta;
+        if (colorValue >= 1) {
+            colorValue = 1;
+        }
+
         if (performChange) {
             backgroundMusic.play();
             performChange = false;
@@ -406,6 +415,9 @@ public class EndScreen implements Screen {
         viewport.apply();
         batch.setProjectionMatrix(camera.combined);
 
+        //assign color values for all
+        card.setColor(1, 1, 1, colorValue);
+
         //begin drawing
         batch.begin();
 
@@ -427,17 +439,22 @@ public class EndScreen implements Screen {
         //reset right and left dialogue colorValue
         card.leftDialogue.setColor(1, 1, 1, 1);
         card.rightDialogue.setColor(1, 1, 1, 1);
+        card.setColor(1, 1, 1,1);
     }
 
     public void drawCurrentBackground() {
         camera.update();
         backgroundViewport.apply();
         batch.setProjectionMatrix(camera.combined);
+        batch.setColor(colorValue, colorValue, colorValue, 1);
         batch.begin();
         for (int i = 0; i < backgroundX.length;i++) {
             batch.draw(background[i], backgroundX[i], 0, epochsGame.worldWidth, epochsGame.worldHeight);
         }
         batch.end();
+
+        //reset color
+        batch.setColor(1, 1, 1, 1);
     }
 
     @Override

@@ -14,24 +14,23 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class SplashScreen implements Screen {
-    //access to epochsGame and the main assetManager
+    //Shared variables to all screens
     EpochsGame epochsGame;
     AssetManager assetManager;
-
-    //viewport and camera
     Viewport viewport;
     Viewport backgroundViewport;
     Camera camera;
 
-    //textures for assets
+    //assets shared by other screens
+    Music backgroundMusic;
     TextureAtlas mainBgsLogos;
+
+
+    //textures for assets
     TextureRegion loadingLogo;
     TextureRegion wearHeadphones;
     TextureRegion mainMenu;
     TextureRegion currentBackground;
-
-    //Audio and sound effects
-    Music backgroundMusic;
 
     //drawer
     SpriteBatch batch;
@@ -66,6 +65,9 @@ public class SplashScreen implements Screen {
     public void loadAssets() {
         //load textures
         mainBgsLogos = assetManager.get("packedTextures/mainBgsLogos.atlas", TextureAtlas.class);
+        backgroundMusic = assetManager.get("audio/background.mp3");
+
+        //setup textures
         loadingLogo = mainBgsLogos.findRegion("logo(portrait)");
         wearHeadphones = mainBgsLogos.findRegion("wearHeadphones(portrait)");
         mainMenu = mainBgsLogos.findRegion("mainBackground(portrait)");
@@ -73,8 +75,7 @@ public class SplashScreen implements Screen {
         //set initial background
         currentBackground = loadingLogo;
 
-        //load and configure music
-        backgroundMusic = assetManager.get("audio/background.mp3");
+        //configure music
         backgroundMusic.setLooping(true);
     }
 

@@ -81,7 +81,7 @@
         int previousGameState;
 
         //fonts
-        BitmapFont headingMainFont, subHeadingMainFont, bodyMainFont, typeWriter, greenScreen25, greenScreen30;
+        BitmapFont headingMainFont, subHeadingMainFont, bodyMainFont, typeWriter, greenScreen25, greenScreen30, greenScreen20;
 
         //countdown year
         int countDownYearCurrent, countDownYearFinish, countDownYearStart;
@@ -112,6 +112,9 @@
         //transitioning variables
         float transitionColorValue;
         float transitionTimer;
+
+        //show gameProgress
+        int gameProgress;
 
 
         //constructor
@@ -235,6 +238,7 @@
             typeWriter = assetManager.get("typewcond20.otf", BitmapFont.class);
             greenScreen25 = assetManager.get("Greenscr25.ttf", BitmapFont.class);
             greenScreen30 = assetManager.get("Greenscr30.ttf", BitmapFont.class);
+            greenScreen20 = assetManager.get("Greenscr20.ttf", BitmapFont.class);
         }
 
         public void setupCards() {
@@ -565,6 +569,9 @@
                 //test icon health
                 updateHealth();
 
+                //udpate game progress
+                gameProgress = (cardCounter * 100)/80;
+
                 //delete the current card
                 currentCard.deleteCurrentCard();
 
@@ -615,51 +622,38 @@
         }
 
         public void checkWinningState() {
-            if (cardCounter >= 80) {
-                if (iconHandler.overallIcon.health <= 3) {
-                    endingScenario = 7;
-                } else {
-                    endingScenario = 6;
+            if (cardCounter >= 80 || iconHandler.environmentalIcon.health <= 0 ||
+                iconHandler.technologicalIcon.health <= 0 || iconHandler.culturalIcon.health <= 0 ||
+                iconHandler.militaryIcon.health <= 0 || iconHandler.medicineIcon.health <= 0) {
+                //check ending scenario
+                if (cardCounter >= 80) {
+                    if (iconHandler.overallIcon.health <= 3) {
+                        endingScenario = 7;
+                    } else {
+                        endingScenario = 6;
+                    }
                 }
-                backgroundMusic.stop();
-                epochsGame.endScreen = new EndScreen(epochsGame);
-                epochsGame.setScreen(epochsGame.endScreen);
-                endingSoundEffect.play();
-            }
-            if (iconHandler.environmentalIcon.health <= 0) {
-                endingScenario = 1;
-                backgroundMusic.stop();
-                epochsGame.endScreen = new EndScreen(epochsGame);
-                epochsGame.setScreen(epochsGame.endScreen);
-                endingSoundEffect.play();
-            }
 
-            if (iconHandler.technologicalIcon.health <= 0) {
-                endingScenario = 2;
-                backgroundMusic.stop();
-                epochsGame.endScreen = new EndScreen(epochsGame);
-                epochsGame.setScreen(epochsGame.endScreen);
-                endingSoundEffect.play();
-            }
+                if (iconHandler.environmentalIcon.health <= 0) {
+                    endingScenario = 1;
+                }
 
-            if (iconHandler.culturalIcon.health <= 0) {
-                endingScenario = 3;
-                backgroundMusic.stop();
-                epochsGame.endScreen = new EndScreen(epochsGame);
-                epochsGame.setScreen(epochsGame.endScreen);
-                endingSoundEffect.play();
-            }
+                if (iconHandler.technologicalIcon.health <= 0) {
+                    endingScenario = 2;
+                }
 
-            if (iconHandler.militaryIcon.health <= 0) {
-                endingScenario = 4;
-                backgroundMusic.stop();
-                epochsGame.endScreen = new EndScreen(epochsGame);
-                epochsGame.setScreen(epochsGame.endScreen);
-                endingSoundEffect.play();
-            }
+                if (iconHandler.culturalIcon.health <= 0) {
+                    endingScenario = 3;
+                }
 
-            if (iconHandler.medicineIcon.health <= 0) {
-                endingScenario = 5;
+                if (iconHandler.militaryIcon.health <= 0) {
+                    endingScenario = 4;
+                }
+
+                if (iconHandler.medicineIcon.health <= 0) {
+                    endingScenario = 5;
+                }
+
                 backgroundMusic.stop();
                 epochsGame.endScreen = new EndScreen(epochsGame);
                 epochsGame.setScreen(epochsGame.endScreen);
@@ -786,6 +780,7 @@
             greenScreen25.draw(batch, currentCard.rank, 0, cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 2, epochsGame.worldWidth, Align.center, true);
             typeWriter.draw(batch, currentCard.question, epochsGame.worldWidth * 0.05f, cardDefaultY - greenScreen25.getCapHeight(), epochsGame.worldWidth * 0.9f, Align.center, true);
 
+
             //reset colors
             currentCard.leftDialogue.setColor(1, 1, 1, 1);
             currentCard.rightDialogue.setColor(1, 1, 1, 1);
@@ -823,6 +818,15 @@
             iconHandler.drawIcons(batch);
             greenScreen30.draw(batch, String.valueOf(countDownYearFinish),
                 greenScreen30.getCapHeight() * 0.5f , epochsGame.worldHeight - greenScreen30.getCapHeight() * 0.9f);
+            if (currentInGameState == playingState || (currentInGameState == transitionState && previousGameState == playingState) || (currentInGameState == shuffleState && previousGameState == playingState)) {
+                //draw progress
+                greenScreen30.draw(batch, String.valueOf(gameProgress) + "%",
+                    greenScreen20.getCapHeight() * 0.5f , epochsGame.worldHeight - greenScreen20.getCapHeight() * 2.5f, epochsGame.worldWidth, Align.center, false);
+
+                //draw remaining cards
+                greenScreen20.draw(batch, "Cards: " + String.valueOf(changeCounter + 1) + "/10" ,
+                    greenScreen20.getCapHeight() * 0.5f , epochsGame.worldHeight - greenScreen20.getCapHeight() * 6.5f);
+            }
             batch.end();
 
             //disable scaling when drawing mainGame scene and some important icons
@@ -892,9 +896,8 @@
 //                cardDefaultY + cardHeight + greenScreen25.getCapHeight() * 4, epochsGame.worldWidth,
 //                Align.center, true);
 
+            //draw texts
             typeWriter.draw(batch, currentCard.question, epochsGame.worldWidth * 0.05f, cardDefaultY - greenScreen25.getCapHeight(), epochsGame.worldWidth * 0.9f, Align.center, true);
-
-
             //reset dialogues' opacity to prevent bugs
             currentCard.leftDialogue.setColor(1, 1, 1, 1);
             currentCard.rightDialogue.setColor(1, 1, 1, 1);

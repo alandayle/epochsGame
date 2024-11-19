@@ -21,19 +21,20 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MainMenuScreen implements Screen {
-    //access to epochsGame and the main assetManager
+    //shared assets to all screens
     EpochsGame epochsGame;
     AssetManager assetManager;
-
-    //viewport and camera
     Viewport viewport;
     Viewport backgroundViewport;
     Camera camera;
 
-    //textures for assets
-    TextureAtlas mainBgsLogos ,playingBgs, settingsAssets;
+    //Textures shared by gameScreen
+    TextureAtlas mainBgsLogos, playingBgs, settingsAssets;
     TextureRegion[] currentBackground;
     TextureRegion flare, title, start, settings, archives, about, bars, xButton;
+
+    //Textures specific to mainMenuScreen
+    Music backgroundMusic;
 
     //xButton properties
     float xButtonX, xButtonY, xButtonWidth, xButtonHeight;
@@ -62,9 +63,6 @@ public class MainMenuScreen implements Screen {
 
     //bars
     float barsX, barsY, barsWidth, barsHeight;
-
-    //Audio and sound effects
-    Music backgroundMusic;
 
     //drawer
     SpriteBatch batch;
@@ -287,8 +285,9 @@ public class MainMenuScreen implements Screen {
             else if (touchPosition.x >= startX && touchPosition.x <= startX + startWidth && touchPosition.y >= startY && touchPosition.y <= startY + startHeight) {
                 justClicked = true;
                 epochsGame.splashScreen.backgroundMusic.stop();
-                epochsGame.gameScreen = new GameScreen(epochsGame);
-                epochsGame.setScreen(epochsGame.gameScreen);
+                epochsGame.loadingScreen.currentLoading = epochsGame.loadingScreen.gameScreen;
+                epochsGame.setScreen(epochsGame.loadingScreen);
+                dispose();
             }
         }
     }
@@ -457,6 +456,8 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        //unload unused assets
+        assetManager.unload("packedTextures/mainBgsLogos.atlas");
+        assetManager.unload("audio/background.mp3");
     }
 }
