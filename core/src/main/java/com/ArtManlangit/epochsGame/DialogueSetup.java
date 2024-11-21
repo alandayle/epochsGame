@@ -509,7 +509,7 @@ public class DialogueSetup {
         leftCardChoice7.add(createList(0,3,4,1,4));
         rightCardChoice7.add(createList( 0,2,1,2,1));
         //add dialogue 3
-        leftCardChoice7.add(createList(0,1,0,4,1));
+        leftCardChoice7.add(createList(0,1,0,1,1));
         rightCardChoice7.add(createList(0,2,0,4,1));
         gameScreen.frontCards[6].setupDialogue(leftCard7Sprite, rightCard7Sprite, card7Qestions, 2, card7Rank, 1, dialogueSwipeLeftTrueCard7, leftCardChoice7, rightCardChoice7);
 

@@ -37,7 +37,7 @@
             guideCardsAtlas;
 
         //Texture Regions
-        TextureRegion currentBackground, backCardTextureRegion, lockCardTextureRegion, leftDialogue, rightDialogue;
+        TextureRegion currentBackground, backCardTextureRegion, lockCardTextureRegion, envIn, techIn, cultIn, milIn, medIn;
         TextureRegion[] scrollingBackground;
         float[] scrollingBackgroundX;
         TextureRegion[] frontCardTextureRegions, gameBackgroundTextureRegions, foregroundTextureRegions;
@@ -67,7 +67,7 @@
         SpriteBatch batch;
 
         //Transition color variables
-        float colorValue, leftDialogueColorValue, rightDialogueColorValue;
+        float colorValue, leftDialogueColorValue, rightDialogueColorValue, indicatorColorValue;
 
         //timer for transitions
         float timer;
@@ -184,6 +184,14 @@
             gameBackgrounds = assetManager.get("packedTextures/gameBackgrounds.atlas");
             foregroundAtlas = assetManager.get("packedTextures/foreground.atlas");
             guideCardsAtlas = assetManager.get("packedTextures/guideDialogues.atlas");
+
+
+            //setup Indicators
+            envIn = overallStatusAtlas.findRegion("environmentalIndicator");
+            techIn = overallStatusAtlas.findRegion("technologyIndicator");
+            cultIn = overallStatusAtlas.findRegion("culturalIndicator");
+            milIn = overallStatusAtlas.findRegion("militaryIndicator");
+            medIn = overallStatusAtlas.findRegion("medicineIndicator");
 
             //setup TextureRegions
             backCardTextureRegion = cards.findRegion("back");
@@ -771,18 +779,48 @@
                     switch (i) {
                         case 0:
                             iconHandler.environmentalIcon.health += addNumber;
+                            if (iconHandler.environmentalIcon.health >= 10) {
+                                iconHandler.environmentalIcon.health = 10;
+                            }
+                            if (iconHandler.environmentalIcon.health <= 0) {
+                                iconHandler.environmentalIcon.health = 0;
+                            }
                             break;
                         case 1:
                             iconHandler.technologicalIcon.health += addNumber;
+                            if (iconHandler.technologicalIcon.health >= 10) {
+                                iconHandler.technologicalIcon.health = 10;
+                            }
+                            if (iconHandler.technologicalIcon.health <= 0) {
+                                iconHandler.technologicalIcon.health = 0;
+                            }
                             break;
                         case 2:
                             iconHandler.culturalIcon.health += addNumber;
+                            if (iconHandler.culturalIcon.health >= 10) {
+                                iconHandler.culturalIcon.health = 10;
+                            }
+                            if (iconHandler.culturalIcon.health <= 0) {
+                                iconHandler.culturalIcon.health = 0;
+                            }
                             break;
                         case 3:
                             iconHandler.militaryIcon.health += addNumber;
+                            if (iconHandler.militaryIcon.health >= 10) {
+                                iconHandler.militaryIcon.health = 10;
+                            }
+                            if (iconHandler.militaryIcon.health <= 0) {
+                                iconHandler.militaryIcon.health = 0;
+                            }
                             break;
                         case 4:
                             iconHandler.medicineIcon.health += addNumber;
+                            if (iconHandler.medicineIcon.health >= 10) {
+                                iconHandler.medicineIcon.health = 10;
+                            }
+                            if (iconHandler.medicineIcon.health <= 0) {
+                                iconHandler.medicineIcon.health = 0;
+                            }
                             break;
                     }
                 }
@@ -809,18 +847,48 @@
                     switch (i) {
                         case 0:
                             iconHandler.environmentalIcon.health += addNumber;
+                            if (iconHandler.environmentalIcon.health >= 10) {
+                                iconHandler.environmentalIcon.health = 10;
+                            }
+                            if (iconHandler.environmentalIcon.health <= 0) {
+                                iconHandler.environmentalIcon.health = 0;
+                            }
                             break;
                         case 1:
                             iconHandler.technologicalIcon.health += addNumber;
+                            if (iconHandler.technologicalIcon.health >= 10) {
+                                iconHandler.technologicalIcon.health = 10;
+                            }
+                            if (iconHandler.technologicalIcon.health <= 0) {
+                                iconHandler.technologicalIcon.health = 0;
+                            }
                             break;
                         case 2:
                             iconHandler.culturalIcon.health += addNumber;
+                            if (iconHandler.culturalIcon.health >= 10) {
+                                iconHandler.culturalIcon.health = 10;
+                            }
+                            if (iconHandler.culturalIcon.health <= 0) {
+                                iconHandler.culturalIcon.health = 0;
+                            }
                             break;
                         case 3:
                             iconHandler.militaryIcon.health += addNumber;
+                            if (iconHandler.militaryIcon.health >= 10) {
+                                iconHandler.militaryIcon.health = 10;
+                            }
+                            if (iconHandler.militaryIcon.health <= 0) {
+                                iconHandler.militaryIcon.health = 0;
+                            }
                             break;
                         case 4:
                             iconHandler.medicineIcon.health += addNumber;
+                            if (iconHandler.medicineIcon.health >= 10) {
+                                iconHandler.medicineIcon.health = 10;
+                            }
+                            if (iconHandler.medicineIcon.health <= 0) {
+                                iconHandler.medicineIcon.health = 0;
+                            }
                             break;
                     }
                 }
@@ -993,6 +1061,36 @@
             //reset dialogues' opacity to prevent bugs
             currentCard.leftDialogue.setColor(1, 1, 1, 1);
             currentCard.rightDialogue.setColor(1, 1, 1, 1);
+
+
+            if(cardChoice == leftChoice) {
+                batch.setColor(1, 1, 1, leftDialogueColorValue);
+            } else if (cardChoice == rightChoice) {
+                batch.setColor(1, 1, 1, rightDialogueColorValue);
+            } else {
+                batch.setColor(0, 0, 0, 0);
+            }
+            //draw indicator
+            if (currentCard.rightChoice.get(0) != 0 || currentCard.leftChoice.get(0) != 0) {
+                batch.draw(envIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+            }
+            if (currentCard.rightChoice.get(1) != 0 || currentCard.leftChoice.get(1) != 0) {
+                batch.draw(techIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+            }
+            if (currentCard.rightChoice.get(2) != 0 || currentCard.leftChoice.get(2) != 0) {
+                batch.draw(cultIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+            }
+            if (currentCard.rightChoice.get(3) != 0 || currentCard.leftChoice.get(3) != 0) {
+                batch.draw(milIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+            }
+            if (currentCard.rightChoice.get(4) != 0 || currentCard.leftChoice.get(4) != 0) {
+                batch.draw(medIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+            }
+
+            //reset color value
+            batch.setColor(1, 1, 1, 1);
+
+
 
         }
 
