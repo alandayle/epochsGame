@@ -578,6 +578,7 @@
                 //udpate game progress
                 gameProgress = (cardCounter * 100)/80;
 
+
                 //delete the current card
                 currentCard.deleteCurrentCard();
 
@@ -587,14 +588,17 @@
                         int index2 = (int) (Math.random() * 18);
                         currentCardIndex = index2;
                         currentCard = frontCards[currentCardIndex];
+
                     } while (currentCard.questions.isEmpty());  //Late commit, updated this part because of the bug
 
                     //debug card
-//                currentCard = frontCards[11];
-
                     //pick a random dialogue
                     int dialogueIndex = (int) (Math.random() * currentCard.questions.size());
                     currentCard.updateCard(dialogueIndex);
+
+                    //debug card
+                    System.out.println(currentCard.leftChoice);
+                    System.out.println(currentCard.rightChoice);
 
                     //update current theme
                     currentTheme = currentCard.theme;
@@ -670,79 +674,161 @@
         public void updateHealth() {
             //update health based on card choice
             //add  = 1 or subtract = -1
-            int operation;
-            System.out.println(currentCard.leftChoiceTrue);
-            if (currentCard.leftChoiceTrue) {
-                if (cardChoice == leftChoice) {
-                    //add health
-                    operation = 1;
-                } else {
-                    //subtract health
-                    operation = -1;
+//            int operation;
+//            System.out.println(currentCard.leftChoiceTrue);
+
+//            if (currentCard.leftChoiceTrue) {
+//                if (cardChoice == leftChoice) {
+//                    //add health
+//                    operation = 1;
+//                } else {
+//                    //subtract health
+//                    operation = -1;
+//                }
+//            } else {
+//                if (cardChoice == leftChoice) {
+//                    //subtract health
+//                    operation = -1;
+//                } else {
+//                    //add health
+//                    operation = 1;
+//                }
+//            }
+//
+//            switch (currentTheme) {
+//                case 1:
+//                    iconHandler.environmentalIcon.health += operation;
+//                    //limit health
+//                    if (iconHandler.environmentalIcon.health >= 10) {
+//                        iconHandler.environmentalIcon.health = 10;
+//                    }
+//                    if (iconHandler.environmentalIcon.health <= 0) {
+//                        iconHandler.environmentalIcon.health = 0;
+//                    }
+//                    break;
+//                case 2:
+//                    iconHandler.technologicalIcon.health += operation;
+//                    //limit health
+//                    if (iconHandler.technologicalIcon.health >= 10) {
+//                        iconHandler.technologicalIcon.health = 10;
+//                    }
+//                    if (iconHandler.technologicalIcon.health <= 0) {
+//                        iconHandler.technologicalIcon.health = 0;
+//                    }
+//                    break;
+//                case 3:
+//                    iconHandler.culturalIcon.health += operation;
+//                    //limit health
+//                    if (iconHandler.culturalIcon.health >= 10) {
+//                        iconHandler.culturalIcon.health = 10;
+//                    }
+//                    if (iconHandler.culturalIcon.health <= 0) {
+//                        iconHandler.culturalIcon.health = 0;
+//                    }
+//                    break;
+//                case 4:
+//                    iconHandler.militaryIcon.health += operation;
+//                    //limit health
+//                    if (iconHandler.militaryIcon.health >= 10) {
+//                        iconHandler.militaryIcon.health = 10;
+//                    }
+//                    if (iconHandler.militaryIcon.health <= 0) {
+//                        iconHandler.militaryIcon.health = 0;
+//                    }
+//                    break;
+//                case 5:
+//                    iconHandler.medicineIcon.health += operation;
+//                    //limit health
+//                    if (iconHandler.medicineIcon.health >= 10) {
+//                        iconHandler.medicineIcon.health = 10;
+//                    }
+//                    if (iconHandler.medicineIcon.health <= 0) {
+//                        iconHandler.medicineIcon.health = 0;
+//                    }
+//                    break;
+//            }
+//
+            if (cardChoice == leftChoice) {
+                for (int i = 0; i < 5; i++) {
+                    int addNumber = 0;
+                    switch (currentCard.leftChoice.get(i)) {
+                        case 0:
+                            break;
+                        case 1:
+                            addNumber = 1;
+                            break;
+                        case 2:
+                            addNumber = -1;
+                            break;
+                        case 3:
+                            addNumber = 2;
+                            break;
+                        case 4:
+                            addNumber = -2;
+                            break;
+                    }
+
+                    switch (i) {
+                        case 0:
+                            iconHandler.environmentalIcon.health += addNumber;
+                            break;
+                        case 1:
+                            iconHandler.technologicalIcon.health += addNumber;
+                            break;
+                        case 2:
+                            iconHandler.culturalIcon.health += addNumber;
+                            break;
+                        case 3:
+                            iconHandler.militaryIcon.health += addNumber;
+                            break;
+                        case 4:
+                            iconHandler.medicineIcon.health += addNumber;
+                            break;
+                    }
                 }
             } else {
-                if (cardChoice == leftChoice) {
-                    //subtract health
-                    operation = -1;
-                } else {
-                    //add health
-                    operation = 1;
+                for (int i = 0; i < 5; i++) {
+                    int addNumber = 0;
+                    switch (currentCard.rightChoice.get(i)) {
+                        case 0:
+                            break;
+                        case 1:
+                            addNumber = 1;
+                            break;
+                        case 2:
+                            addNumber = -1;
+                            break;
+                        case 3:
+                            addNumber = 2;
+                            break;
+                        case 4:
+                            addNumber = -2;
+                            break;
+                    }
+
+                    switch (i) {
+                        case 0:
+                            iconHandler.environmentalIcon.health += addNumber;
+                            break;
+                        case 1:
+                            iconHandler.technologicalIcon.health += addNumber;
+                            break;
+                        case 2:
+                            iconHandler.culturalIcon.health += addNumber;
+                            break;
+                        case 3:
+                            iconHandler.militaryIcon.health += addNumber;
+                            break;
+                        case 4:
+                            iconHandler.medicineIcon.health += addNumber;
+                            break;
+                    }
                 }
+
             }
 
-            switch (currentTheme) {
-                case 1:
-                    iconHandler.environmentalIcon.health += operation;
-                    //limit health
-                    if (iconHandler.environmentalIcon.health >= 10) {
-                        iconHandler.environmentalIcon.health = 10;
-                    }
-                    if (iconHandler.environmentalIcon.health <= 0) {
-                        iconHandler.environmentalIcon.health = 0;
-                    }
-                    break;
-                case 2:
-                    iconHandler.technologicalIcon.health += operation;
-                    //limit health
-                    if (iconHandler.technologicalIcon.health >= 10) {
-                        iconHandler.technologicalIcon.health = 10;
-                    }
-                    if (iconHandler.technologicalIcon.health <= 0) {
-                        iconHandler.technologicalIcon.health = 0;
-                    }
-                    break;
-                case 3:
-                    iconHandler.culturalIcon.health += operation;
-                    //limit health
-                    if (iconHandler.culturalIcon.health >= 10) {
-                        iconHandler.culturalIcon.health = 10;
-                    }
-                    if (iconHandler.culturalIcon.health <= 0) {
-                        iconHandler.culturalIcon.health = 0;
-                    }
-                    break;
-                case 4:
-                    iconHandler.militaryIcon.health += operation;
-                    //limit health
-                    if (iconHandler.militaryIcon.health >= 10) {
-                        iconHandler.militaryIcon.health = 10;
-                    }
-                    if (iconHandler.militaryIcon.health <= 0) {
-                        iconHandler.militaryIcon.health = 0;
-                    }
-                    break;
-                case 5:
-                    iconHandler.medicineIcon.health += operation;
-                    //limit health
-                    if (iconHandler.medicineIcon.health >= 10) {
-                        iconHandler.medicineIcon.health = 10;
-                    }
-                    if (iconHandler.medicineIcon.health <= 0) {
-                        iconHandler.medicineIcon.health = 0;
-                    }
-                    break;
-            }
 
+            //compute health;
             double healthComputation = (iconHandler.medicineIcon.health + iconHandler.militaryIcon.health +
                 iconHandler.culturalIcon.health + iconHandler.environmentalIcon.health +
                 iconHandler.technologicalIcon.health) / 5f;

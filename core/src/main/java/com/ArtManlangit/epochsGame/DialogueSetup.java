@@ -3,6 +3,7 @@ package com.ArtManlangit.epochsGame;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DialogueSetup {
@@ -15,6 +16,9 @@ public class DialogueSetup {
     ArrayList<String> card1Qestions;
     String card1Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard1;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice1;
+    ArrayList<ArrayList<Integer>> rightCardChoice1;
 
     //card 2
     ArrayList<Sprite> leftCard2Sprite;
@@ -22,6 +26,9 @@ public class DialogueSetup {
     ArrayList<String> card2Qestions;
     String card2Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard2;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice2;
+    ArrayList<ArrayList<Integer>> rightCardChoice2;
 
     //card 3
     ArrayList<Sprite> leftCard3Sprite;
@@ -29,6 +36,9 @@ public class DialogueSetup {
     ArrayList<String> card3Qestions;
     String card3Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard3;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice3;
+    ArrayList<ArrayList<Integer>> rightCardChoice3;
 
     //card 4
     ArrayList<Sprite> leftCard4Sprite;
@@ -36,6 +46,9 @@ public class DialogueSetup {
     ArrayList<String> card4Qestions;
     String card4Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard4;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice4;
+    ArrayList<ArrayList<Integer>> rightCardChoice4;
 
 
     //card 5
@@ -44,6 +57,9 @@ public class DialogueSetup {
     ArrayList<String> card5Qestions;
     String card5Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard5;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice5;
+    ArrayList<ArrayList<Integer>> rightCardChoice5;
 
     //card 6
     ArrayList<Sprite> leftCard6Sprite;
@@ -51,6 +67,9 @@ public class DialogueSetup {
     ArrayList<String> card6Qestions;
     String card6Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard6;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice6;
+    ArrayList<ArrayList<Integer>> rightCardChoice6;
 
     //card 7
     ArrayList<Sprite> leftCard7Sprite;
@@ -58,6 +77,9 @@ public class DialogueSetup {
     ArrayList<String> card7Qestions;
     String card7Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard7;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice7;
+    ArrayList<ArrayList<Integer>> rightCardChoice7;
 
     //card 8
     ArrayList<Sprite> leftCard8Sprite;
@@ -65,6 +87,9 @@ public class DialogueSetup {
     ArrayList<String> card8Qestions;
     String card8Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard8;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice8;
+    ArrayList<ArrayList<Integer>> rightCardChoice8;
 
     //card 9
     ArrayList<Sprite> leftCard9Sprite;
@@ -72,6 +97,9 @@ public class DialogueSetup {
     ArrayList<String> card9Qestions;
     String card9Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard9;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice9;
+    ArrayList<ArrayList<Integer>> rightCardChoice9;
 
     //card 10
     ArrayList<Sprite> leftCard10Sprite;
@@ -79,6 +107,9 @@ public class DialogueSetup {
     ArrayList<String> card10Qestions;
     String card10Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard10;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice10;
+    ArrayList<ArrayList<Integer>> rightCardChoice10;
 
     //card 11
     ArrayList<Sprite> leftCard11Sprite;
@@ -86,6 +117,9 @@ public class DialogueSetup {
     ArrayList<String> card11Qestions;
     String card11Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard11;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice11;
+    ArrayList<ArrayList<Integer>> rightCardChoice11;
 
     //card 12
     ArrayList<Sprite> leftCard12Sprite;
@@ -93,6 +127,9 @@ public class DialogueSetup {
     ArrayList<String> card12Qestions;
     String card12Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard12;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice12;
+    ArrayList<ArrayList<Integer>> rightCardChoice12;
 
     //card 13
     ArrayList<Sprite> leftCard13Sprite;
@@ -100,6 +137,9 @@ public class DialogueSetup {
     ArrayList<String> card13Qestions;
     String card13Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard13;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice13;
+    ArrayList<ArrayList<Integer>> rightCardChoice13;
 
     //card 14
     ArrayList<Sprite> leftCard14Sprite;
@@ -107,6 +147,9 @@ public class DialogueSetup {
     ArrayList<String> card14Qestions;
     String card14Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard14;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice14;
+    ArrayList<ArrayList<Integer>> rightCardChoice14;
 
     //card 15
     ArrayList<Sprite> leftCard15Sprite;
@@ -114,6 +157,9 @@ public class DialogueSetup {
     ArrayList<String> card15Qestions;
     String card15Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard15;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice15;
+    ArrayList<ArrayList<Integer>> rightCardChoice15;
 
     //card 16
     ArrayList<Sprite> leftCard16Sprite;
@@ -121,6 +167,9 @@ public class DialogueSetup {
     ArrayList<String> card16Qestions;
     String card16Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard16;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice16;
+    ArrayList<ArrayList<Integer>> rightCardChoice16;
 
 
     //card 17
@@ -129,6 +178,9 @@ public class DialogueSetup {
     ArrayList<String> card17Qestions;
     String card17Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard17;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice17;
+    ArrayList<ArrayList<Integer>> rightCardChoice17;
 
 
     //card 18
@@ -137,6 +189,9 @@ public class DialogueSetup {
     ArrayList<String> card18Qestions;
     String card18Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard18;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice18;
+    ArrayList<ArrayList<Integer>> rightCardChoice18;
 
     //card 19
     ArrayList<Sprite> leftCard19Sprite;
@@ -144,6 +199,9 @@ public class DialogueSetup {
     ArrayList<String> card19Qestions;
     String card19Rank;
     ArrayList<Boolean> dialogueSwipeLeftTrueCard19;
+    //new implementation
+    ArrayList<ArrayList<Integer>> leftCardChoice19;
+    ArrayList<ArrayList<Integer>> rightCardChoice19;
 
     //card 20
     ArrayList<Sprite> leftCard20Sprite;
@@ -156,6 +214,15 @@ public class DialogueSetup {
     //constructor
     public DialogueSetup(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
+    }
+
+    // Helper method to initialize a list with repeated values
+    private ArrayList<Integer> createList(int... values) {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int value : values) {
+            list.add(value);
+        }
+        return list;
     }
 
     public void setupDialogues() {
@@ -184,9 +251,25 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard1.add(true);
         dialogueSwipeLeftTrueCard1.add(false);
 
-        gameScreen.frontCards[0].setupDialogue(leftCard1Sprite, rightCard1Sprite, card1Qestions, 1, card1Rank, 1, dialogueSwipeLeftTrueCard1);
-
-
+        //new implementation
+        leftCardChoice1 = new ArrayList<>();
+        rightCardChoice1 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice1.add(createList(1, 4, 1, 2, 1));
+        rightCardChoice1.add(createList(4, 1, 4, 1, 2));
+        //add dialogue 2
+        leftCardChoice1.add(createList(1, 2, 1, 4, 1));
+        rightCardChoice1.add(createList(4, 1, 1, 2, 1));
+        //add dialogue 3
+        leftCardChoice1.add(createList(1, 4, 1, 0, 1));
+        rightCardChoice1.add(createList(2, 4, 4, 0, 2));
+        //add dialogue 4
+        leftCardChoice1.add(createList(1, 4, 1, 0, 1));
+        rightCardChoice1.add(createList(4, 3, 1, 0, 1));
+        //add dialogue 5
+        leftCardChoice1.add(createList(2, 1, 0, 1, 4));
+        rightCardChoice1.add(createList(1, 1, 0, 0, 1));
+        gameScreen.frontCards[0].setupDialogue(leftCard1Sprite, rightCard1Sprite, card1Qestions, 1, card1Rank, 1, dialogueSwipeLeftTrueCard1, leftCardChoice1, rightCardChoice1);
 
         //card 2
         leftCard2Sprite = new ArrayList<>();
@@ -210,7 +293,26 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard2.add(true);
         dialogueSwipeLeftTrueCard2.add(true);
         dialogueSwipeLeftTrueCard2.add(false);
-        gameScreen.frontCards[1].setupDialogue(leftCard2Sprite, rightCard2Sprite, card2Qestions, 1, card2Rank, 1, dialogueSwipeLeftTrueCard2);
+        //new implementation
+        leftCardChoice2 = new ArrayList<>();
+        rightCardChoice2 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice2.add(createList(4, 4, 0, 0, 1));
+        rightCardChoice2.add(createList(1, 1, 0, 0, 1));
+        //add dialogue 2
+        leftCardChoice2.add(createList(1, 0, 0, 0, 1));
+        rightCardChoice2.add(createList(2, 0, 0, 0, 1));
+        //add dialogue 3
+        leftCardChoice2.add(createList(1, 4, 0, 2, 1));
+        rightCardChoice2.add(createList(4, 1, 0, 1, 1));
+        //add dialogue 4
+        leftCardChoice2.add(createList(1, 1, 1, 0, 1));
+        rightCardChoice2.add(createList(2, 4, 1, 0, 1));
+        //add dialogue 5
+        leftCardChoice2.add(createList(4, 0, 0, 0, 0));
+        rightCardChoice2.add(createList(1, 0, 0, 0, 0));
+        gameScreen.frontCards[1].setupDialogue(leftCard2Sprite, rightCard2Sprite, card2Qestions, 1, card2Rank, 1, dialogueSwipeLeftTrueCard2, leftCardChoice2, rightCardChoice2);
+
 
 
         //card 3
@@ -237,8 +339,28 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard3.add(true);
         dialogueSwipeLeftTrueCard3.add(true);
         dialogueSwipeLeftTrueCard3.add(true);
-
-        gameScreen.frontCards[2].setupDialogue(leftCard3Sprite, rightCard3Sprite, card3Qestions, 1, card3Rank, 2, dialogueSwipeLeftTrueCard3);
+        //new implementation
+        leftCardChoice3 = new ArrayList<>();
+        rightCardChoice3 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice3.add(createList(2, 4, 1, 1, 3));
+        rightCardChoice3.add(createList(4, 3, 2, 4, 4));
+        //add dialogue 2
+        leftCardChoice3.add(createList(1, 1, 0, 0, 1));
+        rightCardChoice3.add(createList(4, 4, 0, 0, 2));
+        //add dialogue 3
+        leftCardChoice3.add(createList(2, 1, 4, 0, 4));
+        rightCardChoice3.add(createList(1, 4, 1, 0, 1));
+        //add dialogue 4
+        leftCardChoice3.add(createList(1, 4, 1, 1, 1));
+        rightCardChoice3.add(createList(4, 1, 1, 1, 1));
+        //add dialogue 5
+        leftCardChoice3.add(createList(1, 1, 4, 2, 4));
+        rightCardChoice3.add(createList(4, 1, 4, 2, 4));
+        //add dialogue 6
+        leftCardChoice3.add(createList(1, 1, 1, 4, 1));
+        rightCardChoice3.add(createList(2, 3, 4, 4, 2));
+        gameScreen.frontCards[2].setupDialogue(leftCard3Sprite, rightCard3Sprite, card3Qestions, 1, card3Rank, 2, dialogueSwipeLeftTrueCard3, leftCardChoice3, rightCardChoice3);
 
         //card4
         leftCard4Sprite = new ArrayList<>();
@@ -264,8 +386,28 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard4.add(false);
         dialogueSwipeLeftTrueCard4.add(true);
         dialogueSwipeLeftTrueCard4.add(false);
-
-        gameScreen.frontCards[3].setupDialogue(leftCard4Sprite, rightCard4Sprite, card4Qestions, 2, card4Rank, 2, dialogueSwipeLeftTrueCard4);
+        //new implementation
+        leftCardChoice4 = new ArrayList<>();
+        rightCardChoice4 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice4.add(createList(0,3,4,3,2));
+        rightCardChoice4.add(createList(0,2,1,4,0));
+        //add dialogue 2
+        leftCardChoice4.add(createList(1,3,1,4,1));
+        rightCardChoice4.add(createList(4,4,2,0,3));
+        //add dialogue 3
+        leftCardChoice4.add(createList(4,3,0,1,1));
+        rightCardChoice4.add(createList(1,2,0,4,4));
+        //add dialogue 4
+        leftCardChoice4.add(createList(4,3,0,3,4));
+        rightCardChoice4.add(createList(1,2,0,1,1));
+        //add dialogue 5
+        leftCardChoice4.add(createList(1,3,0,1,1));
+        rightCardChoice4.add(createList(1,1,0,1,1));
+        //add dialogue 6
+        leftCardChoice4.add(createList(0,3,0,1,4));
+        rightCardChoice4.add(createList(0,2,0,4,1));
+        gameScreen.frontCards[3].setupDialogue(leftCard4Sprite, rightCard4Sprite, card4Qestions, 2, card4Rank, 2, dialogueSwipeLeftTrueCard4, leftCardChoice4, rightCardChoice4);
 
         //card 5
         leftCard5Sprite = new ArrayList<>();
@@ -289,8 +431,26 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard5.add(true);
         dialogueSwipeLeftTrueCard5.add(true);
         dialogueSwipeLeftTrueCard5.add(false);
+        //new implementation
+        leftCardChoice5 = new ArrayList<>();
+        rightCardChoice5 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice5.add(createList(0,3,0,3,4));
+        rightCardChoice5.add(createList(0,4,0,2,1));
+        //add dialogue 2
+        leftCardChoice5.add(createList(0,1,0,1,1));
+        rightCardChoice5.add(createList(0,4,0,2,1));
+        //add dialogue 3
+        leftCardChoice5.add(createList(0,4,0,4,1));
+        rightCardChoice5.add(createList(0,3,0,1,4));
+        //add dialogue 4
+        leftCardChoice5.add(createList(0,3,2,3,4));
+        rightCardChoice5.add(createList(0,4,1,4,1));
+        //add dialogue 5
+        leftCardChoice5.add(createList(0,1,0,0,0));
+        rightCardChoice5.add(createList(0,4,0,0,0));
+        gameScreen.frontCards[4].setupDialogue(leftCard5Sprite, rightCard5Sprite, card5Qestions, 2, card5Rank, 1, dialogueSwipeLeftTrueCard5, leftCardChoice5, rightCardChoice5);
 
-        gameScreen.frontCards[4].setupDialogue(leftCard5Sprite, rightCard5Sprite, card5Qestions, 2, card5Rank, 1, dialogueSwipeLeftTrueCard5);
 
         //card 6
         leftCard6Sprite = new ArrayList<>();
@@ -308,9 +468,20 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard6 = new ArrayList<>();
         dialogueSwipeLeftTrueCard6.add(true);
         dialogueSwipeLeftTrueCard6.add(false);
-        gameScreen.frontCards[5].setupDialogue(leftCard6Sprite, rightCard6Sprite, card6Qestions, 2, card6Rank, 1, dialogueSwipeLeftTrueCard6);
+        //new implementation
+        leftCardChoice6 = new ArrayList<>();
+        rightCardChoice6 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice6.add(createList(2,3,4,4,4));
+        rightCardChoice6.add(createList(1,4,1,1,1));
+        //add dialogue 2
+        leftCardChoice6.add(createList(0,4,0,2,4));
+        rightCardChoice6.add(createList(0,3,0,1,1));
+        gameScreen.frontCards[5].setupDialogue(leftCard6Sprite, rightCard6Sprite, card6Qestions, 2, card6Rank, 1, dialogueSwipeLeftTrueCard6, leftCardChoice6, rightCardChoice6);
 
-//            //card 7
+
+
+        //card 7
         leftCard7Sprite = new ArrayList<>();
         rightCard7Sprite = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -328,9 +499,22 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard7.add(false);
         dialogueSwipeLeftTrueCard7.add(false);
         dialogueSwipeLeftTrueCard7.add(false);
-        gameScreen.frontCards[6].setupDialogue(leftCard7Sprite, rightCard7Sprite, card7Qestions, 2, card7Rank, 1, dialogueSwipeLeftTrueCard7);
+        //new implementation
+        leftCardChoice7 = new ArrayList<>();
+        rightCardChoice7 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice7.add(createList(0,4,4,0,0));
+        rightCardChoice7.add(createList(0,3,0,2,0));
+        //add dialogue 2
+        leftCardChoice7.add(createList(0,3,4,1,4));
+        rightCardChoice7.add(createList( 0,2,1,2,1));
+        //add dialogue 3
+        leftCardChoice7.add(createList(0,1,0,4,1));
+        rightCardChoice7.add(createList(0,2,0,4,1));
+        gameScreen.frontCards[6].setupDialogue(leftCard7Sprite, rightCard7Sprite, card7Qestions, 2, card7Rank, 1, dialogueSwipeLeftTrueCard7, leftCardChoice7, rightCardChoice7);
 
-//            //card 8
+
+        //card 8
         leftCard8Sprite = new ArrayList<>();
         rightCard8Sprite = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
@@ -350,9 +534,25 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard8.add(false);
         dialogueSwipeLeftTrueCard8.add(false);
         dialogueSwipeLeftTrueCard8.add(false);
-        gameScreen.frontCards[7].setupDialogue(leftCard8Sprite, rightCard8Sprite, card8Qestions, 3, card8Rank, 4, dialogueSwipeLeftTrueCard8);
+        //new implementation
+        leftCardChoice8 = new ArrayList<>();
+        rightCardChoice8 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice8.add(createList(0,4,3,4,4));
+        rightCardChoice8.add(createList(0,1,4,1,1));
+        //add dialogue 2
+        leftCardChoice8.add(createList(1,1,4,1,1));
+        rightCardChoice8.add(createList(1,1,3,1,1));
+        //add dialogue 3
+        leftCardChoice8.add(createList(0,0,4,0,0));
+        rightCardChoice8.add(createList(0,0,3,0,0));
+        //add dialogue 4
+        leftCardChoice8.add(createList(1,1,1,1,1));
+        rightCardChoice8.add(createList(2,4,3,2,4));
+        gameScreen.frontCards[7].setupDialogue(leftCard8Sprite, rightCard8Sprite, card8Qestions, 3, card8Rank, 4, dialogueSwipeLeftTrueCard8, leftCardChoice8, rightCardChoice8);
 
-//            //card 9
+
+            //card 9
         leftCard9Sprite = new ArrayList<>();
         rightCard9Sprite = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
@@ -372,7 +572,24 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard9.add(false);
         dialogueSwipeLeftTrueCard9.add(false);
         dialogueSwipeLeftTrueCard9.add(false);
-        gameScreen.frontCards[8].setupDialogue(leftCard9Sprite, rightCard9Sprite, card9Qestions, 3, card9Rank, 1, dialogueSwipeLeftTrueCard9);
+        //new implementation
+        leftCardChoice9 = new ArrayList<>();
+        rightCardChoice9 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice9.add(createList(0,0,4,0,0));
+        rightCardChoice9.add(createList(0,0,3,0,0));
+        //add dialogue 2
+        leftCardChoice9.add(createList(0,0,4,0,0));
+        rightCardChoice9.add(createList(0,0,1,0,0));
+        //add dialogue 3
+        leftCardChoice9.add(createList(1,1,4,1,1));
+        rightCardChoice9.add(createList(2,2,3,4,4));
+        //add dialogue 4
+        leftCardChoice9.add(createList(0,0,1,0,0));
+        rightCardChoice9.add(createList(0,0,3,0,0));
+        gameScreen.frontCards[8].setupDialogue(leftCard9Sprite, rightCard9Sprite, card9Qestions, 3, card9Rank, 1, dialogueSwipeLeftTrueCard9, leftCardChoice9, rightCardChoice9);
+
+
 
 //            //card 10
         leftCard10Sprite = new ArrayList<>();
@@ -394,7 +611,23 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard10.add(false);
         dialogueSwipeLeftTrueCard10.add(true);
         dialogueSwipeLeftTrueCard10.add(true);
-        gameScreen.frontCards[9].setupDialogue(leftCard10Sprite, rightCard10Sprite, card10Qestions, 3, card10Rank, 1, dialogueSwipeLeftTrueCard10);
+        //new implementation
+        leftCardChoice10 = new ArrayList<>();
+        rightCardChoice10 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice10.add(createList(4,2,3,4,4));
+        rightCardChoice10.add(createList(1,1,1,1,1));
+        //add dialogue 2
+        leftCardChoice10.add(createList(2,4,1,4,2));
+        rightCardChoice10.add(createList(4,4,3,2,2));
+        //add dialogue 3
+        leftCardChoice10.add(createList(0,0,1,0,0));
+        rightCardChoice10.add(createList(0,0,3,0,0));
+        //add dialogue 4
+        leftCardChoice10.add(createList(0,0,2,0,0));
+        rightCardChoice10.add(createList(0,0,2,0,0));
+        gameScreen.frontCards[9].setupDialogue(leftCard10Sprite, rightCard10Sprite, card10Qestions, 3, card10Rank, 1, dialogueSwipeLeftTrueCard10, leftCardChoice10, rightCardChoice10);
+
 
 //            //card 11
         leftCard11Sprite = new ArrayList<>();
@@ -416,8 +649,23 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard11.add(true);
         dialogueSwipeLeftTrueCard11.add(false);
         dialogueSwipeLeftTrueCard11.add(true);
+        //new implementation
+        leftCardChoice11 = new ArrayList<>();
+        rightCardChoice11 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice11.add(createList(2,2,3,4,4));
+        rightCardChoice11.add(createList(1,1,4,1,1));
+        //add dialogue 2
+        leftCardChoice11.add(createList(0,1,3,1,1));
+        rightCardChoice11.add(createList(0,1,1,1,1));
+        //add dialogue 3
+        leftCardChoice11.add(createList(0,0,4,0,0));
+        rightCardChoice11.add(createList(0,0,1,0,0));
+        //add dialogue 4
+        leftCardChoice11.add(createList(0,0,1,0,0));
+        rightCardChoice11.add(createList(0,0,1,0,0));
 
-        gameScreen.frontCards[10].setupDialogue(leftCard11Sprite, rightCard11Sprite, card11Qestions, 3, card11Rank, 1, dialogueSwipeLeftTrueCard11);
+        gameScreen.frontCards[10].setupDialogue(leftCard11Sprite, rightCard11Sprite, card11Qestions, 3, card11Rank, 1, dialogueSwipeLeftTrueCard11, leftCardChoice11, rightCardChoice11);
 
 //            //card 12
         leftCard12Sprite = new ArrayList<>();
@@ -439,7 +687,24 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard12.add(false);
         dialogueSwipeLeftTrueCard12.add(true);
         dialogueSwipeLeftTrueCard12.add(true);
-        gameScreen.frontCards[11].setupDialogue(leftCard12Sprite, rightCard12Sprite, card12Qestions, 4, card12Rank, 1, dialogueSwipeLeftTrueCard12);
+        //new implementation
+        leftCardChoice12 = new ArrayList<>();
+        rightCardChoice12 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice12.add(createList(4,1,4,3,2));
+        rightCardChoice12.add(createList(1,4,1,2,1));
+        //add dialogue 2
+        leftCardChoice12.add(createList(0,4,0,4,0));
+        rightCardChoice12.add(createList(0,1,0,3,0));
+        //add dialogue 3
+        leftCardChoice12.add(createList(2,1,4,3,2));
+        rightCardChoice12.add(createList( 1,4,1,4,1));
+        //add dialogue 4
+        leftCardChoice12.add(createList(0,0,1,3,1));
+        rightCardChoice12.add(createList( 0,0,4,4,4));
+        gameScreen.frontCards[11].setupDialogue(leftCard12Sprite, rightCard12Sprite, card12Qestions, 4, card12Rank, 1, dialogueSwipeLeftTrueCard12,leftCardChoice12, rightCardChoice12);
+
+
 
 //            //card 13
         leftCard13Sprite = new ArrayList<>();
@@ -461,7 +726,24 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard13.add(true);
         dialogueSwipeLeftTrueCard13.add(true);
         dialogueSwipeLeftTrueCard13.add(false);
-        gameScreen.frontCards[12].setupDialogue(leftCard13Sprite, rightCard13Sprite, card13Qestions, 4, card13Rank, 1, dialogueSwipeLeftTrueCard13);
+        //new implementation
+        leftCardChoice13 = new ArrayList<>();
+        rightCardChoice13 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice13.add(createList(0,2,1,4,1));
+        rightCardChoice13.add(createList(0,1,4,3,2));
+        //add dialogue 2
+        leftCardChoice13.add(createList(4,1,2,3,4));
+        rightCardChoice13.add(createList(2,1,4,1,2));
+        //add dialogue 3
+        leftCardChoice13.add(createList(1,2,1,4,1));
+        rightCardChoice13.add(createList(2,1,4,3,2));
+        //add dialogue 4
+        leftCardChoice13.add(createList(0,0,2,3,2));
+        rightCardChoice13.add(createList(0,0,1,4,1));
+
+        gameScreen.frontCards[12].setupDialogue(leftCard13Sprite, rightCard13Sprite, card13Qestions, 4, card13Rank, 1, dialogueSwipeLeftTrueCard13, leftCardChoice13, rightCardChoice13);
+
 
 //            //card 14
         leftCard14Sprite = new ArrayList<>();
@@ -483,7 +765,25 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard14.add(false);
         dialogueSwipeLeftTrueCard14.add(false);
         dialogueSwipeLeftTrueCard14.add(true);
-        gameScreen.frontCards[13].setupDialogue(leftCard14Sprite, rightCard14Sprite, card14Qestions, 4, card14Rank, 1, dialogueSwipeLeftTrueCard14);
+        //new implementation
+        leftCardChoice14 = new ArrayList<>();
+        rightCardChoice14 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice14.add(createList(2,1,4,3,2));
+        rightCardChoice14.add(createList(1,4,1,4,1));
+        //add dialogue 2
+        leftCardChoice14.add(createList(2,1,4,3,2));
+        rightCardChoice14.add(createList(1,4,1,4,1));
+        //add dialogue 3
+        leftCardChoice14.add(createList(0,1,0,3,1));
+        rightCardChoice14.add(createList(0,4,0,2,4));
+        //add dialogue 4
+        leftCardChoice14.add(createList(1,4,1,4,1));
+        rightCardChoice14.add(createList(2,1,4,3,2));
+        gameScreen.frontCards[13].setupDialogue(leftCard14Sprite, rightCard14Sprite, card14Qestions, 4, card14Rank, 1, dialogueSwipeLeftTrueCard14, leftCardChoice14, rightCardChoice14);
+
+
+
 
 //            //card 15
         leftCard15Sprite = new ArrayList<>();
@@ -506,7 +806,25 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard15.add(true);
         dialogueSwipeLeftTrueCard15.add(false);
 
-        gameScreen.frontCards[14].setupDialogue(leftCard15Sprite, rightCard15Sprite, card15Qestions, 4, card15Rank, 1, dialogueSwipeLeftTrueCard15);
+        //new implementation
+        leftCardChoice15 = new ArrayList<>();
+        rightCardChoice15 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice15.add(createList(4,4,4,4,3));
+        rightCardChoice15.add(createList(2,2,2,2,1));
+        //add dialogue 1
+        leftCardChoice15.add(createList(2,3,2,3,2));
+        rightCardChoice15.add(createList(1,4,1,4,1));
+        //add dialogue 1
+        leftCardChoice15.add(createList(0,0,0,1,0));
+        rightCardChoice15.add(createList(0,0,0,3,0));
+        //add dialogue 1
+        leftCardChoice15.add(createList(4,4,4,4,4));
+        rightCardChoice15.add(createList(2,1,4,3,2));
+
+        gameScreen.frontCards[14].setupDialogue(leftCard15Sprite, rightCard15Sprite, card15Qestions, 4, card15Rank, 1, dialogueSwipeLeftTrueCard15, leftCardChoice15, rightCardChoice15);
+
+
 
 //            //card 16
         leftCard16Sprite = new ArrayList<>();
@@ -536,7 +854,38 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard16.add(true);
         dialogueSwipeLeftTrueCard16.add(false);
         dialogueSwipeLeftTrueCard16.add(false);
-        gameScreen.frontCards[15].setupDialogue(leftCard16Sprite, rightCard16Sprite, card16Qestions, 5, card16Rank, 1, dialogueSwipeLeftTrueCard16);
+        //new implementation
+        leftCardChoice16 = new ArrayList<>();
+        rightCardChoice16 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice16.add(createList(1,4,1,2,3));
+        rightCardChoice16.add(createList(2,1,4,1,2));
+        //add dialogue 2
+        leftCardChoice16.add(createList(0,0,0,0,4));
+        rightCardChoice16.add(createList(0,0,0,0,3));
+        //add dialogue 3
+        leftCardChoice16.add(createList(0,1,0,0,4));
+        rightCardChoice16.add(createList(0,4,0,0,3));
+        //add dialogue 4
+        leftCardChoice16.add(createList(2,1,4,1,2));
+        rightCardChoice16.add(createList(1,4,1,2,3));
+        //add dialogue 5
+        leftCardChoice16.add(createList(4,1,4,1,2));
+        rightCardChoice16.add(createList(1,4,1,2,3));
+        //add dialogue 6
+        leftCardChoice16.add(createList(2,1,4,1,3));
+        rightCardChoice16.add(createList(1,4,1,4,4));
+        //add dialogue 7
+        leftCardChoice16.add(createList(2,1,4,1,2));
+        rightCardChoice16.add(createList(1,4,1,2,3));
+        //add dialogue 8
+        leftCardChoice16.add(createList(0,1,4,1,2));
+        rightCardChoice16.add(createList(0,2,1,4,3));
+
+
+        gameScreen.frontCards[15].setupDialogue(leftCard16Sprite, rightCard16Sprite, card16Qestions, 5, card16Rank, 1, dialogueSwipeLeftTrueCard16, leftCardChoice16, rightCardChoice16);
+
+
 
         //card 17
         leftCard17Sprite = new ArrayList<>();
@@ -558,7 +907,24 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard17.add(false);
         dialogueSwipeLeftTrueCard17.add(false);
         dialogueSwipeLeftTrueCard17.add(false);
-        gameScreen.frontCards[16].setupDialogue(leftCard17Sprite, rightCard17Sprite, card17Qestions, 5, card17Rank, 2, dialogueSwipeLeftTrueCard17);
+        //new implementation
+        leftCardChoice17 = new ArrayList<>();
+        rightCardChoice17 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice17.add(createList(1,1,1,1,1));
+        rightCardChoice17.add(createList(2,4,2,4,3));
+        //add dialogue 2
+        leftCardChoice17.add(createList(1,1,1,1,4));
+        rightCardChoice17.add(createList(4,4,4,4,3));
+        //add dialogue 3
+        leftCardChoice17.add(createList(0,0,0,0,4));
+        rightCardChoice17.add(createList(0,0,0,0,3));
+        //add dialogue 4
+        leftCardChoice17.add(createList(0,0,4,0,4));
+        rightCardChoice17.add(createList(0,0,1,0,3));
+        gameScreen.frontCards[16].setupDialogue(leftCard17Sprite, rightCard17Sprite, card17Qestions, 5, card17Rank, 2, dialogueSwipeLeftTrueCard17, leftCardChoice17, rightCardChoice17);
+
+
 
         //card 18
         leftCard18Sprite = new ArrayList<>();
@@ -580,7 +946,25 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard18.add(false);
         dialogueSwipeLeftTrueCard18.add(true);
         dialogueSwipeLeftTrueCard18.add(true);
-        gameScreen.frontCards[17].setupDialogue(leftCard18Sprite, rightCard18Sprite, card18Qestions, 5, card18Rank, 1, dialogueSwipeLeftTrueCard18);
+        //new implementation
+        leftCardChoice18 = new ArrayList<>();
+        rightCardChoice18 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice18.add(createList(1,1,1,1,4));
+        rightCardChoice18.add(createList(2,1,4,2,3));
+        //add dialogue 2
+        leftCardChoice18.add(createList(0,0,0,0,4));
+        rightCardChoice18.add(createList( 0,0,0,0,3));
+        //add dialogue 3
+        leftCardChoice18.add(createList(4,4,4,4,3));
+        rightCardChoice18.add(createList(1,1,1,1,4));
+        //add dialogue 4
+        leftCardChoice18.add(createList(1,2,1,2,3));
+        rightCardChoice18.add(createList(2,1,4,1,4));
+        gameScreen.frontCards[17].setupDialogue(leftCard18Sprite, rightCard18Sprite, card18Qestions, 5, card18Rank, 1, dialogueSwipeLeftTrueCard18, leftCardChoice18, rightCardChoice18);
+
+        System.out.println(leftCardChoice18);
+        System.out.println(rightCardChoice18);
 
         //card 19
         leftCard19Sprite = new ArrayList<>();
@@ -604,6 +988,24 @@ public class DialogueSetup {
         dialogueSwipeLeftTrueCard19.add(true);
         dialogueSwipeLeftTrueCard19.add(true);
         dialogueSwipeLeftTrueCard19.add(true);
-        gameScreen.frontCards[18].setupDialogue(leftCard19Sprite, rightCard19Sprite, card19Qestions, 5, card19Rank, 1, dialogueSwipeLeftTrueCard19);
+        //new implementation
+        leftCardChoice19 = new ArrayList<>();
+        rightCardChoice19 = new ArrayList<>();
+        //add dialogue 1
+        leftCardChoice19.add(createList());
+        rightCardChoice19.add(createList());
+        //add dialogue 2
+        leftCardChoice19.add(createList());
+        rightCardChoice19.add(createList());
+        //add dialogue 3
+        leftCardChoice19.add(createList());
+        rightCardChoice19.add(createList());
+        //add dialogue 4
+        leftCardChoice19.add(createList());
+        rightCardChoice19.add(createList());
+        //add dialogue 5
+        leftCardChoice19.add(createList());
+        rightCardChoice19.add(createList());
+        gameScreen.frontCards[18].setupDialogue(leftCard19Sprite, rightCard19Sprite, card19Qestions, 5, card19Rank, 1, dialogueSwipeLeftTrueCard19, leftCardChoice19, rightCardChoice19);
     }
 }

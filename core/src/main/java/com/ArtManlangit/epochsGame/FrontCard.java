@@ -21,18 +21,30 @@ public class FrontCard extends Card{
     ArrayList<Boolean> dialogueSwipeLeftTrue;
     boolean leftChoiceTrue;
 
+    //new Implementation
+    ArrayList<ArrayList<Integer>> leftChoices;
+    ArrayList<ArrayList<Integer>> rightChoices;
+    ArrayList<Integer> leftChoice;
+    ArrayList<Integer> rightChoice;
+
     public FrontCard(TextureRegion image, float xPosition, float yPosition, float width, float height) {
         super(image, xPosition, yPosition, width, height);
         this.setX(xPosition);
         this.setY(yPosition);
     }
 
-    public void setupDialogue(ArrayList<Sprite> leftDialogues, ArrayList<Sprite> rightDialogues, ArrayList<String> questions, int theme, String rank, int maxNumberOfTimes, ArrayList<Boolean> dialogueSwipeLeftTrue) {
+    public void setupDialogue(ArrayList<Sprite> leftDialogues, ArrayList<Sprite> rightDialogues, ArrayList<String> questions, int theme, String rank, int maxNumberOfTimes, ArrayList<Boolean> dialogueSwipeLeftTrue, ArrayList<ArrayList<Integer>> leftChoices, ArrayList<ArrayList<Integer>> rightChoices) {
         //initialize array
         this.leftDialogues = new ArrayList<>();
         this.rightDialogues = new ArrayList<>();
         this.questions = new ArrayList<>();
         this.dialogueSwipeLeftTrue = new ArrayList<>();
+
+        //new implementation
+        this.leftChoices = new ArrayList<>();
+        this.rightChoices = new ArrayList<>();
+        this.leftChoices.addAll(leftChoices);
+        this.rightChoices.addAll(rightChoices);
 
         //copy array of dialogues and booleans
         this.leftDialogues.addAll(leftDialogues);
@@ -79,6 +91,11 @@ public class FrontCard extends Card{
         leftDialogues.remove(leftDialogue);
         rightDialogues.remove(rightDialogue);
         dialogueSwipeLeftTrue.remove(leftChoiceTrue);
+
+        //new implementation
+        rightChoices.remove(rightChoice);
+        leftChoices.remove(leftChoice);
+
     }
 
     public void updateCard(int index) {
@@ -86,6 +103,10 @@ public class FrontCard extends Card{
         leftDialogue = leftDialogues.get(index);
         rightDialogue = rightDialogues.get(index);
         leftChoiceTrue = dialogueSwipeLeftTrue.get(index);
+
+        //new implemenetation
+        rightChoice = rightChoices.get(index);
+        leftChoice = leftChoices.get(index);
     }
 
 

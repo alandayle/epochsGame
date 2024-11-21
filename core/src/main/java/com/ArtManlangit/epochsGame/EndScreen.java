@@ -160,7 +160,9 @@ public class EndScreen implements Screen {
         ignore.add(true);
         ignore.add(true);
         ignore.add(true);
-        card.setupDialogue(leftCardSprite, rightCardSprite, cardQuestions, 5, rank, 1, ignore);
+        ArrayList<ArrayList<Integer>> leftNull = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> rightNull = new ArrayList<>();
+        card.setupDialogue(leftCardSprite, rightCardSprite, cardQuestions, 5, rank, 1, ignore, leftNull, rightNull);
     }
 
     public void setupCardProperties() {

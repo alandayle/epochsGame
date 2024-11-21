@@ -76,6 +76,9 @@
             //load all assets
 //            loadAssets();
 
+            //debug
+            currentLoading = gameScreen;
+
             //testing new loading
             loadScreenAssets();
         }
@@ -93,6 +96,9 @@
                 epochsGame.endScreen = new EndScreen(epochsGame);
                 epochsGame.setScreen(epochsGame.endScreen);
             }
+
+
+
 
 
 //            mainMenu screen
@@ -369,9 +375,6 @@
             greenScreen20.fontFileName = "fonts/typewcond.otf";
             greenScreen20.fontParameters.size = 20;
             assetManager.load("Greenscr20.ttf", BitmapFont.class, greenScreen20);
-
-
-
         }
 
         @Override
@@ -392,7 +395,7 @@
                 } else if (currentLoading == gameScreen) {
                     loadingText = "Preparing the game";
                 } else if (currentLoading == endScreen) {
-                    loadingText = "Checking world status";
+                    loadingText = "Analyzing your decisions";
                 }
                 timerNext += delta;
                 if (timerNext >= launchDelay) {
@@ -400,6 +403,7 @@
 //                    epochsGame.setScreen(epochsGame.splashScreen);
                     debug();
                     dispose();
+                    timerNext = 0;
                 }
             }
 
