@@ -23,7 +23,7 @@ public class Icon {
         currentIconImage = iconImage[5];
 
         //default health
-        health = 5;
+        health = 10;
     }
 
     public void draw(Batch batch) {
@@ -32,33 +32,43 @@ public class Icon {
                currentIconImage = iconImage[0];
                break;
             case 1:
+            case 2:
                 currentIconImage = iconImage[1];
                 break;
-            case 2:
+            case 3:
+            case 4:
                 currentIconImage = iconImage[2];
                 break;
-            case 3:
+            case 5:
+            case 6:
                 currentIconImage = iconImage[3];
                 break;
-            case 4:
+            case 7:
+            case 8:
                 currentIconImage = iconImage[4];
                 break;
-            case 5:
+            case 9:
+            case 10:
                 currentIconImage = iconImage[5];
                 break;
-            case 6:
+            case 11:
+            case 12:
                 currentIconImage = iconImage[6];
                 break;
-            case 7:
+            case 13:
+            case 14:
                 currentIconImage = iconImage[7];
                 break;
-            case 8:
+            case 15:
+            case 16:
                 currentIconImage = iconImage[8];
                 break;
-            case 9:
+            case 17:
+            case 18:
                 currentIconImage = iconImage[9];
                 break;
-            case 10:
+            case 19:
+            case 20:
                 currentIconImage = iconImage[10];
                 break;
 

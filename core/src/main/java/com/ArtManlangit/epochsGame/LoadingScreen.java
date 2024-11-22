@@ -77,7 +77,7 @@
 //            loadAssets();
 
             //debug
-            currentLoading = gameScreen;
+//            currentLoading = gameScreen;
 
             //testing new loading
             loadScreenAssets();
@@ -183,6 +183,16 @@
                 assetManager.load("audio/playing.mp3", Music.class);
                 assetManager.load("audio/cardShuffle.mp3", Sound.class);
                 assetManager.load("audio/outro.mp3", Sound.class);
+                assetManager.load("audio/bg1.mp3", Music.class);
+                assetManager.load("audio/bg2.mp3", Music.class);
+                assetManager.load("audio/bg3.mp3", Music.class);
+                assetManager.load("audio/bg4.mp3", Music.class);
+                assetManager.load("audio/bg5.mp3", Music.class);
+                assetManager.load("audio/bg6.mp3", Music.class);
+                assetManager.load("audio/bg7.mp3", Music.class);
+                assetManager.load("audio/bg8.mp3", Music.class);
+                assetManager.load("audio/bg9.mp3", Music.class);
+                assetManager.load("audio/bg10.mp3", Music.class);
 
                 //create special type of loader for loading fonts
                 FileHandleResolver resolver = new InternalFileHandleResolver();

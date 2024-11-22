@@ -60,6 +60,8 @@
 
         //Audio and sound effects
         Music backgroundMusic;
+        Music[] bgMusic;
+        int currentMusicIndex;
         Sound yearCountSoundEffect, cardShuffleSoundEffect, endingSoundEffect;
         boolean yearCountPlayed;
 
@@ -243,6 +245,17 @@
             backgroundMusic.setLooping(true);
             cardShuffleSoundEffect = assetManager.get("audio/cardShuffle.mp3");
             endingSoundEffect = assetManager.get("audio/outro.mp3");
+            bgMusic = new Music[10];
+            bgMusic[0] = assetManager.get("audio/bg1.mp3");
+            bgMusic[1] = assetManager.get("audio/bg2.mp3");
+            bgMusic[2] = assetManager.get("audio/bg3.mp3");
+            bgMusic[3] = assetManager.get("audio/bg4.mp3");
+            bgMusic[4] = assetManager.get("audio/bg5.mp3");
+            bgMusic[5] = assetManager.get("audio/bg6.mp3");
+            bgMusic[6] = assetManager.get("audio/bg7.mp3");
+            bgMusic[7] = assetManager.get("audio/bg8.mp3");
+            bgMusic[8] = assetManager.get("audio/bg9.mp3");
+            bgMusic[9] = assetManager.get("audio/bg10.mp3");
         }
 
         public void loadFonts() {
@@ -349,7 +362,12 @@
                     colorValue = 0;
 
                     //play background music of playing
-                    backgroundMusic.play();
+                    if (!guideDone) {
+                        backgroundMusic.play();
+                    } else {
+                        bgMusic[currentMusicIndex].play();
+                    }
+
                     yearCountPlayed = false;
                 }
             }
@@ -578,7 +596,6 @@
                 previousGameState = currentInGameState;
                 currentInGameState = transitionState;
                 cardCounter++;
-                System.out.println("Current card: Card " + cardCounter);
                 //update health based on card choice
                 //test icon health
                 updateHealth();
@@ -605,8 +622,8 @@
                     currentCard.updateCard(dialogueIndex);
 
                     //debug card
-                    System.out.println(currentCard.leftChoice);
-                    System.out.println(currentCard.rightChoice);
+                    System.out.println("Left choice: " + currentCard.leftChoice);
+                    System.out.println("Right Choice: " + currentCard.rightChoice);
 
                     //update current theme
                     currentTheme = currentCard.theme;
@@ -619,7 +636,13 @@
                         currentInGameState = shuffleState;
                         currentGameState = countState;
                         changeCounter = 0;
-                        backgroundMusic.stop();
+                        if (guideDone) {
+                            bgMusic[currentMusicIndex].stop();
+                            currentMusicIndex++;
+                            bgMusic[currentMusicIndex].setLooping(true);
+                        } else {
+                            backgroundMusic.stop();
+                        }
                         countDownYearCurrent = countDownYearFinish;
                         countDownYearStart = countDownYearFinish;
                         countDownYearFinish += (int) (Math.random() * 300 + 100);
@@ -672,7 +695,7 @@
                     endingScenario = 5;
                 }
 
-                backgroundMusic.stop();
+                bgMusic[currentMusicIndex].stop();
                 epochsGame.loadingScreen.currentLoading = epochsGame.loadingScreen.endScreen;
                 epochsGame.setScreen(epochsGame.loadingScreen);
                 endingSoundEffect.play();
@@ -907,7 +930,12 @@
             }
             iconHandler.overallIcon.health = (int) healthComputation;
 
-            System.out.println(iconHandler.overallIcon.health);
+            System.out.println("Overall health: " + iconHandler.overallIcon.health);
+            System.out.println("Environmental Health: " + iconHandler.environmentalIcon.health);
+            System.out.println("Technological health: " +iconHandler.technologicalIcon.health);
+            System.out.println("Cultural health: " +iconHandler.culturalIcon.health);
+            System.out.println("Military health: " + iconHandler.militaryIcon.health);
+            System.out.println("Medicine Health: " + iconHandler.medicineIcon.health);
         }
         public void draw() {
             ScreenUtils.clear(Color.BLACK);
@@ -1065,26 +1093,42 @@
 
             if(cardChoice == leftChoice) {
                 batch.setColor(1, 1, 1, leftDialogueColorValue);
+                //draw indicator
+                if (currentCard.leftChoice.get(0) != 0) {
+                    batch.draw(envIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+                }
+                if (currentCard.leftChoice.get(1) != 0) {
+                    batch.draw(techIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+                }
+                if (currentCard.leftChoice.get(2) != 0) {
+                    batch.draw(cultIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+                }
+                if (currentCard.leftChoice.get(3) != 0) {
+                    batch.draw(milIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+                }
+                if (currentCard.leftChoice.get(4) != 0) {
+                    batch.draw(medIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+                }
             } else if (cardChoice == rightChoice) {
                 batch.setColor(1, 1, 1, rightDialogueColorValue);
+                //draw indicator
+                if (currentCard.rightChoice.get(0) != 0) {
+                    batch.draw(envIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+                }
+                if (currentCard.rightChoice.get(1) != 0) {
+                    batch.draw(techIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+                }
+                if (currentCard.rightChoice.get(2) != 0) {
+                    batch.draw(cultIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+                }
+                if (currentCard.rightChoice.get(3) != 0) {
+                    batch.draw(milIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+                }
+                if (currentCard.rightChoice.get(4) != 0) {
+                    batch.draw(medIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+                }
             } else {
                 batch.setColor(0, 0, 0, 0);
-            }
-            //draw indicator
-            if (currentCard.rightChoice.get(0) != 0 || currentCard.leftChoice.get(0) != 0) {
-                batch.draw(envIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
-            }
-            if (currentCard.rightChoice.get(1) != 0 || currentCard.leftChoice.get(1) != 0) {
-                batch.draw(techIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
-            }
-            if (currentCard.rightChoice.get(2) != 0 || currentCard.leftChoice.get(2) != 0) {
-                batch.draw(cultIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
-            }
-            if (currentCard.rightChoice.get(3) != 0 || currentCard.leftChoice.get(3) != 0) {
-                batch.draw(milIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
-            }
-            if (currentCard.rightChoice.get(4) != 0 || currentCard.leftChoice.get(4) != 0) {
-                batch.draw(medIn, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
             }
 
             //reset color value
