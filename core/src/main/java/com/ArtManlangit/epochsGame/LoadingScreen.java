@@ -59,7 +59,7 @@
         int endScreen = 2;
 
         //delay time before launching the game after loading the assets
-        float launchDelay = 3;
+        float launchDelay = 0;
 
         public LoadingScreen(EpochsGame epochsGame) {
             //initialize variables
@@ -76,15 +76,14 @@
             //load all assets
 //            loadAssets();
 
-            //debug
-//            currentLoading = gameScreen;
+//            debug
+            currentLoading = splashScreen;
 
             //testing new loading
             loadScreenAssets();
         }
 
         public void debug() {
-
             //default
             if (currentLoading == splashScreen) {
                 epochsGame.splashScreen = new SplashScreen(epochsGame);
@@ -96,22 +95,6 @@
                 epochsGame.endScreen = new EndScreen(epochsGame);
                 epochsGame.setScreen(epochsGame.endScreen);
             }
-
-
-
-
-
-//            mainMenu screen
-//            MainMenuScreen mainMenuScreen = new MainMenuScreen(epochsGame);
-//            epochsGame.setScreen((mainMenuScreen));
-
-            //endScreen shortcut
-//            epochsGame.gameScreen = new GameScreen(epochsGame);
-//            epochsGame.gameScreen.guideDone = true;
-//            epochsGame.gameScreen.cardCounter = 80;
-//            epochsGame.setScreen(epochsGame.gameScreen);
-//            epochsGame.gameScreen.currentGameState = epochsGame.gameScreen.inGameState;
-//            dispose();
         }
 
         public void loadLoadingAssets() {
@@ -157,6 +140,7 @@
                 assetManager.load("packedTextures/mainBgsLogos.atlas", TextureAtlas.class);
                 assetManager.load("packedTextures/playingBgs.atlas", TextureAtlas.class);
                 assetManager.load("packedTextures/settings.atlas", TextureAtlas.class);
+                assetManager.load("packedTextures/newMenu.atlas", TextureAtlas.class);
             } else if (currentLoading == gameScreen) {
                 assetManager.load("packedTextures/mainBgsLogos.atlas", TextureAtlas.class);
                 assetManager.load("packedTextures/playingBgs.atlas", TextureAtlas.class);

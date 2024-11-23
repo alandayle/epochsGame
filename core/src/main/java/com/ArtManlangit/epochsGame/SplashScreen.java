@@ -23,7 +23,7 @@ public class SplashScreen implements Screen {
 
     //assets shared by other screens
     Music backgroundMusic;
-    TextureAtlas mainBgsLogos;
+    TextureAtlas mainBgsLogos, newMenu;
 
 
     //textures for assets
@@ -31,6 +31,7 @@ public class SplashScreen implements Screen {
     TextureRegion wearHeadphones;
     TextureRegion mainMenu;
     TextureRegion currentBackground;
+    TextureRegion sideBuilding;
 
     //drawer
     SpriteBatch batch;
@@ -66,11 +67,14 @@ public class SplashScreen implements Screen {
         //load textures
         mainBgsLogos = assetManager.get("packedTextures/mainBgsLogos.atlas", TextureAtlas.class);
         backgroundMusic = assetManager.get("audio/background.mp3");
+        newMenu = assetManager.get("packedTextures/newMenu.atlas", TextureAtlas.class);
+
 
         //setup textures
         loadingLogo = mainBgsLogos.findRegion("logo(portrait)");
         wearHeadphones = mainBgsLogos.findRegion("wearHeadphones(portrait)");
-        mainMenu = mainBgsLogos.findRegion("mainBackground(portrait)");
+        mainMenu = newMenu.findRegion("nbg1");
+        sideBuilding = newMenu.findRegion("sideBuilding");
 
         //set initial background
         currentBackground = loadingLogo;
@@ -121,10 +125,6 @@ public class SplashScreen implements Screen {
             colorValue += delta;
         }
 
-
-
-
-
         //limit colorvalue to 0 - 1;
         if (colorValue <= 0) {
             colorValue = 0;
@@ -147,6 +147,9 @@ public class SplashScreen implements Screen {
         //begin draw
         batch.begin();
         batch.draw(currentBackground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+        if(currentBackground == mainMenu) {
+            batch.draw(sideBuilding, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+        }
         batch.end();
 
         //avoid scaling

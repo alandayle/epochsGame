@@ -703,82 +703,6 @@
         }
 
         public void updateHealth() {
-            //update health based on card choice
-            //add  = 1 or subtract = -1
-//            int operation;
-//            System.out.println(currentCard.leftChoiceTrue);
-
-//            if (currentCard.leftChoiceTrue) {
-//                if (cardChoice == leftChoice) {
-//                    //add health
-//                    operation = 1;
-//                } else {
-//                    //subtract health
-//                    operation = -1;
-//                }
-//            } else {
-//                if (cardChoice == leftChoice) {
-//                    //subtract health
-//                    operation = -1;
-//                } else {
-//                    //add health
-//                    operation = 1;
-//                }
-//            }
-//
-//            switch (currentTheme) {
-//                case 1:
-//                    iconHandler.environmentalIcon.health += operation;
-//                    //limit health
-//                    if (iconHandler.environmentalIcon.health >= 10) {
-//                        iconHandler.environmentalIcon.health = 10;
-//                    }
-//                    if (iconHandler.environmentalIcon.health <= 0) {
-//                        iconHandler.environmentalIcon.health = 0;
-//                    }
-//                    break;
-//                case 2:
-//                    iconHandler.technologicalIcon.health += operation;
-//                    //limit health
-//                    if (iconHandler.technologicalIcon.health >= 10) {
-//                        iconHandler.technologicalIcon.health = 10;
-//                    }
-//                    if (iconHandler.technologicalIcon.health <= 0) {
-//                        iconHandler.technologicalIcon.health = 0;
-//                    }
-//                    break;
-//                case 3:
-//                    iconHandler.culturalIcon.health += operation;
-//                    //limit health
-//                    if (iconHandler.culturalIcon.health >= 10) {
-//                        iconHandler.culturalIcon.health = 10;
-//                    }
-//                    if (iconHandler.culturalIcon.health <= 0) {
-//                        iconHandler.culturalIcon.health = 0;
-//                    }
-//                    break;
-//                case 4:
-//                    iconHandler.militaryIcon.health += operation;
-//                    //limit health
-//                    if (iconHandler.militaryIcon.health >= 10) {
-//                        iconHandler.militaryIcon.health = 10;
-//                    }
-//                    if (iconHandler.militaryIcon.health <= 0) {
-//                        iconHandler.militaryIcon.health = 0;
-//                    }
-//                    break;
-//                case 5:
-//                    iconHandler.medicineIcon.health += operation;
-//                    //limit health
-//                    if (iconHandler.medicineIcon.health >= 10) {
-//                        iconHandler.medicineIcon.health = 10;
-//                    }
-//                    if (iconHandler.medicineIcon.health <= 0) {
-//                        iconHandler.medicineIcon.health = 0;
-//                    }
-//                    break;
-//            }
-//
             if (cardChoice == leftChoice) {
                 for (int i = 0; i < 5; i++) {
                     int addNumber = 0;
@@ -1090,6 +1014,11 @@
             currentCard.leftDialogue.setColor(1, 1, 1, 1);
             currentCard.rightDialogue.setColor(1, 1, 1, 1);
 
+            batch.end();
+
+            backgroundViewport.apply();
+            batch.setProjectionMatrix(camera.combined);
+            batch.begin();
 
             if(cardChoice == leftChoice) {
                 batch.setColor(1, 1, 1, leftDialogueColorValue);
