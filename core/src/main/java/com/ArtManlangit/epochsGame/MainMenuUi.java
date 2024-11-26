@@ -123,6 +123,10 @@ public class MainMenuUi extends ScreenState {
 
     }
 
+    public void drawUnavailableText() {
+
+    }
+
     public void startTransitionStateLogic(float delta) {
         slideInSpeed = 500;
         dissolveTime = 1f;

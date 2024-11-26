@@ -77,7 +77,7 @@
 //            loadAssets();
 
 //            debug
-            currentLoading = splashScreen;
+            currentLoading = gameScreen;
 
             //testing new loading
             loadScreenAssets();

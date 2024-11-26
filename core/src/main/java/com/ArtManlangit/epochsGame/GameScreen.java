@@ -37,7 +37,7 @@
             guideCardsAtlas;
 
         //Texture Regions
-        TextureRegion currentBackground, backCardTextureRegion, lockCardTextureRegion, envIn, techIn, cultIn, milIn, medIn;
+        TextureRegion currentBackground, backCardTextureRegion, lockCardTextureRegion, envIn, techIn, cultIn, milIn, medIn, currentForeground;
         TextureRegion[] scrollingBackground;
         float[] scrollingBackgroundX;
         TextureRegion[] frontCardTextureRegions, gameBackgroundTextureRegions, foregroundTextureRegions;
@@ -220,8 +220,8 @@
 
             //scrolling background
             scrollingBackground = new TextureRegion[2];
-            scrollingBackground[0] = gameBackgroundTextureRegions[0];
-            scrollingBackground[1] = gameBackgroundTextureRegions[0];
+            scrollingBackground[0] = gameBackgroundTextureRegions[4];
+            scrollingBackground[1] = gameBackgroundTextureRegions[4];
             scrollingBackgroundX = new float[2];
             scrollingBackgroundX[0] = 0;
             scrollingBackgroundX[1] = epochsGame.worldWidth;
@@ -243,6 +243,7 @@
                 foregroundFileName = "fg" + (i+1);
                 foregroundTextureRegions[i] = foregroundAtlas.findRegion(foregroundFileName);
             }
+            currentForeground = foregroundTextureRegions[4];
         }
 
         public void setupStatus() {
@@ -465,7 +466,8 @@
                         scrollingBackgroundX[i] = epochsGame.worldWidth;
                     }
                 }
-
+                //check environmental health and update
+                updateScrollingBackground();
 
                 if (currentInGameState == shuffleState){
                     shuffleStateLogic(delta);
@@ -481,6 +483,38 @@
                 if (currentInGameState == transitionState) {
                     transitionStateLogic(delta);
                 }
+            }
+        }
+
+        public void updateScrollingBackground() {
+            if (iconHandler.overallIcon.health < 3) {
+                currentForeground = foregroundTextureRegions[2];
+                scrollingBackground[0] = gameBackgroundTextureRegions[3];
+                scrollingBackground[1] = gameBackgroundTextureRegions[3];
+            } else if (iconHandler.overallIcon.health < 6) {
+                currentForeground = foregroundTextureRegions[3];
+                scrollingBackground[0] = gameBackgroundTextureRegions[2];
+                scrollingBackground[1] = gameBackgroundTextureRegions[2];
+            } else if (iconHandler.overallIcon.health < 9) {
+                currentForeground = foregroundTextureRegions[1];
+                scrollingBackground[0] = gameBackgroundTextureRegions[1];
+                scrollingBackground[1] = gameBackgroundTextureRegions[1];
+            } else if (iconHandler.overallIcon.health < 12) {
+                currentForeground = foregroundTextureRegions[0];
+                scrollingBackground[0] = gameBackgroundTextureRegions[0];
+                scrollingBackground[1] = gameBackgroundTextureRegions[0];
+            } else if (iconHandler.overallIcon.health < 15) {
+                currentForeground = foregroundTextureRegions[4];
+                scrollingBackground[0] = gameBackgroundTextureRegions[4];
+                scrollingBackground[1] = gameBackgroundTextureRegions[4];
+            } else if (iconHandler.overallIcon.health < 18) {
+                currentForeground = foregroundTextureRegions[5];
+                scrollingBackground[0] = gameBackgroundTextureRegions[5];
+                scrollingBackground[1] = gameBackgroundTextureRegions[5];
+            } else {
+                currentForeground = foregroundTextureRegions[6];
+                scrollingBackground[0] = gameBackgroundTextureRegions[6];
+                scrollingBackground[1] = gameBackgroundTextureRegions[6];
             }
         }
 
@@ -738,8 +772,8 @@
                     switch (i) {
                         case 0:
                             iconHandler.environmentalIcon.health += addNumber;
-                            if (iconHandler.environmentalIcon.health >= 10) {
-                                iconHandler.environmentalIcon.health = 10;
+                            if (iconHandler.environmentalIcon.health >= 20) {
+                                iconHandler.environmentalIcon.health = 20;
                             }
                             if (iconHandler.environmentalIcon.health <= 0) {
                                 iconHandler.environmentalIcon.health = 0;
@@ -747,8 +781,8 @@
                             break;
                         case 1:
                             iconHandler.technologicalIcon.health += addNumber;
-                            if (iconHandler.technologicalIcon.health >= 10) {
-                                iconHandler.technologicalIcon.health = 10;
+                            if (iconHandler.technologicalIcon.health >= 20) {
+                                iconHandler.technologicalIcon.health = 20;
                             }
                             if (iconHandler.technologicalIcon.health <= 0) {
                                 iconHandler.technologicalIcon.health = 0;
@@ -756,8 +790,8 @@
                             break;
                         case 2:
                             iconHandler.culturalIcon.health += addNumber;
-                            if (iconHandler.culturalIcon.health >= 10) {
-                                iconHandler.culturalIcon.health = 10;
+                            if (iconHandler.culturalIcon.health >= 20) {
+                                iconHandler.culturalIcon.health = 20;
                             }
                             if (iconHandler.culturalIcon.health <= 0) {
                                 iconHandler.culturalIcon.health = 0;
@@ -765,8 +799,8 @@
                             break;
                         case 3:
                             iconHandler.militaryIcon.health += addNumber;
-                            if (iconHandler.militaryIcon.health >= 10) {
-                                iconHandler.militaryIcon.health = 10;
+                            if (iconHandler.militaryIcon.health >= 20) {
+                                iconHandler.militaryIcon.health = 20;
                             }
                             if (iconHandler.militaryIcon.health <= 0) {
                                 iconHandler.militaryIcon.health = 0;
@@ -774,8 +808,8 @@
                             break;
                         case 4:
                             iconHandler.medicineIcon.health += addNumber;
-                            if (iconHandler.medicineIcon.health >= 10) {
-                                iconHandler.medicineIcon.health = 10;
+                            if (iconHandler.medicineIcon.health >= 20) {
+                                iconHandler.medicineIcon.health = 20;
                             }
                             if (iconHandler.medicineIcon.health <= 0) {
                                 iconHandler.medicineIcon.health = 0;
@@ -806,8 +840,8 @@
                     switch (i) {
                         case 0:
                             iconHandler.environmentalIcon.health += addNumber;
-                            if (iconHandler.environmentalIcon.health >= 10) {
-                                iconHandler.environmentalIcon.health = 10;
+                            if (iconHandler.environmentalIcon.health >= 20) {
+                                iconHandler.environmentalIcon.health = 20;
                             }
                             if (iconHandler.environmentalIcon.health <= 0) {
                                 iconHandler.environmentalIcon.health = 0;
@@ -815,8 +849,8 @@
                             break;
                         case 1:
                             iconHandler.technologicalIcon.health += addNumber;
-                            if (iconHandler.technologicalIcon.health >= 10) {
-                                iconHandler.technologicalIcon.health = 10;
+                            if (iconHandler.technologicalIcon.health >= 20) {
+                                iconHandler.technologicalIcon.health = 20;
                             }
                             if (iconHandler.technologicalIcon.health <= 0) {
                                 iconHandler.technologicalIcon.health = 0;
@@ -824,8 +858,8 @@
                             break;
                         case 2:
                             iconHandler.culturalIcon.health += addNumber;
-                            if (iconHandler.culturalIcon.health >= 10) {
-                                iconHandler.culturalIcon.health = 10;
+                            if (iconHandler.culturalIcon.health >= 20) {
+                                iconHandler.culturalIcon.health = 20;
                             }
                             if (iconHandler.culturalIcon.health <= 0) {
                                 iconHandler.culturalIcon.health = 0;
@@ -833,8 +867,8 @@
                             break;
                         case 3:
                             iconHandler.militaryIcon.health += addNumber;
-                            if (iconHandler.militaryIcon.health >= 10) {
-                                iconHandler.militaryIcon.health = 10;
+                            if (iconHandler.militaryIcon.health >= 20) {
+                                iconHandler.militaryIcon.health = 20;
                             }
                             if (iconHandler.militaryIcon.health <= 0) {
                                 iconHandler.militaryIcon.health = 0;
@@ -842,8 +876,8 @@
                             break;
                         case 4:
                             iconHandler.medicineIcon.health += addNumber;
-                            if (iconHandler.medicineIcon.health >= 10) {
-                                iconHandler.medicineIcon.health = 10;
+                            if (iconHandler.medicineIcon.health >= 20) {
+                                iconHandler.medicineIcon.health = 20;
                             }
                             if (iconHandler.medicineIcon.health <= 0) {
                                 iconHandler.medicineIcon.health = 0;
@@ -938,7 +972,7 @@
             for (int i = 0; i < scrollingBackgroundX.length; i++) {
                 batch.draw(scrollingBackground[i], scrollingBackgroundX[i], 0, epochsGame.worldWidth, epochsGame.worldHeight);
             }
-            batch.draw(foregroundTextureRegions[0], 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
+            batch.draw(currentForeground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
             iconHandler.drawIcons(batch);
             greenScreen30.draw(batch, String.valueOf(countDownYearFinish),
                 greenScreen30.getCapHeight() * 0.5f , epochsGame.worldHeight - greenScreen30.getCapHeight() * 0.9f);
