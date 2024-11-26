@@ -297,7 +297,7 @@ public class DialogueSetup {
         leftCardChoice2 = new ArrayList<>();
         rightCardChoice2 = new ArrayList<>();
         //add dialogue 1
-        leftCardChoice2.add(createList(4, 4, 0, 0, 1));
+        leftCardChoice2.add(createList(4, 2, 0, 0, 1));
         rightCardChoice2.add(createList(1, 1, 0, 0, 1));
         //add dialogue 2
         leftCardChoice2.add(createList(1, 0, 0, 0, 1));
@@ -356,10 +356,10 @@ public class DialogueSetup {
         rightCardChoice3.add(createList(4, 1, 1, 1, 1));
         //add dialogue 5
         leftCardChoice3.add(createList(1, 1, 4, 2, 4));
-        rightCardChoice3.add(createList(4, 1, 4, 2, 4));
+        rightCardChoice3.add(createList(4, 1, 2, 2, 4));
         //add dialogue 6
         leftCardChoice3.add(createList(1, 1, 1, 4, 1));
-        rightCardChoice3.add(createList(2, 3, 4, 4, 2));
+        rightCardChoice3.add(createList(2, 3, 4, 2, 2));
         gameScreen.frontCards[2].setupDialogue(leftCard3Sprite, rightCard3Sprite, card3Qestions, 1, card3Rank, 2, dialogueSwipeLeftTrueCard3, leftCardChoice3, rightCardChoice3);
 
         //card4
@@ -390,16 +390,16 @@ public class DialogueSetup {
         leftCardChoice4 = new ArrayList<>();
         rightCardChoice4 = new ArrayList<>();
         //add dialogue 1
-        leftCardChoice4.add(createList(0,3,4,3,2));
+        leftCardChoice4.add(createList(0,3,4,1,2));
         rightCardChoice4.add(createList(0,2,1,4,0));
         //add dialogue 2
         leftCardChoice4.add(createList(1,3,1,4,1));
-        rightCardChoice4.add(createList(4,4,2,0,3));
+        rightCardChoice4.add(createList(4,2,2,0,3));
         //add dialogue 3
         leftCardChoice4.add(createList(4,3,0,1,1));
-        rightCardChoice4.add(createList(1,2,0,4,4));
+        rightCardChoice4.add(createList(1,2,0,2,4));
         //add dialogue 4
-        leftCardChoice4.add(createList(4,3,0,3,4));
+        leftCardChoice4.add(createList(4,1,0,3,2));
         rightCardChoice4.add(createList(1,2,0,1,1));
         //add dialogue 5
         leftCardChoice4.add(createList(1,3,0,1,1));
@@ -435,17 +435,17 @@ public class DialogueSetup {
         leftCardChoice5 = new ArrayList<>();
         rightCardChoice5 = new ArrayList<>();
         //add dialogue 1
-        leftCardChoice5.add(createList(0,3,0,3,4));
+        leftCardChoice5.add(createList(0,1,0,3,4));
         rightCardChoice5.add(createList(0,4,0,2,1));
         //add dialogue 2
         leftCardChoice5.add(createList(0,1,0,1,1));
         rightCardChoice5.add(createList(0,4,0,2,1));
         //add dialogue 3
-        leftCardChoice5.add(createList(0,4,0,4,1));
+        leftCardChoice5.add(createList(0,2,0,4,1));
         rightCardChoice5.add(createList(0,3,0,1,4));
         //add dialogue 4
-        leftCardChoice5.add(createList(0,3,2,3,4));
-        rightCardChoice5.add(createList(0,4,1,4,1));
+        leftCardChoice5.add(createList(0,3,2,1,4));
+        rightCardChoice5.add(createList(0,2,1,4,1));
         //add dialogue 5
         leftCardChoice5.add(createList(0,1,0,0,0));
         rightCardChoice5.add(createList(0,4,0,0,0));
@@ -472,10 +472,10 @@ public class DialogueSetup {
         leftCardChoice6 = new ArrayList<>();
         rightCardChoice6 = new ArrayList<>();
         //add dialogue 1
-        leftCardChoice6.add(createList(2,3,4,4,4));
+        leftCardChoice6.add(createList(2,3,4,2,2));
         rightCardChoice6.add(createList(1,4,1,1,1));
         //add dialogue 2
-        leftCardChoice6.add(createList(0,4,0,2,4));
+        leftCardChoice6.add(createList(0,4,0,2,2));
         rightCardChoice6.add(createList(0,3,0,1,1));
         gameScreen.frontCards[5].setupDialogue(leftCard6Sprite, rightCard6Sprite, card6Qestions, 2, card6Rank, 1, dialogueSwipeLeftTrueCard6, leftCardChoice6, rightCardChoice6);
 
@@ -503,7 +503,7 @@ public class DialogueSetup {
         leftCardChoice7 = new ArrayList<>();
         rightCardChoice7 = new ArrayList<>();
         //add dialogue 1
-        leftCardChoice7.add(createList(0,4,4,0,0));
+        leftCardChoice7.add(createList(0,4,2,0,0));
         rightCardChoice7.add(createList(0,3,0,2,0));
         //add dialogue 2
         leftCardChoice7.add(createList(0,3,4,1,4));
@@ -538,7 +538,7 @@ public class DialogueSetup {
         leftCardChoice8 = new ArrayList<>();
         rightCardChoice8 = new ArrayList<>();
         //add dialogue 1
-        leftCardChoice8.add(createList(0,4,3,4,4));
+        leftCardChoice8.add(createList(0,4,3,2,2));
         rightCardChoice8.add(createList(0,1,4,1,1));
         //add dialogue 2
         leftCardChoice8.add(createList(1,1,4,1,1));
@@ -619,7 +619,7 @@ public class DialogueSetup {
         rightCardChoice10.add(createList(1,1,1,1,1));
         //add dialogue 2
         leftCardChoice10.add(createList(2,4,1,4,2));
-        rightCardChoice10.add(createList(4,4,3,2,2));
+        rightCardChoice10.add(createList(4,2,3,2,2));
         //add dialogue 3
         leftCardChoice10.add(createList(0,0,1,0,0));
         rightCardChoice10.add(createList(0,0,3,0,0));
@@ -653,7 +653,7 @@ public class DialogueSetup {
         leftCardChoice11 = new ArrayList<>();
         rightCardChoice11 = new ArrayList<>();
         //add dialogue 1
-        leftCardChoice11.add(createList(2,2,3,4,4));
+        leftCardChoice11.add(createList(2,2,3,2,4));
         rightCardChoice11.add(createList(1,1,4,1,1));
         //add dialogue 2
         leftCardChoice11.add(createList(0,1,3,1,1));
@@ -691,14 +691,14 @@ public class DialogueSetup {
         leftCardChoice12 = new ArrayList<>();
         rightCardChoice12 = new ArrayList<>();
         //add dialogue 1
-        leftCardChoice12.add(createList(4,1,4,3,2));
+        leftCardChoice12.add(createList(4,1,2,3,2));
         rightCardChoice12.add(createList(1,4,1,2,1));
         //add dialogue 2
-        leftCardChoice12.add(createList(0,4,0,4,0));
+        leftCardChoice12.add(createList(0,4,0,2,0));
         rightCardChoice12.add(createList(0,1,0,3,0));
         //add dialogue 3
         leftCardChoice12.add(createList(2,1,4,3,2));
-        rightCardChoice12.add(createList( 1,4,1,4,1));
+        rightCardChoice12.add(createList( 1,4,1,2,1));
         //add dialogue 4
         leftCardChoice12.add(createList(0,0,1,3,1));
         rightCardChoice12.add(createList( 0,0,4,4,4));
@@ -770,15 +770,15 @@ public class DialogueSetup {
         rightCardChoice14 = new ArrayList<>();
         //add dialogue 1
         leftCardChoice14.add(createList(2,1,4,3,2));
-        rightCardChoice14.add(createList(1,4,1,4,1));
+        rightCardChoice14.add(createList(1,4,1,2,1));
         //add dialogue 2
         leftCardChoice14.add(createList(2,1,4,3,2));
-        rightCardChoice14.add(createList(1,4,1,4,1));
+        rightCardChoice14.add(createList(1,4,1,2,1));
         //add dialogue 3
         leftCardChoice14.add(createList(0,1,0,3,1));
         rightCardChoice14.add(createList(0,4,0,2,4));
         //add dialogue 4
-        leftCardChoice14.add(createList(1,4,1,4,1));
+        leftCardChoice14.add(createList(1,2,1,4,1));
         rightCardChoice14.add(createList(2,1,4,3,2));
         gameScreen.frontCards[13].setupDialogue(leftCard14Sprite, rightCard14Sprite, card14Qestions, 4, card14Rank, 1, dialogueSwipeLeftTrueCard14, leftCardChoice14, rightCardChoice14);
 
@@ -810,16 +810,16 @@ public class DialogueSetup {
         leftCardChoice15 = new ArrayList<>();
         rightCardChoice15 = new ArrayList<>();
         //add dialogue 1
-        leftCardChoice15.add(createList(4,4,4,4,3));
+        leftCardChoice15.add(createList(4,2,2,2,3));
         rightCardChoice15.add(createList(2,2,2,2,1));
         //add dialogue 1
         leftCardChoice15.add(createList(2,3,2,3,2));
-        rightCardChoice15.add(createList(1,4,1,4,1));
+        rightCardChoice15.add(createList(1,2,1,4,1));
         //add dialogue 1
         leftCardChoice15.add(createList(0,0,0,1,0));
         rightCardChoice15.add(createList(0,0,0,3,0));
         //add dialogue 1
-        leftCardChoice15.add(createList(4,4,4,4,4));
+        leftCardChoice15.add(createList(2,4,2,2,2));
         rightCardChoice15.add(createList(2,1,4,3,2));
 
         gameScreen.frontCards[14].setupDialogue(leftCard15Sprite, rightCard15Sprite, card15Qestions, 4, card15Rank, 1, dialogueSwipeLeftTrueCard15, leftCardChoice15, rightCardChoice15);
@@ -870,11 +870,11 @@ public class DialogueSetup {
         leftCardChoice16.add(createList(2,1,4,1,2));
         rightCardChoice16.add(createList(1,4,1,2,3));
         //add dialogue 5
-        leftCardChoice16.add(createList(4,1,4,1,2));
+        leftCardChoice16.add(createList(4,1,2,1,2));
         rightCardChoice16.add(createList(1,4,1,2,3));
         //add dialogue 6
         leftCardChoice16.add(createList(2,1,4,1,3));
-        rightCardChoice16.add(createList(1,4,1,4,4));
+        rightCardChoice16.add(createList(1,4,1,2,2));
         //add dialogue 7
         leftCardChoice16.add(createList(2,1,4,1,2));
         rightCardChoice16.add(createList(1,4,1,2,3));
@@ -912,15 +912,15 @@ public class DialogueSetup {
         rightCardChoice17 = new ArrayList<>();
         //add dialogue 1
         leftCardChoice17.add(createList(1,1,1,1,1));
-        rightCardChoice17.add(createList(2,4,2,4,3));
+        rightCardChoice17.add(createList(2,2,2,4,3));
         //add dialogue 2
         leftCardChoice17.add(createList(1,1,1,1,4));
-        rightCardChoice17.add(createList(4,4,4,4,3));
+        rightCardChoice17.add(createList(2,2,2,2,3));
         //add dialogue 3
         leftCardChoice17.add(createList(0,0,0,0,4));
         rightCardChoice17.add(createList(0,0,0,0,3));
         //add dialogue 4
-        leftCardChoice17.add(createList(0,0,4,0,4));
+        leftCardChoice17.add(createList(0,0,2,0,4));
         rightCardChoice17.add(createList(0,0,1,0,3));
         gameScreen.frontCards[16].setupDialogue(leftCard17Sprite, rightCard17Sprite, card17Qestions, 5, card17Rank, 2, dialogueSwipeLeftTrueCard17, leftCardChoice17, rightCardChoice17);
 
@@ -956,7 +956,7 @@ public class DialogueSetup {
         leftCardChoice18.add(createList(0,0,0,0,4));
         rightCardChoice18.add(createList( 0,0,0,0,3));
         //add dialogue 3
-        leftCardChoice18.add(createList(4,4,4,4,3));
+        leftCardChoice18.add(createList(2,2,2,2,3));
         rightCardChoice18.add(createList(1,1,1,1,4));
         //add dialogue 4
         leftCardChoice18.add(createList(1,2,1,2,3));

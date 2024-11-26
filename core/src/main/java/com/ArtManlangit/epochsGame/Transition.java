@@ -5,12 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Transition {
-    float timer;
-    TextureRegion currentImage;
-    TextureRegion nextImage;
     Batch batch;
-
-
 
 
     //constructor

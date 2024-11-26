@@ -124,7 +124,7 @@ public class MainMenuUi extends ScreenState {
     }
 
     public void startTransitionStateLogic(float delta) {
-        slideInSpeed = 400;
+        slideInSpeed = 500;
         dissolveTime = 1f;
 
         //slide in
@@ -156,6 +156,7 @@ public class MainMenuUi extends ScreenState {
 
         //begin draw
         batch.begin();
+        batch.draw(title, titleX, titleY, titleWidth, titleHeight);
         batch.draw(settings,settingsX, settingsY, settingsWidth, settingsHeight);
         batch.draw(archives, archivesX, archivesY, archivesWidth, archivesHeight);
         batch.draw(contDisabled, contX, contY, contWidth, contHeight);

@@ -17,7 +17,6 @@ public class MainMenuUiInput {
             if (!touching) {
                 inputLocation.set(Gdx.input.getX(), Gdx.input.getY());
                 mainMenuUi.viewport.unproject(inputLocation);
-
                 //check newGame
                 if (checkButtonTouch(mainMenuUi.newGameX, mainMenuUi.newGameY, mainMenuUi.newGameWidth, mainMenuUi.newGameHeight)) {
                     mainMenuUi.epochsGame.loadingScreen.currentLoading = mainMenuUi.epochsGame.loadingScreen.gameScreen;

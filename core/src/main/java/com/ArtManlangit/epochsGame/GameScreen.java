@@ -124,6 +124,11 @@
         //show gameProgress
         int gameProgress;
 
+        //transition
+        Transition transition;
+        float healthTransitionColorValue;
+
+
 
         //constructor
         public GameScreen(EpochsGame epochsGame) {
@@ -146,6 +151,11 @@
 
             //setup assets
             setupAssets();
+
+            //transition
+            transition = new Transition(batch);
+
+
         }
 
         public void setGameDefaults() {
@@ -537,9 +547,11 @@
                 timer+= delta;
                 if (timer > 1) {
                     if (!guideDone) {
-                        currentInGameState = guideState;
+                        previousGameState = guideState;
+                        currentInGameState = transitionState;
                     } else {
-                        currentInGameState = playingState;
+                        previousGameState = playingState;
+                        currentInGameState = transitionState;
                     }
                     timer = 0;
 
