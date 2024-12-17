@@ -89,11 +89,11 @@
         BitmapFont typeWriter;
         BitmapFont greenScreen25;
         BitmapFont greenScreen30;
-        BitmapFont greenScreen20;
 
         //countdown year
-        int countDownYearCurrent, countDownYearFinish, countDownYearStart;
+        int countDownYearCurrent, countDownYearStart;
 
+        int countDownYearFinish;
         //Card movement variables
         Vector2 initialTouch, touchPosition;
         boolean isDragging;
@@ -164,7 +164,7 @@
             currentInGameState = shuffleState;
             countDownYearCurrent = 0;
             countDownYearStart = 0;
-            countDownYearFinish = (int)(Math.random() * 101) + 2000;
+            countDownYearFinish = (int)(Math.random() * 51) + 2100;
             numberOfBackCards = 10;
             numberOfFrontCards = 19;
             shuffleSpeed = 850;
@@ -276,7 +276,6 @@
             typeWriter = assetManager.get("typewcond20.otf", BitmapFont.class);
             greenScreen25 = assetManager.get("Greenscr25.ttf", BitmapFont.class);
             greenScreen30 = assetManager.get("Greenscr30.ttf", BitmapFont.class);
-            greenScreen20 = assetManager.get("Greenscr20.ttf", BitmapFont.class);
         }
 
         public void setupCards() {
@@ -606,7 +605,7 @@
                 currentInGameState = transitionState;
                 changeCounter++;
                 //delete the current card
-                if (changeCounter >= 5) {
+                if (changeCounter >= 9) {
                     guideDone = true;
                     currentInGameState = shuffleState;
                     currentGameState = countState;
@@ -614,7 +613,7 @@
                     backgroundMusic.stop();
                     countDownYearCurrent = 0;
                     countDownYearStart = 0;
-                    countDownYearFinish += (int) (Math.random() * 300 + 100);
+                    countDownYearFinish += (int) (Math.random() * 30);
 
                     //default current card for actual play
                     currentCardIndex = (int) (Math.random() * 18);
@@ -691,7 +690,7 @@
                         }
                         countDownYearCurrent = countDownYearFinish;
                         countDownYearStart = countDownYearFinish;
-                        countDownYearFinish += (int) (Math.random() * 300 + 100);
+                        countDownYearFinish += (int) (Math.random() * 30);
 
                         //reset number of cards used in the decade
                         for (int i = 0; i < numberOfFrontCards; i++) {
@@ -709,12 +708,16 @@
         }
 
         public void checkWinningState() {
+            //debug
+//            iconHandler.overallIcon.health = 0;
+//            cardCounter= 80;
+
             if (cardCounter >= 80 || iconHandler.environmentalIcon.health <= 0 ||
                 iconHandler.technologicalIcon.health <= 0 || iconHandler.culturalIcon.health <= 0 ||
                 iconHandler.militaryIcon.health <= 0 || iconHandler.medicineIcon.health <= 0) {
                 //check ending scenario
                 if (cardCounter >= 80) {
-                    if (iconHandler.overallIcon.health <= 3) {
+                    if (iconHandler.overallIcon.health <= 12) {
                         endingScenario = 7;
                     } else {
                         endingScenario = 6;
@@ -975,15 +978,15 @@
             batch.draw(currentForeground, 0, 0, epochsGame.worldWidth, epochsGame.worldHeight);
             iconHandler.drawIcons(batch);
             greenScreen30.draw(batch, String.valueOf(countDownYearFinish),
-                greenScreen30.getCapHeight() * 0.5f , epochsGame.worldHeight - greenScreen30.getCapHeight() * 0.9f);
+                greenScreen30.getCapHeight() * 0.5f , epochsGame.worldHeight - greenScreen30.getCapHeight() * 1.05f);
             if (currentInGameState == playingState || (currentInGameState == transitionState && previousGameState == playingState) || (currentInGameState == shuffleState && previousGameState == playingState)) {
                 //draw progress
                 greenScreen30.draw(batch, String.valueOf(gameProgress) + "%",
-                    greenScreen20.getCapHeight() * 0.5f , epochsGame.worldHeight - greenScreen20.getCapHeight() * 2.5f, epochsGame.worldWidth, Align.center, false);
+                    greenScreen30.getCapHeight() * 0.5f , epochsGame.worldHeight - greenScreen30.getCapHeight() * 1.7f, epochsGame.worldWidth, Align.center, false);
 
                 //draw remaining cards
-                greenScreen20.draw(batch, "Cards: " + String.valueOf(changeCounter + 1) + "/10" ,
-                    greenScreen20.getCapHeight() * 0.5f , epochsGame.worldHeight - greenScreen20.getCapHeight() * 6.5f);
+                typeWriter.draw(batch, "Cards: " + String.valueOf(changeCounter + 1) + "/10" ,
+                    typeWriter.getCapHeight() * 0.5f , epochsGame.worldHeight - typeWriter.getCapHeight() * 6.5f);
             }
             batch.end();
 

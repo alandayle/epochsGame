@@ -2,8 +2,10 @@ package com.ArtManlangit.epochsGame;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.sun.tools.javac.Main;
 
@@ -27,6 +29,9 @@ public class MainMenuUi extends ScreenState {
     float colorValue;
     float dissolveTime;
 
+    //fonts
+    BitmapFont mainFont;
+
     //inputs
     MainMenuUiInput mainMenuUiInput;
 
@@ -34,6 +39,9 @@ public class MainMenuUi extends ScreenState {
     int currentState;
     int mainState = 0;
     int startTransitionState = 1;
+
+    //timer for dialogue
+    float showDialogueTimer;
 
     public MainMenuUi(EpochsGame epochsGame,  MainMenuScreen mainMenuScreen) {
         super(epochsGame);
@@ -56,6 +64,9 @@ public class MainMenuUi extends ScreenState {
 
         //inputs
         mainMenuUiInput = new MainMenuUiInput(this);
+
+        //setup fonts
+        mainFont = epochsGame.loadingScreen.mainFont;
 
     }
 
@@ -94,15 +105,15 @@ public class MainMenuUi extends ScreenState {
         newGameHeight = viewport.getWorldHeight() * 0.05f;
         newGameX = (viewport.getWorldWidth() - newGameWidth);
         newGameY = viewport.getWorldHeight() * 0.36f;
-
-        settingsXTransition = settingsX + settingsWidth;
-        archivesXTransition = archivesX + settingsWidth + 100;
-        contXTransition = contX + settingsWidth + 200;
-        newGameXTransition = newGameX + settingsWidth + 300;
     }
 
     public void setupDefaults() {
         currentState = startTransitionState;
+        settingsXTransition = settingsX + settingsWidth;
+        archivesXTransition = archivesX + settingsWidth + 100;
+        contXTransition = contX + settingsWidth + 200;
+        newGameXTransition = newGameX + settingsWidth + 300;
+        epochsGame.splashScreen.backgroundMusic.play();
     }
 
     public void input() {
@@ -120,11 +131,18 @@ public class MainMenuUi extends ScreenState {
     }
 
     public void mainStateLogic(float delta) {
-
+        if (mainMenuUiInput.showDialogue) {
+            showDialogueTimer+= delta;
+            if (showDialogueTimer > 4) {
+                mainMenuUiInput.showDialogue = false;
+                showDialogueTimer = 0;
+            }
+        }
     }
 
     public void drawUnavailableText() {
-
+        mainFont.draw(batch, "Sorry, this feature is currently under development", epochsGame.worldWidth * 0.05f,
+            epochsGame.worldHeight * 0.7f, epochsGame.worldWidth * 0.9f, Align.center, true);
     }
 
     public void startTransitionStateLogic(float delta) {
@@ -154,6 +172,9 @@ public class MainMenuUi extends ScreenState {
     }
 
     public void drawMainState() {
+
+
+
         camera.update();
         viewport.apply();
         batch.setProjectionMatrix(camera.combined);
@@ -165,6 +186,9 @@ public class MainMenuUi extends ScreenState {
         batch.draw(archives, archivesX, archivesY, archivesWidth, archivesHeight);
         batch.draw(contDisabled, contX, contY, contWidth, contHeight);
         batch.draw(newGame, newGameX, newGameY, newGameWidth, newGameHeight);
+        if (mainMenuUiInput.showDialogue) {
+            drawUnavailableText();
+        }
         //end draw
         batch.end();
     }

@@ -969,22 +969,30 @@ public class DialogueSetup {
         //card 19
         leftCard19Sprite = new ArrayList<>();
         rightCard19Sprite = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 9; i++) {
             Sprite leftCardSprite = new Sprite(gameScreen.guideCardsAtlas.findRegion("card0Dialogue" + (i+1) + ".1"));
             Sprite rightCardSprite = new Sprite(gameScreen.guideCardsAtlas.findRegion("card0Dialogue" + (i+1) + ".2"));
             leftCard19Sprite.add(leftCardSprite);
             rightCard19Sprite.add(rightCardSprite);
         }
         card19Qestions = new ArrayList<>();
-        card19Qestions.add("Greetings, Overseer. This is a world reshaped by the hands of humanity and scarred by time itself. Swipe left or right to proceed.");
+        card19Qestions.add("Greetings, Overseer. This is a world reshaped by the hands of humanity and scarred by time itself. Drag left or right to proceed.");
         card19Qestions.add("Long has the civilization thrived, and longer has it endured. But now... the Epoch draws to its end.");
+        card19Qestions.add("The five symbols below represent the nation's key aspects: environment, technology, culture, military, and healthcare.");
+        card19Qestions.add("Each decade will present ten cards. Choose wisely; every decision shapes the nation's fate.");
+        card19Qestions.add("The top right leaf tracks overall stability. The progress bar shows how many decision points you have navigated.");
         card19Qestions.add("Your goal is simple, yet grave: navigate the ruins, confront the choices of past ages, and shape what remains.");
+        card19Qestions.add("Do not fret! The indicators will guide you. Drag a card to the left or right. As you do, an indicator will appear on top of the nation’s key aspects that will be affected by your choice.");
         card19Qestions.add("Be warned: each choice ripples, every action echoes. The end is inevitable-but how it unfolds... that duty rests on you.");
         card19Qestions.add("Take this heed Overseer, there is no going back.");
         card19Rank = "Guide";
         dialogueSwipeLeftTrueCard19 = new ArrayList<>();
         dialogueSwipeLeftTrueCard19.add(false);
         dialogueSwipeLeftTrueCard19.add(false);
+        dialogueSwipeLeftTrueCard19.add(true);
+        dialogueSwipeLeftTrueCard19.add(true);
+        dialogueSwipeLeftTrueCard19.add(true);
+        dialogueSwipeLeftTrueCard19.add(true);
         dialogueSwipeLeftTrueCard19.add(true);
         dialogueSwipeLeftTrueCard19.add(true);
         dialogueSwipeLeftTrueCard19.add(true);
@@ -1004,6 +1012,18 @@ public class DialogueSetup {
         leftCardChoice19.add(createList());
         rightCardChoice19.add(createList());
         //add dialogue 5
+        leftCardChoice19.add(createList());
+        rightCardChoice19.add(createList());
+        //add dialogue 6
+        leftCardChoice19.add(createList());
+        rightCardChoice19.add(createList());
+        //add dialogue 7
+        leftCardChoice19.add(createList());
+        rightCardChoice19.add(createList());
+        //add dialogue 8
+        leftCardChoice19.add(createList());
+        rightCardChoice19.add(createList());
+        //add dialogue 9
         leftCardChoice19.add(createList());
         rightCardChoice19.add(createList());
         gameScreen.frontCards[18].setupDialogue(leftCard19Sprite, rightCard19Sprite, card19Qestions, 5, card19Rank, 1, dialogueSwipeLeftTrueCard19, leftCardChoice19, rightCardChoice19);

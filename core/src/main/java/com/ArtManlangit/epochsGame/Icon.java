@@ -23,7 +23,8 @@ public class Icon {
         currentIconImage = iconImage[5];
 
         //default health
-        health = 14;
+        health = 13;
+
     }
 
     public void draw(Batch batch) {

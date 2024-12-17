@@ -1,15 +1,19 @@
 package com.ArtManlangit.epochsGame;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 
 public class MainMenuUiInput {
     MainMenuUi mainMenuUi;
+    boolean showDialogue = false;
     Vector2 inputLocation;
     boolean touching = false;
+    BitmapFont mainFont;
     public MainMenuUiInput(MainMenuUi mainMenuUi) {
         this.mainMenuUi = mainMenuUi;
         inputLocation = new Vector2();
+        mainFont = mainMenuUi.mainFont;
     }
 
     public void checkMainInput() {
@@ -23,6 +27,11 @@ public class MainMenuUiInput {
                     mainMenuUi.epochsGame.splashScreen.backgroundMusic.stop();
                     mainMenuUi.epochsGame.setScreen(mainMenuUi.epochsGame.loadingScreen);
                     mainMenuUi.epochsGame.mainMenuScreen.dispose();
+                }
+                if (checkButtonTouch(mainMenuUi.contX, mainMenuUi.contY, mainMenuUi.contWidth, mainMenuUi.contHeight)
+                    || checkButtonTouch(mainMenuUi.archivesX, mainMenuUi.archivesY, mainMenuUi.archivesWidth,
+                    mainMenuUi.archivesHeight) || checkButtonTouch(mainMenuUi.settingsX, mainMenuUi.settingsY, mainMenuUi.settingsWidth, mainMenuUi.settingsHeight)) {
+                    showDialogue = true;
                 }
                 touching = true;
             }

@@ -22,6 +22,7 @@
     import com.badlogic.gdx.utils.Align;
     import com.badlogic.gdx.utils.ScreenUtils;
     import com.badlogic.gdx.utils.viewport.Viewport;
+    import com.sun.tools.javac.Main;
 
     import javax.print.attribute.HashPrintServiceAttributeSet;
 
@@ -57,10 +58,14 @@
         int splashScreen = 0;
         int gameScreen = 1;
         int endScreen = 2;
+        int mainMenuScreen = 3;
 
         //delay time before launching the game after loading the assets
         float launchDelay = 0;
 
+
+
+        //constructor
         public LoadingScreen(EpochsGame epochsGame) {
             //initialize variables
             this.epochsGame = epochsGame;
@@ -77,7 +82,7 @@
 //            loadAssets();
 
 //            debug
-            currentLoading = gameScreen;
+            currentLoading = splashScreen;
 
             //testing new loading
             loadScreenAssets();
@@ -94,6 +99,9 @@
             } else if (currentLoading == endScreen) {
                 epochsGame.endScreen = new EndScreen(epochsGame);
                 epochsGame.setScreen(epochsGame.endScreen);
+            } else if (currentLoading == mainMenuScreen) {
+                epochsGame.mainMenuScreen = new MainMenuScreen(epochsGame);
+                epochsGame.setScreen(epochsGame.mainMenuScreen);
             }
         }
 
@@ -135,7 +143,7 @@
         }
 
         public void loadScreenAssets() {
-            if (currentLoading == splashScreen) {
+            if (currentLoading == splashScreen || currentLoading == mainMenuScreen) {
                 assetManager.load("audio/background.mp3", Music.class);
                 assetManager.load("packedTextures/mainBgsLogos.atlas", TextureAtlas.class);
                 assetManager.load("packedTextures/playingBgs.atlas", TextureAtlas.class);

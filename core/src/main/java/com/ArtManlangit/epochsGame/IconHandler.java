@@ -84,6 +84,9 @@ public class IconHandler {
             medicineIconImage[i] = medicineStatusAtlas.findRegion("H" + (i) + "0");
         }
         medicineIcon = new Icon(medicineIconImage, xPosition, yPosition, iconWidth, iconHeight);
+
+
+
     }
 
     public void drawIcons(Batch batch) {
@@ -96,5 +99,6 @@ public class IconHandler {
         culturalIcon.draw(batch);
         medicineIcon.draw(batch);
         militaryIcon.draw(batch);
+
     }
 }

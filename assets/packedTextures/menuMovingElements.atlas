@@ -1,0 +1,9 @@
+menuMovingElements.png
+size:4096,2048
+repeat:none
+clouds
+bounds:0,0,1080,1920
+flare
+bounds:2160,1112,808,808
+leaves
+bounds:1080,0,1080,1920
