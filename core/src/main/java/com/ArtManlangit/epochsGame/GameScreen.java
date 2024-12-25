@@ -21,6 +21,8 @@
 
     import java.util.ArrayList;
 
+    //EYy wala pa rin yung indicator na red for selecting icons. Paki add na lang pls before 5 PM. Deadline at 7 sabi ni ma'am. Try asking help sa stackoverflow pag hindi mo maimplement, winowork ko pa yung database natin. Thanks. Pachat ako if meron na. 
+
     public class GameScreen implements Screen {
         //access to epochsGame and the main assetManager
         EpochsGame epochsGame;
